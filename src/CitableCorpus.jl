@@ -14,4 +14,9 @@ include("catalog.jl")
 
 include("corpus.jl")
 
+include("retrieval.jl")
+include("navigation.jl")
+
+include("delimited.jl")
+
 end # module
