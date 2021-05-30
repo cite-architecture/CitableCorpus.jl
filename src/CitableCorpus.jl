@@ -1,7 +1,10 @@
 module CitableCorpus
-using CitableText
 
-export CitableNode, CitableCorpus
+using CitableText
+using CSV, DataFrames, HTTP
+using Documenter, DocStringExtensions
+
+export CitableNode, CiteCorpus
 export fromdelimited, fromfile, fromurl,
   nextnode, prevnode,
   combine, composite_array,
@@ -12,7 +15,7 @@ export CatalogedText
 export catalog, cataloged_to_df, citationdepth
 
 include("citableNode.jl")
-include("catalog2.jl")
+include("catalog.jl")
 
 include("corpus.jl")
 
