@@ -10,7 +10,7 @@ end
 @testset "Unmarshall CatalogedText" begin
     cex = split("urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat", "|")
     cataloged = catalog(cex)
-    unmarshalled = CitableText.unmarshall(cataloged)
+    unmarshalled = CitableCorpus.unmarshall(cataloged)
     # Need equality test on CtsUrns from 
     
     @test all(unmarshalled .==

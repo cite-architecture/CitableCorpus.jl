@@ -30,7 +30,7 @@ end
         c1 = fromfile(CitableTextCorpus, f, "#")  
         c2 = fromfile(CitableTextCorpus, f, "#")  
         @test length(c1.corpus) == 1234
-        combo = CitableText.combine(c1, c2)
+        combo = CitableCorpus.combine(c1, c2)
         @test length(combo.corpus) == 2468
         @test isa(combo, CitableTextCorpus)
 end
@@ -40,7 +40,7 @@ end
         f = "data/hyginus.csv"
         c = fromfile(CitableTextCorpus, f, "#")  
         @test length(c.corpus) == 1234
-        combo = CitableText.composite_array([c, c, c, c])
+        combo = CitableCorpus.composite_array([c, c, c, c])
         @test length(combo.corpus) == 4936
         @test isa(combo, CitableTextCorpus)
 end
