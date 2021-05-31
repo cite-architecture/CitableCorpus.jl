@@ -1,13 +1,13 @@
 "A canonically citable text corpus."
-struct CiteCorpus
+struct CitableTextCorpus
     corpus
 end
 
 """
 $(SIGNATURES)
-Create a DataFrame from a `CiteCorpus`
+Create a DataFrame from a `CitableTextCorpus`
 """
-function to_df(c::CiteCorpus)
+function to_df(c::CitableTextCorpus)
     urns = map(cn -> cn.urn, c.corpus)
     psgs = map(cn -> cn.text, c.corpus)
     df = DataFrame(urn = urns,text = psgs)
@@ -16,17 +16,17 @@ end
 
 """
 $(SIGNATURES)
-Create a single composite `CiteCorpus` from two
+Create a single composite `CitableTextCorpus` from two
 sources.
 """
-function combine(c1::CiteCorpus, c2::CiteCorpus)
-    CiteCorpus(vcat(c1.corpus, c2.corpus))
+function combine(c1::CitableTextCorpus, c2::CitableTextCorpus)
+    CitableTextCorpus(vcat(c1.corpus, c2.corpus))
 end
 
 
 """
 $(SIGNATURES)
-Create a single composite `CiteCorpus` from an
+Create a single composite `CitableTextCorpus` from an
 array of source corpora by recursively adding corpora.
 """
 function composite_array(src_array, composite = nothing)

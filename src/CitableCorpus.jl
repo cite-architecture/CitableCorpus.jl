@@ -4,7 +4,7 @@ using CitableText
 using CSV, DataFrames, HTTP
 using Documenter, DocStringExtensions
 
-export CitableNode, CiteCorpus
+export CitableNode, CitableTextCorpus
 export fromdelimited, fromfile, fromurl,
   nextnode, prevnode,
   combine, composite_array,

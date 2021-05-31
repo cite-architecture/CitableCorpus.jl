@@ -2,7 +2,7 @@
 # or URLs, to create different types of CitableText structures.
 
 # Types that can be loaded from delimited-text sources
-loadableTypes = Union{CiteCorpus, CatalogedText}
+loadableTypes = Union{CitableTextCorpus, CatalogedText}
 
 """
 $(SIGNATURES)
@@ -13,9 +13,9 @@ function fromdelimited(::Type{T}, src::AbstractString, delimiter::AbstractString
     lines = split(src,"\n")
     nonempty = filter(ln -> ln != "", lines)
     cols = map(l -> split(l, delimiter), nonempty)
-    if T === CiteCorpus
+    if T === CitableTextCorpus
         citablenodes = map(col -> CitableNode(CtsUrn(col[1]), col[2]), cols)
-        CiteCorpus(citablenodes)
+        CitableTextCorpus(citablenodes)
     elseif T === CatalogedText
         map(row -> catalog(row), cols)
     else
@@ -31,10 +31,10 @@ Create an instance of type T from a delimited-text file with header line.
 function fromfile(::Type{T}, filename::AbstractString, delimiter::AbstractString="|") where 
     {T <: loadableTypes} 
     raw = CSV.File(filename, skipto=2, delim=delimiter)
-    if T === CiteCorpus
+    if T === CitableTextCorpus
         arr = raw |> Array
         corpusdata = map(row -> (CitableNode(CtsUrn(row[1]), row[2])),  arr)
-        CiteCorpus(corpusdata)
+        CitableTextCorpus(corpusdata)
 
     elseif T === CatalogedText
         arr = raw |> Array
@@ -57,10 +57,10 @@ Create an instance of type T from a URL to a delimited-text file with header lin
 function fromurl(::Type{T}, url::AbstractString, delimiter::AbstractString="#") where 
     {T <: loadableTypes} 
     raw = CSV.File(HTTP.get(url).body, skipto=2, delim=delimiter)  
-    if T == CiteCorpus
+    if T == CitableTextCorpus
         arr = raw |> Array
         corpusdata = map(row -> (CitableNode(CtsUrn(row[1]), row[2])),  raw)
-        CiteCorpus(corpusdata)
+        CitableTextCorpus(corpusdata)
     elseif T === CatalogedText
         #map(row -> catalog(row), raw)
         raw |> DataFrame
@@ -70,7 +70,7 @@ function fromurl(::Type{T}, url::AbstractString, delimiter::AbstractString="#") 
 end
 
 "Compose a delimited-text string for a corpus."
-function cex(c::CiteCorpus, delimiter="|")
+function cex(c::CitableTextCorpus, delimiter="|")
     txt = map(cn -> string(cn.urn.urn, delimiter, cn.text), c.corpus)
     join(txt, "\n") * "\n"
 end

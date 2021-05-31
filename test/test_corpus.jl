@@ -2,7 +2,7 @@
         urn = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.1")
         content = "μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος"
         cn = CitableNode(urn,content)
-        c = CiteCorpus([cn])
+        c = CitableTextCorpus([cn])
         @test c.corpus[1] == cn
 end
 
@@ -14,34 +14,34 @@ urn:cts:latinLit:stoa1263.stoa001.hc:pr.3#Ex Aethere et Terra Dolor Dolus Ira Lu
 urn:cts:latinLit:stoa1263.stoa001.hc:pr.4#Ex Terra et Tartaro Gigantes, Enceladus Coeus elentes mophius Astraeus Pelorus Pallas Emphytus Rhoecus ienios Agrius alemone Ephialtes Eurytus effracorydon Theomises Theodamas Otus Typhon Polyboetes menephriarus abesus colophonus Iapetus.
 urn:cts:latinLit:stoa1263.stoa001.hc:pr.5#Ex Ponto et Mari piscium genera.
 """     
-        c = fromdelimited(CiteCorpus, cex, "#")
-        @test isa(c, CiteCorpus)
+        c = fromdelimited(CitableTextCorpus, cex, "#")
+        @test isa(c, CitableTextCorpus)
 end
 
 @testset "Load a corpus from a file" begin
         f = "data/hyginus.csv"
-        c = fromfile(CiteCorpus, f, "#")
-        @test isa(c, CiteCorpus)
+        c = fromfile(CitableTextCorpus, f, "#")
+        @test isa(c, CitableTextCorpus)
 end
 
 
 @testset "Combine two copora" begin
         f = "data/hyginus.csv"
-        c1 = fromfile(CiteCorpus, f, "#")  
-        c2 = fromfile(CiteCorpus, f, "#")  
+        c1 = fromfile(CitableTextCorpus, f, "#")  
+        c2 = fromfile(CitableTextCorpus, f, "#")  
         @test length(c1.corpus) == 1234
         combo = CitableText.combine(c1, c2)
         @test length(combo.corpus) == 2468
-        @test isa(combo, CiteCorpus)
+        @test isa(combo, CitableTextCorpus)
 end
 
 
 @testset "Recursively composite an array of corpora" begin
         f = "data/hyginus.csv"
-        c = fromfile(CiteCorpus, f, "#")  
+        c = fromfile(CitableTextCorpus, f, "#")  
         @test length(c.corpus) == 1234
         combo = CitableText.composite_array([c, c, c, c])
         @test length(combo.corpus) == 4936
-        @test isa(combo, CiteCorpus)
+        @test isa(combo, CitableTextCorpus)
 end
 

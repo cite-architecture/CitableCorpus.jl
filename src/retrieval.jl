@@ -1,6 +1,6 @@
-# Functions retrieving content from a CiteCorpus
+# Functions retrieving content from a CitableTextCorpus
 
-function retrieve(u::CtsUrn, c::CiteCorpus)
+function retrieve(u::CtsUrn, c::CitableTextCorpus)
     "TO BE IMPLEMENTED"
     #= Cases to cover:
     - single leaf node
