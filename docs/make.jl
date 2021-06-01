@@ -13,3 +13,8 @@ makedocs(
     pages = [
         "Home" => "index.md"    ]
     )
+
+
+    deploydocs(
+    repo = "github.com/cite-architecture/CitableCorpus.jl.git",
+) 
