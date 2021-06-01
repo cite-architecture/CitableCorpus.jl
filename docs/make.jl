@@ -6,12 +6,14 @@ Pkg.activate(".")
 Pkg.instantiate()
 
 
-using Documenter, DocStringExtensions, CitableTextCorpus
+using Documenter, DocStringExtensions, CitableCorpus
 
 makedocs(
-    sitename = "CitableTextCorpus.jl",
+    sitename = "CitableCorpus.jl",
     pages = [
-        "Home" => "index.md"    ]
+        "Home" => "index.md",
+        "API documentation" => "api.md"
+        ]
     )
 
 
