@@ -15,6 +15,6 @@ makedocs(
     )
 
 
-    deploydocs(
+deploydocs(
     repo = "github.com/cite-architecture/CitableCorpus.jl.git",
 ) 
