@@ -1,5 +1,11 @@
 # Functions retrieving content from a CitableTextCorpus
 
+
+
+"""NOT YET IMPLEMENTED.
+
+$(SIGNATURES)
+"""
 function retrieve(u::CtsUrn, c::CitableTextCorpus)
     "TO BE IMPLEMENTED"
     #= Cases to cover:
