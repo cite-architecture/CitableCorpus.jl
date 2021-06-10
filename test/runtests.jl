@@ -7,6 +7,7 @@ using Test
 include("test_citable_nodes.jl")
 include("test_corpus_navigation.jl")
 include("test_catalog.jl")
+include("test_readcatalog.jl")
 include("test_corpus.jl")
 include("test_cex.jl")
 
