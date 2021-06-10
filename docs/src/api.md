@@ -22,6 +22,20 @@ combine
 composite_array
 ```
 
+
+### Reading the catalog of a corpus
+
+```@docs
+groupname
+worktitle
+versionlabel
+exemplarlabel
+citationlabels
+online
+lang
+```
+
+
 ### Navigating a corpus
 
 ```@docs

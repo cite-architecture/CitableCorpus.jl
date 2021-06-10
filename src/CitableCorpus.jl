@@ -13,7 +13,8 @@ export to_df, cex
 
 export CatalogedText
 export catalog, cataloged_to_df, citationdepth
-export textgroup
+export groupname, worktitle, versionlabel, exemplarlabel
+export citationlabels, online, lang
 
 include("citableNode.jl")
 include("catalog.jl")
