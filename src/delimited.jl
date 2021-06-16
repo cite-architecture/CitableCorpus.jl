@@ -71,6 +71,10 @@ end
 
 "Compose a delimited-text string for a corpus."
 function cex(c::CitableTextCorpus, delimiter="|")
-    txt = map(cn -> string(cn.urn.urn, delimiter, cn.text), c.corpus)
+    # Rm newlines from output.
+    txt = map( cn -> string(
+            cn.urn.urn, delimiter, 
+            replace(cn.text, "\n" => " ")), 
+            c.corpus)
     join(txt, "\n") * "\n"
 end
