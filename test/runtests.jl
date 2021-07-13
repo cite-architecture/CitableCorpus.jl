@@ -11,7 +11,7 @@ include("test_readcatalog.jl")
 include("test_corpus.jl")
 include("test_cex.jl")
 include("test_textanalysis.jl")
-include("test_topicmodels.jl")
+#include("test_topicmodels.jl")
 
 # Only include this if you're online:
 # include("test_online.jl")

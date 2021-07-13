@@ -4,7 +4,7 @@ using CitableText
 using CSV, DataFrames, HTTP
 using Documenter, DocStringExtensions
 using TextAnalysis
-using TopicModelsVB
+#using TopicModelsVB
 
 export CitableNode, CitableTextCorpus
 export fromdelimited, fromfile, fromurl,
@@ -33,6 +33,6 @@ include("navigation.jl")
 include("delimited.jl")
 
 include("textanalysis.jl")
-include("topicmodels.jl")
+#include("topicmodels.jl")
 
 end # module
