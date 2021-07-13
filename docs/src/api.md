@@ -44,3 +44,10 @@ prevnode
 retrieve
 ```
   
+### Working with the `TextAnalysis` module
+
+```@docs
+tacorpus
+talexicon
+dtmatrix
+```
