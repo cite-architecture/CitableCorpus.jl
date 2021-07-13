@@ -5,7 +5,7 @@ $(SIGNATURES)
 """
 function tacorpus(c::CitableTextCorpus)
     docs = map(cn -> StringDocument(cn.text), c.corpus)
-    Corpus(docs)
+    TextAnalysis.Corpus(docs)
 end
 
 """Create a lexicon (a `Dict` of tokens to counts) from a `CitableTextCorpus`
