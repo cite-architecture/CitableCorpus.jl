@@ -16,8 +16,10 @@ CitableTextCorpus
 
 ```@docs
 fromdelimited
-fromfile
-fromurl
+fromdelimitedfile
+fromdelmitedurl
+fromcexfile
+fromcexurl
 combine
 composite_array
 ```
@@ -44,10 +46,3 @@ prevnode
 retrieve
 ```
   
-### Working with the `TextAnalysis` module
-
-```@docs
-tacorpus
-talexicon
-dtmatrix
-```
