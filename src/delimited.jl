@@ -5,27 +5,45 @@
 loadableTypes = Union{CitableTextCorpus, CatalogedText}
 
 
+"""Create an instance of type T from
+a file with labelled #!ctsdata blocks.
 
-
-
+$(SIGNATURES)
+"""
 function fromcexfile(::Type{T}, src, delimiter::AbstractString="|")  where 
     {T <: loadableTypes} 
     blocks = CiteEXchange.fromfile(src)
+
     if  T === CatalogedText
-        
+        # Skip header line:
+        datalines = datafortype("ctscatalog", blocks)
+        data = join(datalines[2:end], "\n")
+        fromdelimited(T, data, delimiter) 
+
     elseif T === CitableTextCorpus
         data = join(datafortype("ctsdata", blocks), "\n")
         fromdelimited(T, data, delimiter) 
     end
 end
 
+
+"""Create an instance of type T from
+a URL source with labelled #!ctsdata blocks.
+
+$(SIGNATURES)
+"""
 function fromcexurl(::Type{T}, src::AbstractString, delimiter::AbstractString="|")  where
     {T <: loadableTypes} 
     blocks = CiteEXchange.fromurl(src)
     if  T === CatalogedText
+        # Skip header line:
+        datalines = datafortype("ctscatalog", blocks)
+        data = join(datalines[2:end], "\n")
+        fromdelimited(T, data, delimiter) 
 
     elseif T === CitableTextCorpus
         data = join(datafortype("ctsdata", blocks), "\n")
+        
         fromdelimited(T, data, delimiter) 
     end
 end
