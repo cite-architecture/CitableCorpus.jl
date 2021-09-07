@@ -8,18 +8,25 @@ loadableTypes = Union{CitableTextCorpus, CatalogedText}
 
 
 
-function fromcexfile(::Type{T}, src::AbstractString, delimiter::AbstractString="|")  where 
+function fromcexfile(::Type{T}, src, delimiter::AbstractString="|")  where 
     {T <: loadableTypes} 
+    blocks = CiteEXchange.fromfile(src)
     if  T === CatalogedText
-
+        
     elseif T === CitableTextCorpus
+        data = join(datafortype("ctsdata", blocks), "\n")
+        fromdelimited(T, data, delimiter) 
     end
 end
 
-function fromcexurl(::Type{T}, src::AbstractString, delimiter::AbstractString="|")  where 
+function fromcexurl(::Type{T}, src::AbstractString, delimiter::AbstractString="|")  where
     {T <: loadableTypes} 
+    blocks = CiteEXchange.fromurl(src)
     if  T === CatalogedText
+
     elseif T === CitableTextCorpus
+        data = join(datafortype("ctsdata", blocks), "\n")
+        fromdelimited(T, data, delimiter) 
     end
 end
 
