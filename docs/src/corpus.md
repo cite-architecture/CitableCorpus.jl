@@ -33,3 +33,9 @@ cn.text
 
 A `CitableCorpus` has a sequence of `CitableNode`s.  You can load a `CitableCorpus` from delimited files, or CEX sources.  (Under the hood, the module uses the [CiteEXchange](https://cite-architecture.github.io/CiteEXchange.jl/stable/) module to load CEX sources.)
 
+TBA: examples of
+
+- fromdelimitedfile
+- fromdelimitedurl
+- fromcexfile
+- fromcexurl
