@@ -4,6 +4,25 @@
 # Types that can be loaded from delimited-text sources
 loadableTypes = Union{CitableTextCorpus, CatalogedText}
 
+
+
+
+
+function fromcexfile(::Type{T}, src::AbstractString, delimiter::AbstractString="|")  where 
+    {T <: loadableTypes} 
+    if  T === CatalogedText
+
+    elseif T === CitableTextCorpus
+    end
+end
+
+function fromcexurl(::Type{T}, src::AbstractString, delimiter::AbstractString="|")  where 
+    {T <: loadableTypes} 
+    if  T === CatalogedText
+    elseif T === CitableTextCorpus
+    end
+end
+
 """
 $(SIGNATURES)
 Create an instance of type T from a delimited-text String.
@@ -28,7 +47,7 @@ end
 $(SIGNATURES)
 Create an instance of type T from a delimited-text file with header line.
 """
-function fromfile(::Type{T}, filename::AbstractString, delimiter::AbstractString="|") where 
+function fromdelimitedfile(::Type{T}, filename::AbstractString, delimiter::AbstractString="|") where 
     {T <: loadableTypes} 
     raw = CSV.File(filename, skipto=2, delim=delimiter)
     if T === CitableTextCorpus
@@ -54,7 +73,7 @@ end
 $(SIGNATURES)
 Create an instance of type T from a URL to a delimited-text file with header line.
 """
-function fromurl(::Type{T}, url::AbstractString, delimiter::AbstractString="#") where 
+function fromdelimitedurl(::Type{T}, url::AbstractString, delimiter::AbstractString="#") where 
     {T <: loadableTypes} 
     raw = CSV.File(HTTP.get(url).body, skipto=2, delim=delimiter)  
     if T == CitableTextCorpus

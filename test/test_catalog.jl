@@ -32,7 +32,7 @@ end
 
 @testset "Load catalog from local file" begin
     catfile = "data/catalog.cex"
-    catalog_df = fromfile(CatalogedText, catfile)
+    catalog_df = fromdelimitedfile(CatalogedText, catfile)
     @test isa(catalog_df, DataFrame)
 end
 

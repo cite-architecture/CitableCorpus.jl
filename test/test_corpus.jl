@@ -20,15 +20,15 @@ end
 
 @testset "Load a corpus from a file" begin
         f = "data/hyginus.csv"
-        c = fromfile(CitableTextCorpus, f, "#")
+        c = fromdelimitedfile(CitableTextCorpus, f, "#")
         @test isa(c, CitableTextCorpus)
 end
 
 
 @testset "Combine two copora" begin
         f = "data/hyginus.csv"
-        c1 = fromfile(CitableTextCorpus, f, "#")  
-        c2 = fromfile(CitableTextCorpus, f, "#")  
+        c1 = fromdelimitedfile(CitableTextCorpus, f, "#")  
+        c2 = fromdelimitedfile(CitableTextCorpus, f, "#")  
         @test length(c1.corpus) == 1234
         combo = CitableCorpus.combine(c1, c2)
         @test length(combo.corpus) == 2468
@@ -38,7 +38,7 @@ end
 
 @testset "Recursively composite an array of corpora" begin
         f = "data/hyginus.csv"
-        c = fromfile(CitableTextCorpus, f, "#")  
+        c = fromdelimitedfile(CitableTextCorpus, f, "#")  
         @test length(c.corpus) == 1234
         combo = CitableCorpus.composite_array([c, c, c, c])
         @test length(combo.corpus) == 4936

@@ -1,6 +1,6 @@
 @testset begin
     f = "data/hyginus.csv"
-    c = fromfile(CitableTextCorpus, f, "#")  
+    c = fromdelimitedfile(CitableTextCorpus, f, "#")  
     @test length(c.corpus) == 1234
     tacorp = tacorpus(c)
     @test length(tacorp.documents) == length(c.corpus)

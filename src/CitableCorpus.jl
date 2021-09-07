@@ -1,16 +1,17 @@
 module CitableCorpus
 
 using CitableText
+using CiteEXchange
 using CSV, DataFrames, HTTP
 using Documenter, DocStringExtensions
-using TextAnalysis
+#using TextAnalysis
 #using TopicModelsVB
 
 export CitableNode, CitableTextCorpus
-export fromdelimited, fromfile, fromurl,
-  nextnode, prevnode,
-  combine, composite_array,
-  retrieve
+export fromdelimited, fromdelimitedfile, fromdelimitedurl
+export fromcexfile, fromcexurl
+export nextnode, prevnode, retrieve
+export combine, composite_array
 export to_df, cex
 
 export CatalogedText
@@ -32,7 +33,7 @@ include("navigation.jl")
 
 include("delimited.jl")
 
-include("textanalysis.jl")
+#include("textanalysis.jl")
 #include("topicmodels.jl")
 
 end # module

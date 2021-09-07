@@ -1,7 +1,7 @@
 
 @testset "Reading catalog data for a text identified by URN" begin
     catfile = "data/catalog.cex"
-    catalog_df = fromfile(CatalogedText, catfile)
+    catalog_df = fromdelimitedfile(CatalogedText, catfile)
     txt = CtsUrn("urn:cts:latinLit:stoa1263.stoa001.hc:")
 
     expectedgroup = "Hyginus"
