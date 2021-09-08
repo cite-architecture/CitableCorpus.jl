@@ -1,5 +1,8 @@
 # Citable Text Catalogs
 
+
+## A single catalog entry
+
 A `CatalogedText` has the following information about an individual text:
 
 1. its URN
@@ -14,7 +17,8 @@ A `CatalogedText` has the following information about an individual text:
 
 ```jldoctest catalog
 using CitableCorpus
-columns = split("urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat", "|")
+data = "urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat"
+columns = split(data, "|")
 cataloged = catalog(columns)
 cataloged.group
 
@@ -22,3 +26,6 @@ cataloged.group
 
 "Hyginus"
 ```
+
+
+## A collection of cataloged texts

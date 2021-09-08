@@ -8,7 +8,9 @@ using Documenter, DocStringExtensions
 #using TopicModelsVB
 
 export CitableNode, CitableTextCorpus
-export fromdelimited, fromdelimitedfile, fromdelimitedurl
+export corpus_fromdelimited, corpus_fromfile, corpus_fromurl
+export catalog_fromdelimited
+export df_fromfile, df_fromurl
 export fromcexfile, fromcexurl
 export nextnode, prevnode, retrieve
 export combine, composite_array
@@ -19,21 +21,19 @@ export catalog, cataloged_to_df, citationdepth
 export groupname, worktitle, versionlabel, exemplarlabel
 export citationlabels, online, lang
 
-export tacorpus, talexicon, dtmatrix
-export tmcorpus
+#export tacorpus, talexicon, dtmatrix
+#export tmcorpus
 
 include("citableNode.jl")
 include("catalog.jl")
 include("readcatalog.jl")
 
 include("corpus.jl")
-
 include("retrieval.jl")
 include("navigation.jl")
 
-include("delimited.jl")
+include("corpus_delimited.jl")
+include("catalog_delimited.jl")
 
-#include("textanalysis.jl")
-#include("topicmodels.jl")
 
 end # module

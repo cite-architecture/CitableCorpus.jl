@@ -1,9 +1,9 @@
 # Citable nodes and corpora
 
 
-## Citable nodes
+## Citable passages
 
-A `CitableNode` has two members: a URN, and a string of text.  You can apply all the functions of the `CitableText` module to its URN.
+A `CitableNode` has two members: a URN, and a string of text.  You can apply all of the `CitableText` module's functions for working with URNs to the `CitableNode`'s URN.
 
 ```jldoctest corpus
 using CitableCorpus
@@ -31,11 +31,15 @@ cn.text
 
 ## Citable corpus
 
-A `CitableCorpus` has a sequence of `CitableNode`s.  You can load a `CitableCorpus` from delimited files, or CEX sources.  (Under the hood, the module uses the [CiteEXchange](https://cite-architecture.github.io/CiteEXchange.jl/stable/) module to load CEX sources.)
+A `CitableCorpus` has a sequence of `CitableNode`s. You can load a `CitableCorpus` from delimited files, or CEX sources.  (Under the hood, the module uses the [CiteEXchange](https://cite-architecture.github.io/CiteEXchange.jl/stable/) module to load CEX sources.)
 
 TBA: examples of
 
-- fromdelimitedfile
-- fromdelimitedurl
+- df_fromfile
+- df_fromurl
 - fromcexfile
 - fromcexurl
+
+
+### Navigating a citable corpus
+

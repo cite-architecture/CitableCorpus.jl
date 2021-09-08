@@ -16,7 +16,7 @@ CitableTextCorpus
 
 ```@docs
 fromdelimited
-fromdelimitedfile
+df_fromfile
 fromdelmitedurl
 fromcexfile
 fromcexurl

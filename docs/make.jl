@@ -18,7 +18,7 @@ makedocs(
     pages = [
         "Overview" => "index.md",
         "User's guide" => Any[
-            "Citable nodes and corpora" => "corpus.md",
+            "Citable passages and corpora" => "corpus.md",
             "Citable text catalogs" => "catalog.md"
 
         ],

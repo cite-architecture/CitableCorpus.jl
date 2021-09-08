@@ -1,7 +1,7 @@
 
 @testset "Load a corpus from a url" begin
     url = "https://raw.githubusercontent.com/LinguaLatina/texts/master/texts/latin23/hyginus.cex"
-    c = fromdelimitedurl(CitableTextCorpus, url, "#")
+    c = df_fromurl(CitableTextCorpus, url, "#")
     @test isa(c, CitableTextCorpus)
 end
 
