@@ -29,3 +29,9 @@ cataloged.group
 
 
 ## A collection of cataloged texts
+
+You can create either Vectors of `CatalogedText`s or DataFrames with catalog data from delimited-text sources.
+
+- catalog_fromdelimited
+- df_fromfile, df_fromurl
+- fromcexfile, fromcexurl

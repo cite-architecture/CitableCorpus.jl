@@ -8,8 +8,8 @@ using Documenter, DocStringExtensions
 #using TopicModelsVB
 
 export CitableNode, CitableTextCorpus
-export corpus_fromdelimited, corpus_fromfile, corpus_fromurl
-export catalog_fromdelimited
+export corpus_fromdelimited, corpus_fromfile, corpus_fromurl, corpus_fromcexurl, corpus_fromcexfile
+export catalog_fromdelimited, catalog_fromcexurl, catalog_fromcexfile
 export df_fromfile, df_fromurl
 export fromcexfile, fromcexurl
 export nextnode, prevnode, retrieve

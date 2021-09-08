@@ -5,6 +5,7 @@
 
 A `CitableNode` has two members: a URN, and a string of text.  You can apply all of the `CitableText` module's functions for working with URNs to the `CitableNode`'s URN.
 
+
 ```jldoctest corpus
 using CitableCorpus
 using CitableText
@@ -43,3 +44,5 @@ TBA: examples of
 
 ### Navigating a citable corpus
 
+
+TBA

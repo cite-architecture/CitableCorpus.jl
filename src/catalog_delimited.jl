@@ -29,7 +29,7 @@ end
 
 $(SIGNATURES)
 """
-function cataloged_fromdelimited(src::AbstractString, delimiter::AbstractString="|")  
+function catalog_fromdelimited(src::AbstractString, delimiter::AbstractString="|")  
     lines = split(src,"\n")
     nonempty = filter(ln -> ln != "", lines)
     cols = map(l -> split(l, delimiter), nonempty)
