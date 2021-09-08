@@ -10,9 +10,8 @@ struct CatalogedText
     lang
 end
 
-
 "Number of citation levels defined for a cataloged text."
-function citationdepth(catalogedtext)
+function citationdepth(catalogedtext::CatalogedText)
     length(split(catalogedtext.citation,","))
 end
 
@@ -24,9 +23,9 @@ function citationdepth(u::CtsUrn, df)
     length(split(citation,","))
 end
 
-"""
+"""Create a DataFrame with text catalog information from an array of raw text values.
+
 $(SIGNATURES)
-Create a DataFrame with text catalog information from an array of raw text values.
 """
 function raw_to_df(arr)
     urns = map(row -> row[1], arr)
@@ -52,9 +51,9 @@ function raw_to_df(arr)
 end
 
 
-"""
+"""Create a DataFrame with text catalog information from an Array of `CatalogedText`s.
+
 $(SIGNATURES)
-Create a DataFrame with text catalog information from an Array of `CatalogedText`s.
 """
 function cataloged_to_df(arr)
     urns = map(row -> row.urn, arr)
@@ -79,9 +78,9 @@ function cataloged_to_df(arr)
     )
 end
 
-"""
+"""Decompose members of a `CatalogedText` into an Array.
+
 $(SIGNATURES)
-Decompose members of CatalogedText into an Array.
 """
 function unmarshall(entry)
     [entry.urn, entry.citation, 
@@ -122,9 +121,9 @@ function catalog(csvrow::CSV.Row)
     end
 end
 
-"""
+"""Create a `CatalogedText` from an array of String values.
+
 $(SIGNATURES)
-Create a `CatalogedText` from an array of String values.
 """
 function catalog(arr)
     if length(arr) < 8

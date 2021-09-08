@@ -14,21 +14,21 @@ urn:cts:latinLit:stoa1263.stoa001.hc:pr.3#Ex Aethere et Terra Dolor Dolus Ira Lu
 urn:cts:latinLit:stoa1263.stoa001.hc:pr.4#Ex Terra et Tartaro Gigantes, Enceladus Coeus elentes mophius Astraeus Pelorus Pallas Emphytus Rhoecus ienios Agrius alemone Ephialtes Eurytus effracorydon Theomises Theodamas Otus Typhon Polyboetes menephriarus abesus colophonus Iapetus.
 urn:cts:latinLit:stoa1263.stoa001.hc:pr.5#Ex Ponto et Mari piscium genera.
 """     
-        c = fromdelimited(CitableTextCorpus, cex, "#")
+        c = corpus_fromdelimited(cex, "#")
         @test isa(c, CitableTextCorpus)
 end
 
 @testset "Load a corpus from a file" begin
         f = "data/hyginus.csv"
-        c = fromfile(CitableTextCorpus, f, "#")
+        c = corpus_fromfile(f, "#")
         @test isa(c, CitableTextCorpus)
 end
 
 
 @testset "Combine two copora" begin
         f = "data/hyginus.csv"
-        c1 = fromfile(CitableTextCorpus, f, "#")  
-        c2 = fromfile(CitableTextCorpus, f, "#")  
+        c1 = corpus_fromfile(f, "#")  
+        c2 = corpus_fromfile(f, "#")  
         @test length(c1.corpus) == 1234
         combo = CitableCorpus.combine(c1, c2)
         @test length(combo.corpus) == 2468
@@ -38,7 +38,7 @@ end
 
 @testset "Recursively composite an array of corpora" begin
         f = "data/hyginus.csv"
-        c = fromfile(CitableTextCorpus, f, "#")  
+        c = corpus_fromfile(f, "#")  
         @test length(c.corpus) == 1234
         combo = CitableCorpus.composite_array([c, c, c, c])
         @test length(combo.corpus) == 4936
