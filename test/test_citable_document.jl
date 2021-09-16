@@ -37,12 +37,45 @@ end
 
 
 @testset "Test CEX parsing for CitableDocument" begin
+    iliad = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:")
+    
     u = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.1")
     content = "μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος"
     psg = CitablePassage(u,content)   
     docurn = droppassage(u)
-    doc = CitableDocument(docurn,"Iliad",[psg])
-    inputdata = cex(doc)
+    srcdoc1 = CitableDocument(docurn,"Iliad",[psg])
+    ctsblock = cex(srcdoc1)
 
-    @test_broken 1 == 2
+    doc1 = CitableCorpus.document_fromcex(ctsblock)
+    @test label(doc1) == "Citable document"
+    @test urn(doc1) == iliad
+    @test length(doc1.passages) == 1
+
+    doc2 = CitableCorpus.document_fromcex(ctsblock, "|")
+    @test label(doc2) == "Citable document"
+    @test urn(doc2) == iliad
+    @test length(doc2.passages) == 1
+
+    doc3 = CitableCorpus.document_fromcex(ctsblock, title = "Iliad")
+    @test label(doc3) == "Iliad" 
+    @test urn(doc3) ==  iliad
+    @test length(doc3.passages) == 1
+
+    doc4 = CitableCorpus.document_fromcex(ctsblock, title = "Iliad", docurn = iliad)
+    @test label(doc4) == "Iliad"
+    @test urn(doc4) == iliad
+    @test length(doc4.passages) == 1
+
+    bk1 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1")
+    doc5 =  CitableCorpus.document_fromcex(ctsblock, title = "Iliad, book 1", docurn = bk1)
+    @test label(doc5) == "Iliad, book 1"
+    @test urn(doc5) == bk1
+    @test length(doc5.passages) == 1
+
+
+    bk2 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:2")
+    @test_throws ArgumentError CitableCorpus.document_fromcex(ctsblock, docurn = bk2)
+
+    odyssey = CtsUrn("urn:cts:greekLit:tlg0012.tlg002:")
+    @test_throws ArgumentError CitableCorpus.document_fromcex(ctsblock, docurn = odyssey)
 end

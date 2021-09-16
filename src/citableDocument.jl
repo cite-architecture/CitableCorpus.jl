@@ -34,13 +34,37 @@ function cex(doc::CitableDocument, delim = "|")
     join(lines,"\n")
 end
 
-
-
-
 """Parse a CEX `ctsdata` block into a `CitableDocument`.
 $(SIGNATURES)
 """
-function document_fromcex(block, delimiter = "|")
+function document_fromcex(cexstring, delimiter = "|"; docurn = nothing, title = nothing)
+    label = isnothing(title) ? "Citable document" : title
+    allblocks = blocks(cexstring)
+    ctsblocks = blocksfortype("ctsdata", allblocks)
+    passages = []
+    for blk in ctsblocks
+        for psg in blk.lines
+            push!(passages, passage_fromcex(psg, delimiter))
+        end
+    end
+    if isnothing(docurn)
+        topurn = passages[1].urn |> droppassage
+        CitableDocument(topurn, label, passages)
+    else
+        docpassages = filter(p -> urncontains(docurn, p.urn), passages)
+        if isempty(docpassages)
+            throw(ArgumentError("No passages in input matched urn $docurn"))
+        else
+            CitableDocument(docurn, label, docpassages)
+        end
+    end
+end
 
-    
+"""Override Base.print for `CitableDocument`.
+$(SIGNATURES)
+"""
+function print(io::IO, doc::CitableDocument)
+    count = doc.passages |> length
+    suffix = count == 1 ? "" : "s"
+    print(io, label(doc), " <", urn(doc), "> $count citable passage$suffix" )
 end
