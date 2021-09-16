@@ -29,8 +29,8 @@ composite_array
 ### Navigating a corpus
 
 ```@docs
-nextnode
-prevnode
+nextpassage
+prevpassage
 retrieve
 ```
 

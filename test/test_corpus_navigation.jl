@@ -11,10 +11,10 @@ urn:cts:latinLit:stoa1263.stoa001.hc:pr.5#Ex Ponto et Mari piscium genera.
     c = corpus_fromdelimited(cex, "#")
     @test size(c.corpus,1) == 6
   
-    @test nextnode(c.corpus[1], c) == c.corpus[2]
-    @test prevnode(c.corpus[1], c) === nothing
+    @test nextpassage(c.corpus[1], c) == c.corpus[2]
+    @test prevpassage(c.corpus[1], c) === nothing
 
-    @test nextnode(c.corpus[6], c) === nothing
-    @test nextnode(c.corpus[5], c) == c.corpus[6]
+    @test nextpassage(c.corpus[6], c) === nothing
+    @test nextpassage(c.corpus[5], c) == c.corpus[6]
 
 end

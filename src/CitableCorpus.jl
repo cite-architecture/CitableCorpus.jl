@@ -22,7 +22,7 @@ export corpus_fromdelimited, corpus_fromfile, corpus_fromurl, corpus_fromcexurl,
 export catalog_fromdelimited, catalog_fromcexurl, catalog_fromcexfile
 export df_fromfile, df_fromurl
 export fromcexfile, fromcexurl
-export nextnode, prevnode, retrieve
+export nextpassage, prevpassage, retrieve
 export combine, composite_array
 export to_df, cex
 

@@ -7,7 +7,7 @@
         @test psg.urn == u
 end
 
-@testset "Test functions required for Citable interface" begin
+@testset "Test functions required for Citable interface on CitablePassage" begin
         u = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.1")
         content = "μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος"
         psg = CitablePassage(u,content)   
@@ -16,3 +16,12 @@ end
         @test cex(psg) == "urn:cts:greekLit:tlg0012.tlg001:1.1|μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος"
 end
 
+
+@testset "Test CEX parsing for CitablePassage" begin
+        psg = CitablePassage(CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.1"), "μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος")
+        # Round trip it!
+        cex(psg) |> CitableCorpus.passage_fromcex == psg
+        # Check error handling:
+        @test_throws DomainError CitableCorpus.passage_fromcex("No columns")
+        @test_throws DomainError CitableCorpus.passage_fromcex("Too|many|darn|columns!|")
+end

@@ -45,7 +45,10 @@ $(SIGNATURES)
 """
 function passage_fromcex(s::AbstractString, delimiter = "|")
     parts = split(s, delimiter)
-    length(parts) == 2 ? "Yoohoo" : throw(DomainError(s, "Did not find two columns delimited by $delimiter"))
-
-    #CitablePassage(CtsUrn(parts[1]), parts[2])
+    if length(parts) == 2 
+        u = CtsUrn(parts[1])
+        CitablePassage(u, parts[2])
+    else 
+        throw(DomainError(s, "Invalid input. Found $(length(parts)) columns delimited by $delimiter"))
+    end
 end
