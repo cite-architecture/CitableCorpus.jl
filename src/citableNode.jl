@@ -1,5 +1,5 @@
 "A canonically citable text node."
-struct CitableNode
+struct CitablePassage
     urn::CtsUrn
     text::AbstractString
 end

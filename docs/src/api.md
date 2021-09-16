@@ -7,7 +7,7 @@
 ### The main types
 
 ```@docs
-CitableNode
+CitablePassage
 CitableTextCorpus
 CatalogedText
 ```

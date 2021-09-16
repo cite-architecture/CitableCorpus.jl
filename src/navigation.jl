@@ -5,7 +5,7 @@ $(SIGNATURES)
 Retrieve citable node following a given citable node in a corpus.
 If `n` is the last node in the corpus, return `nothing`.
 """
-function nextnode(n::CitableNode, c::CitableTextCorpus)
+function nextnode(n::CitablePassage, c::CitableTextCorpus)
     idx = findfirst(cn -> cn == n, c.corpus)
     if idx == size(c.corpus, 1)
         nothing
@@ -20,7 +20,7 @@ $(SIGNATURES)
 Retrieve citable node preceding a given citable node in a corpus.
 If `n` is the first node in the corpus, return `nothing`.
 """
-function prevnode(n::CitableNode, c::CitableTextCorpus)
+function prevnode(n::CitablePassage, c::CitableTextCorpus)
     idx = findfirst(cn -> cn == n, c.corpus)
     if idx == 1
         nothing

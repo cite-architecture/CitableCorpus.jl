@@ -3,7 +3,7 @@
 
 ## Citable passages
 
-A `CitableNode` has two members: a URN, and a string of text.  You can apply all of the `CitableText` module's functions for working with URNs to the `CitableNode`'s URN.
+A `CitablePassage` has two members: a URN, and a string of text.  You can apply all of the `CitableText` module's functions for working with URNs to the `CitablePassage`'s URN.
 
 
 ```jldoctest corpus
@@ -12,7 +12,7 @@ using CitableText
 
 urn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v1:1")
 txt = "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
-cn = CitableNode(urn, txt)
+cn = CitablePassage(urn, txt)
 cn.urn |> passagecomponent
 
 # output
@@ -32,7 +32,7 @@ cn.text
 
 ## Citable corpus
 
-A `CitableCorpus` has a sequence of `CitableNode`s. You can load a `CitableCorpus` from delimited files, or CEX sources.  (Under the hood, the module uses the [CiteEXchange](https://cite-architecture.github.io/CiteEXchange.jl/stable/) module to load CEX sources.)
+A `CitableCorpus` has a sequence of `CitablePassage`s. You can load a `CitableCorpus` from delimited files, or CEX sources.  (Under the hood, the module uses the [CiteEXchange](https://cite-architecture.github.io/CiteEXchange.jl/stable/) module to load CEX sources.)
 
 TBA: examples of
 

@@ -36,7 +36,7 @@ function corpus_fromdelimited(src::AbstractString, delimiter::AbstractString="|"
     lines = split(src,"\n")
     nonempty = filter(ln -> ln != "", lines)
     cols = map(l -> split(l, delimiter), nonempty)
-    citablenodes = map(col -> CitableNode(CtsUrn(col[1]), col[2]), cols)
+    citablenodes = map(col -> CitablePassage(CtsUrn(col[1]), col[2]), cols)
     CitableTextCorpus(citablenodes)
 end
     
@@ -47,7 +47,7 @@ $(SIGNATURES)
 function corpus_fromfile(filename::AbstractString, delimiter::AbstractString="|") 
     raw = CSV.File(filename, skipto=2, delim=delimiter)
     arr = raw |> Array
-    corpusdata = map(row -> (CitableNode(CtsUrn(row[1]), row[2])),  arr)
+    corpusdata = map(row -> (CitablePassage(CtsUrn(row[1]), row[2])),  arr)
     CitableTextCorpus(corpusdata)
 end
 
@@ -58,7 +58,7 @@ $(SIGNATURES)
 """
 function corpus_fromurl(url::AbstractString, delimiter::AbstractString="#") 
     arr = CSV.File(HTTP.get(url).body, skipto=2, delim=delimiter)  |> Array
-    corpusdata = map(row -> (CitableNode(CtsUrn(row[1]), row[2])),  arr)
+    corpusdata = map(row -> (CitablePassage(CtsUrn(row[1]), row[2])),  arr)
     CitableTextCorpus(corpusdata)
    
 end
