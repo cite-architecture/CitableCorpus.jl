@@ -31,11 +31,13 @@ export catalog, cataloged_to_df, citationdepth
 export groupname, worktitle, versionlabel, exemplarlabel
 export citationlabels, online, lang
 
-#export tacorpus, talexicon, dtmatrix
-#export tmcorpus
+
 
 include("citablePassage.jl")
 include("citableDocument.jl")
+
+
+
 include("catalog.jl")
 include("readcatalog.jl")
 
