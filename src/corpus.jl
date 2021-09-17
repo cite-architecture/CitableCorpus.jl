@@ -99,12 +99,13 @@ end
 function next(psgdf::DataFrame, u::CtsUrn)
     nextpsg = nothing
     for r in eachrow(psgdf)
-        #println(rownumber(r))
         if urncontains(u, r.urn)
             rownum = rownumber(r)
-            println("at ", rownumber(r))
             if  rownum < nrow(psgdf)
-                nextpsg = psgdf[rownum + 1, :]
+                nextpsg = CitablePassage(
+                    psgdf[rownum + 1, :urn],
+                    psgdf[rownum + 1, :text],
+                )
             end
         end
         
@@ -123,8 +124,20 @@ function prev(doc::CitableDocument, u::CtsUrn)
 end
 
 function prev(psgdf::DataFrame, u::CtsUrn)
-    @warn("Not yet implemetned")
-    nothing
+    prevpsg = nothing
+    for r in eachrow(psgdf)
+        if urncontains(u, r.urn)
+            rownum = rownumber(r)
+            if  rownum > 1
+                prevpsg = CitablePassage(
+                    psgdf[rownum  - 1, :urn],
+                    psgdf[rownum - 1, :text],
+                )
+            end
+        end
+        
+    end
+    prevpsg
 end
 
 
