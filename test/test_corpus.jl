@@ -3,7 +3,7 @@
         content = "μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος"
         cn = CitablePassage(urn,content)
         c = CitableTextCorpus([cn])
-        @test c.corpus[1] == cn
+        @test c.passage[1] == cn
 end
 
 @testset "Build a corpus from a delimited-text string" begin
@@ -39,8 +39,8 @@ end
 @testset "Recursively composite an array of corpora" begin
         f = "data/hyginus.csv"
         c = corpus_fromfile(f, "#")  
-        @test length(c.corpus) == 1234
-        combo = CitableCorpus.composite_array([c, c, c, c])
+        @test length(c.passage) == 1234
+        combo = CitableCorpus.combine([c, c, c, c])
         @test length(combo.corpus) == 4936
         @test isa(combo, CitableTextCorpus)
 end

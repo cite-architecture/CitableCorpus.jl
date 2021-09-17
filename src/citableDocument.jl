@@ -68,3 +68,11 @@ function print(io::IO, doc::CitableDocument)
     suffix = count == 1 ? "" : "s"
     print(io, label(doc), " <", urn(doc), "> $count citable passage$suffix" )
 end
+
+
+"""Create a DataFrame of passages in `doc`.
+$(SIGNATURES)
+"""
+function textdf(doc::CitableDocument)
+    doc.passages |> DataFrame
+end

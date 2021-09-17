@@ -6,11 +6,11 @@ Retrieve citable node following a given citable node in a corpus.
 If `n` is the last node in the corpus, return `nothing`.
 """
 function nextpassage(n::CitablePassage, c::CitableTextCorpus)
-    idx = findfirst(cn -> cn == n, c.corpus)
-    if idx == size(c.corpus, 1)
+    idx = findfirst(cn -> cn == n, c.passage)
+    if idx == size(c.passage, 1)
         nothing
     else
-        c.corpus[idx + 1]
+        c.passage[idx + 1]
     end
 end
 
@@ -21,10 +21,10 @@ Retrieve citable node preceding a given citable node in a corpus.
 If `n` is the first node in the corpus, return `nothing`.
 """
 function prevpassage(n::CitablePassage, c::CitableTextCorpus)
-    idx = findfirst(cn -> cn == n, c.corpus)
+    idx = findfirst(cn -> cn == n, c.passage)
     if idx == 1
         nothing
     else
-        c.corpus[idx - 1]
+        c.passage[idx - 1]
     end
 end
