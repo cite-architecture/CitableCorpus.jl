@@ -1,17 +1,16 @@
-# Functions retrieving content from a CitableTextCorpus
 
 
+function retrieve(c::CitableTextCorpus, u::CtsUrn)
+    df = c.passages |> DataFrame
+    retrieve(df, u)
+end
 
-"""NOT YET IMPLEMENTED.
+function retrieve(doc::CitableDocument, u::CtsUrn)
+    df = doc.passages |> DataFrame
+    retrieve(df, u)
+end
 
-$(SIGNATURES)
-"""
-function retrieve(u::CtsUrn, c::CitableTextCorpus)
-    "TO BE IMPLEMENTED"
-    #= Cases to cover:
-    - single leaf node
-    - containing node
-    - range of leaf nodes
-    - range of containing nodes
-    =#
+function retrieve(psgdf::DataFrame, u::CtsUrn)
+    @warn("Not yet implemetned")
+    nothing
 end

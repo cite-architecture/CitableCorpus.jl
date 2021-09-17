@@ -33,11 +33,11 @@ export citationlabels, online, lang
 
 include("citablePassage.jl")
 include("citableDocument.jl")
-
 include("corpus.jl")
-include("retrieval.jl")
 include("navigation.jl")
 
+
+include("retrieval.jl")
 
 
 include("catalog.jl")

@@ -5,14 +5,6 @@
 
 ## Working with a corpus of citable passages
 
-
-URN comparison
-
-- [x] containment
-- [x] equality (==)
-- [x] similarity
-
-
 Retrieval:
 
 - [ ] leaf node
@@ -21,8 +13,10 @@ Retrieval:
 
 Navigation:
 
-- [x] find next node
-- [x] find previous node
+- [x] next passage
+- [ ] nextn passages
+- [x] previous passage
+- [ ] previousn passages
 
 
 ## Working with a catalog of texts

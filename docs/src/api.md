@@ -24,8 +24,8 @@ textdf
 ### Navigating a corpus
 
 ```@docs
-nextpassage
-prevpassage
+next
+prev
 retrieve
 ```
 

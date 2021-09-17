@@ -1,30 +1,88 @@
-# Functions for navigation and retreival in a CitableTextCorpus
 
-"""
+"""Find the next `CitablePassage` after `u` in a corpus.
+If no passage found, or `u` is last passage in corpus, return `nothing`.
 $(SIGNATURES)
-Retrieve citable node following a given citable node in a corpus.
-If `n` is the last node in the corpus, return `nothing`.
 """
-function nextpassage(n::CitablePassage, c::CitableTextCorpus)
-    idx = findfirst(cn -> cn == n, c.passage)
-    if idx == size(c.passage, 1)
-        nothing
-    else
-        c.passage[idx + 1]
-    end
+function next(c::CitableTextCorpus, u::CtsUrn)
+    df = c.passages |> DataFrame
+    next(df, u)
 end
 
 
-"""
+"""Find the next `CitablePassage` after `u` in a document.
+If no passage found, or `u` is last passage in document, return `nothing`.
 $(SIGNATURES)
-Retrieve citable node preceding a given citable node in a corpus.
-If `n` is the first node in the corpus, return `nothing`.
 """
-function prevpassage(n::CitablePassage, c::CitableTextCorpus)
-    idx = findfirst(cn -> cn == n, c.passage)
-    if idx == 1
-        nothing
-    else
-        c.passage[idx - 1]
-    end
+function next(doc::CitableDocument, u::CtsUrn)
+    df = doc.passages |> DataFrame
+    next(df, u)
 end
+
+
+"""Find the next `CitablePassage` after `u` in a DataFrame.
+If no passage found, or `u` is last passage in DataFrame, return `nothing`.
+$(SIGNATURES)
+"""
+function next(psgdf::DataFrame, u::CtsUrn)
+    nextpsg = nothing
+    for r in eachrow(psgdf)
+        if urncontains(u, r.urn)
+            rownum = rownumber(r)
+            if  rownum < nrow(psgdf)
+                nextpsg = CitablePassage(
+                    psgdf[rownum + 1, :urn],
+                    psgdf[rownum + 1, :text],
+                )
+            end
+        end
+        
+    end
+    nextpsg
+end
+
+
+
+"""Find the previous `CitablePassage` before `u` in a corpus.
+If no passage found, or `u` is the first passage in the corpus, return `nothing`.
+$(SIGNATURES)
+"""
+function prev(c::CitableTextCorpus, u::CtsUrn)
+    df = c.passages |> DataFrame
+    prev(df, u)
+end
+
+
+
+"""Find the previous `CitablePassage` before `u` in a document.
+If no passage found, or `u` is the first passage in the document, return `nothing`.
+$(SIGNATURES)
+"""
+function prev(doc::CitableDocument, u::CtsUrn)
+    df = doc.passages |> DataFrame
+    prev(df, u)
+end
+
+
+
+"""Find the previous `CitablePassage` before `u` in a DataFrame.
+If no passage found, or `u` is the first passage in the DataFrame, return `nothing`.
+$(SIGNATURES)
+"""
+function prev(psgdf::DataFrame, u::CtsUrn)
+    prevpsg = nothing
+    for r in eachrow(psgdf)
+        if urncontains(u, r.urn)
+            rownum = rownumber(r)
+            if  rownum > 1
+                prevpsg = CitablePassage(
+                    psgdf[rownum  - 1, :urn],
+                    psgdf[rownum - 1, :text],
+                )
+            end
+        end
+        
+    end
+    prevpsg
+end
+
+
