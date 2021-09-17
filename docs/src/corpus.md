@@ -83,15 +83,30 @@ document_fromcex(cexsrc)
 CitableDocument(urn:cts:citedemo:gburg.bancroft.v1:, "Citable document", Any[CitablePassage(urn:cts:citedemo:gburg.bancroft.v1:1, "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")])
 ```    
 
-You can use these functions together with normal Julia I/O functions to read CEX data from local files, or remote URLs.
+You can use these functions together with normal Julia I/O functions to read CEX data from files, URLs, or other data sources.
+
 
 ```jldoctest corpus
-pwd()
+f = "data/gettysburgcorpus.cex"
+gburgcorpus = read(f, String) |> corpus_fromcex
+gburgcorpus.passages |> length
 
 # output
 
-/Users/nsmith
+20
 ```
+
+```jldoctest corpus
+
+bancroftdoc = document_fromcex(read(f, String), docurn=bancroft, title="Bancroft's text of the Gettysburg address")
+bancroftdoc.passages |> length
+
+# output
+
+4
+```
+
+
 ### Navigating documents and corpora
 
 

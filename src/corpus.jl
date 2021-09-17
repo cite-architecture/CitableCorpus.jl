@@ -70,3 +70,79 @@ function corpus_fromcex(cexstring, delimiter = "|")
     end
     CitableTextCorpus(passages)
 end
+
+function documents(c::CitableTextCorpus)
+    @warn("Not yet implemetned")
+    nothing
+end
+
+function document_urns(c::CitableTextCorpus)
+    @warn("Not yet implemetned")
+    nothing
+end
+
+function document(c::CitableTextCorpus, u::CtsUrn)
+    @warn("Not yet implemetned")
+    nothing
+end
+
+function next(c::CitableTextCorpus, u::CtsUrn)
+    df = c.passages |> DataFrame
+    next(df, u)
+end
+
+function next(doc::CitableDocument, u::CtsUrn)
+    df = doc.passages |> DataFrame
+    next(df, u)
+end
+
+function next(psgdf::DataFrame, u::CtsUrn)
+    nextpsg = nothing
+    for r in eachrow(psgdf)
+        #println(rownumber(r))
+        if urncontains(u, r.urn)
+            rownum = rownumber(r)
+            println("at ", rownumber(r))
+            if  rownum < nrow(psgdf)
+                nextpsg = psgdf[rownum + 1, :]
+            end
+        end
+        
+    end
+    nextpsg
+end
+
+function prev(c::CitableTextCorpus, u::CtsUrn)
+    df = c.passages |> DataFrame
+    prev(df, u)
+end
+
+function prev(doc::CitableDocument, u::CtsUrn)
+    df = doc.passages |> DataFrame
+    prev(df, u)
+end
+
+function prev(psgdf::DataFrame, u::CtsUrn)
+    @warn("Not yet implemetned")
+    nothing
+end
+
+
+
+
+
+
+function retrieve(c::CitableTextCorpus, u::CtsUrn)
+    df = c.passages |> DataFrame
+    retrieve(df, u)
+end
+
+function retrieve(doc::CitableDocument, u::CtsUrn)
+    df = doc.passages |> DataFrame
+    retrieve(df, u)
+end
+
+function retrieve(psgdf::DataFrame, u::CtsUrn)
+    @warn("Not yet implemetned")
+    nothing
+end

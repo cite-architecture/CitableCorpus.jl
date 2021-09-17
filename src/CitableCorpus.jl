@@ -1,5 +1,6 @@
 module CitableCorpus
 
+
 import Base:  print
 #import Base:  length
 
@@ -21,9 +22,8 @@ export CitablePassage, CitableDocument, CitableTextCorpus
 
 
 export corpus_fromcex, document_fromcex, textdf
-export nextpassage, prevpassage, retrieve
-export combine, combine
-export to_df, cex
+export next, prev, retrieve
+export combine
 
 export CatalogedText
 export catalog, cataloged_to_df, citationdepth
