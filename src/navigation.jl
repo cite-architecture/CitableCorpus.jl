@@ -3,9 +3,9 @@
 If no passage found, or `u` is last passage in corpus, return `nothing`.
 $(SIGNATURES)
 """
-function next(c::CitableTextCorpus, u::CtsUrn)
+function next(u::CtsUrn, c::CitableTextCorpus)
     df = c.passages |> DataFrame
-    next(df, u)
+    next(u, df)
 end
 
 
@@ -13,9 +13,9 @@ end
 If no passage found, or `u` is last passage in document, return `nothing`.
 $(SIGNATURES)
 """
-function next(doc::CitableDocument, u::CtsUrn)
+function next(u::CtsUrn, doc::CitableDocument)
     df = doc.passages |> DataFrame
-    next(df, u)
+    next(u, df)
 end
 
 
@@ -23,7 +23,7 @@ end
 If no passage found, or `u` is last passage in DataFrame, return `nothing`.
 $(SIGNATURES)
 """
-function next(psgdf::DataFrame, u::CtsUrn)
+function next(u::CtsUrn, psgdf::DataFrame)
     nextpsg = nothing
     for r in eachrow(psgdf)
         if urncontains(u, r.urn)
@@ -46,9 +46,9 @@ end
 If no passage found, or `u` is the first passage in the corpus, return `nothing`.
 $(SIGNATURES)
 """
-function prev(c::CitableTextCorpus, u::CtsUrn)
+function prev(u::CtsUrn, c::CitableTextCorpus)
     df = c.passages |> DataFrame
-    prev(df, u)
+    prev(u, df)
 end
 
 
@@ -57,9 +57,9 @@ end
 If no passage found, or `u` is the first passage in the document, return `nothing`.
 $(SIGNATURES)
 """
-function prev(doc::CitableDocument, u::CtsUrn)
+function prev(u::CtsUrn, doc::CitableDocument)
     df = doc.passages |> DataFrame
-    prev(df, u)
+    prev(u, df)
 end
 
 
@@ -68,7 +68,7 @@ end
 If no passage found, or `u` is the first passage in the DataFrame, return `nothing`.
 $(SIGNATURES)
 """
-function prev(psgdf::DataFrame, u::CtsUrn)
+function prev(u::CtsUrn, psgdf::DataFrame)
     prevpsg = nothing
     for r in eachrow(psgdf)
         if urncontains(u, r.urn)

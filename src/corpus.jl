@@ -16,7 +16,7 @@ $(SIGNATURES)
 Create a single composite CitableTextCorpus` from two sources.
 """
 function combine(c1::CitableTextCorpus, c2::CitableTextCorpus)
-    CitableTextCorpus(vcat(c1.corpus, c2.corpus))
+    CitableTextCorpus(vcat(c1.passages, c2.passages))
 end
 
 
