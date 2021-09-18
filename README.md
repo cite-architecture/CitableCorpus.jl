@@ -7,9 +7,9 @@
 
 Retrieval:
 
-- [ ] leaf node
-- [ ] containing node
-- [ ] range
+- [x] leaf node
+- [x] containing node
+- [x] range
 
 Navigation:
 
