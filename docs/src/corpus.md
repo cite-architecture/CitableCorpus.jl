@@ -10,7 +10,7 @@ A `CitablePassage` has two members: a URN, and a string of text.  You can apply 
 using CitableCorpus
 using CitableText
 
-psgurn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v1:1")
+psgurn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:1")
 txt = "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
 psg = CitablePassage(psgurn, txt)
 urn(psg) |> passagecomponent
@@ -39,7 +39,7 @@ doc = CitableDocument(bancroft, "Bancroft's text of the Gettysburg Address", [ps
 
 # output
 
-CitableDocument(urn:cts:citedemo:gburg.bancroft.v1:, "Bancroft's text of the Gettysburg Address", CitablePassage[CitablePassage(urn:cts:citedemo:gburg.bancroft.v1:1, "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")])
+CitableDocument(urn:cts:citedemo:gburg.bancroft.v2:, "Bancroft's text of the Gettysburg Address", CitablePassage[CitablePassage(urn:cts:citedemo:gburg.bancroft.v2:1, "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")])
 ```
 
 CitableCorpus includes functions that fulfill the contract of the `Citable` abstraction in the `CitableBase` module. 
@@ -57,7 +57,7 @@ urn(doc)
 
 # output
 
-urn:cts:citedemo:gburg.bancroft.v1:
+urn:cts:citedemo:gburg.bancroft.v2:
 ```
 
 ## Citable text corpus
@@ -72,15 +72,15 @@ The `text_fromcex` and `corpus_fromcex` functions read `ctsdata` sections from a
 ```jldoctest corpus
 cexsrc = join([
     "#!ctsdata",
-    "// Bancroft's text of the Gettysburg Address, urn:cts:citedemo:gburg.bancroft.v1:",
+    "// Bancroft's text of the Gettysburg Address, urn:cts:citedemo:gburg.bancroft.v2:",
     "// 1 citable passages.",
     "//",
-    "urn:cts:citedemo:gburg.bancroft.v1:1|Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."], "\n")
+    "urn:cts:citedemo:gburg.bancroft.v2:1|Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."], "\n")
 document_fromcex(cexsrc)    
 
 # output
 
-CitableDocument(urn:cts:citedemo:gburg.bancroft.v1:, "Citable document", Any[CitablePassage(urn:cts:citedemo:gburg.bancroft.v1:1, "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")])
+CitableDocument(urn:cts:citedemo:gburg.bancroft.v2:, "Citable document", Any[CitablePassage(urn:cts:citedemo:gburg.bancroft.v2:1, "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")])
 ```    
 
 You can use these functions together with normal Julia I/O functions to read CEX data from files, URLs, or other data sources.
