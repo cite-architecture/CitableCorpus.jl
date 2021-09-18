@@ -71,17 +71,35 @@ function corpus_fromcex(cexstring, delimiter = "|")
     CitableTextCorpus(passages)
 end
 
-function documents(c::CitableTextCorpus)
-    @warn("Not yet implemetned")
-    nothing
+
+"""Create a Vector of citable documents in a corpus.
+
+$(SIGNATURES)
+"""
+function documents(corp::CitableTextCorpus)
+   docs = []
+   for docurn in document_urns(corp)
+        push!(docs, document(docurn, corp))
+   end
+   docs
 end
 
+
+"""Identify documents in a corpus by URN.
+
+$(SIGNATURES)
+"""
 function document_urns(c::CitableTextCorpus)
-    @warn("Not yet implemetned")
-    nothing
+    map(p -> droppassage(p.urn), c.passages) |> unique
 end
 
-function document(c::CitableTextCorpus, u::CtsUrn)
-    @warn("Not yet implemetned")
-    nothing
+
+"""Extract a citable document from a corpus.  
+If no matching document found, return nothing.
+
+$(SIGNATURES)
+"""
+function document(u::CtsUrn, c::CitableTextCorpus)
+    psgs = filter(p -> urncontains(u, p.urn), c.passages)
+    isempty(psgs) ? nothing  :     CitableDocument(u, "Citable document", psgs)
 end

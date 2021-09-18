@@ -22,8 +22,9 @@ export CitablePassage, CitableDocument, CitableTextCorpus
 
 
 export corpus_fromcex, document_fromcex, textdf
-export next, prev, retrieve
 export combine
+export next, prev, retrieve
+export document_urns, documents, document
 
 export CatalogedText
 export catalog, cataloged_to_df, citationdepth

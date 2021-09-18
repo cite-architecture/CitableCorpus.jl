@@ -46,3 +46,30 @@ end
         @test isa(combo, CitableTextCorpus)
 end
 
+
+
+@testset "Find URNs for documents in a corpus" begin
+        f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
+        c = read(f, String) |> corpus_fromcex
+        docurns = document_urns(c)
+        @test length(docurns) == 5
+end
+
+@testset "Extract a citable document from a corpus" begin
+        f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
+        c = read(f, String) |> corpus_fromcex
+        hay =  CtsUrn("urn:cts:citedemo:gburg.hay.v2:")
+        doc = document(hay, c)
+        @test isa(doc, CitableDocument)
+        @test length(doc.passages) == 4
+end
+
+@testset "Convert corpus to a list of citable documents" begin
+        f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
+        corp = read(f, String) |> corpus_fromcex
+        alldocs = documents(corp)
+        @test length(alldocs) == 5
+        for doc in alldocs
+                @test isa(doc, CitableDocument)
+        end
+end
