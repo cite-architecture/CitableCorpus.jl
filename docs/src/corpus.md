@@ -1,19 +1,19 @@
-# Citable nodes and corpora
+# Citable passages, documents and corpora
 
 
 ## Citable passages
 
-A `CitableNode` has two members: a URN, and a string of text.  You can apply all of the `CitableText` module's functions for working with URNs to the `CitableNode`'s URN.
+A `CitablePassage` has two members: a URN, and a string of text.  You can apply all of the `CitableText` module's functions for working with URNs to the `CitablePassage`'s URN.
 
 
 ```jldoctest corpus
 using CitableCorpus
 using CitableText
 
-urn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v1:1")
+psgurn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:1")
 txt = "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
-cn = CitableNode(urn, txt)
-cn.urn |> passagecomponent
+psg = CitablePassage(psgurn, txt)
+urn(psg) |> passagecomponent
 
 # output
 
@@ -22,27 +22,92 @@ cn.urn |> passagecomponent
 
 
 ```jldoctest corpus
-cn.text
+psg.text
 
 # output
 
 "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
 ```
 
+## Citable documents
 
-## Citable corpus
+A `CitableDocument` has a title, a `CtsUrn`, and a Vector of `CitablePassages`.  Here we'll manually create a very short document with just the first passage of Bancroft's text of the Gettysburg Address.
 
-A `CitableCorpus` has a sequence of `CitableNode`s. You can load a `CitableCorpus` from delimited files, or CEX sources.  (Under the hood, the module uses the [CiteEXchange](https://cite-architecture.github.io/CiteEXchange.jl/stable/) module to load CEX sources.)
+```jldoctest corpus
+bancroft = droppassage(psgurn)
+doc = CitableDocument(bancroft, "Bancroft's text of the Gettysburg Address", [psg])
 
-TBA: examples of
+# output
 
-- df_fromfile
-- df_fromurl
-- fromcexfile
-- fromcexurl
+CitableDocument(urn:cts:citedemo:gburg.bancroft.v2:, "Bancroft's text of the Gettysburg Address", CitablePassage[CitablePassage(urn:cts:citedemo:gburg.bancroft.v2:1, "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")])
+```
+
+CitableCorpus includes functions that fulfill the contract of the `Citable` abstraction in the `CitableBase` module. 
+
+```jldoctest corpus
+label(doc)
+
+# output
+
+"Bancroft's text of the Gettysburg Address"
+```
+
+```jldoctest corpus
+urn(doc)
+
+# output
+
+urn:cts:citedemo:gburg.bancroft.v2:
+```
+
+## Citable text corpus
+
+A `CitableCorpus` has a sequence of `CitablePassage`s. 
 
 
-### Navigating a citable corpus
+## I/O with documents and corpora
+
+The `text_fromcex` and `corpus_fromcex` functions read `ctsdata` sections from a string formatted in CITE Data Exchange (CEX) format.
+
+```jldoctest corpus
+cexsrc = join([
+    "#!ctsdata",
+    "// Bancroft's text of the Gettysburg Address, urn:cts:citedemo:gburg.bancroft.v2:",
+    "// 1 citable passages.",
+    "//",
+    "urn:cts:citedemo:gburg.bancroft.v2:1|Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."], "\n")
+document_fromcex(cexsrc)    
+
+# output
+
+CitableDocument(urn:cts:citedemo:gburg.bancroft.v2:, "Citable document", Any[CitablePassage(urn:cts:citedemo:gburg.bancroft.v2:1, "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.")])
+```    
+
+You can use these functions together with normal Julia I/O functions to read CEX data from files, URLs, or other data sources.
+
+
+```jldoctest corpus
+f = "data/gettysburgcorpus.cex"
+gburgcorpus = read(f, String) |> corpus_fromcex
+gburgcorpus.passages |> length
+
+# output
+
+20
+```
+
+```jldoctest corpus
+
+bancroftdoc = document_fromcex(read(f, String), docurn=bancroft, title="Bancroft's text of the Gettysburg address")
+bancroftdoc.passages |> length
+
+# output
+
+4
+```
+
+
+### Navigating documents and corpora
 
 
 TBA
