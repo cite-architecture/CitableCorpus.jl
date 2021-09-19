@@ -19,6 +19,13 @@ function next(u::CtsUrn, doc::CitableDocument)
 end
 
 
+"""True if both URNs come from the same document.
+$(SIGNATURES)
+"""
+function samedoc(urn1::CtsUrn, urn2::CtsUrn)
+    urnsimilar(droppassage(urn1), droppassage(urn2))
+end
+
 """Find the next `CitablePassage` after `u` in a DataFrame.
 If no passage found, or `u` is last passage in DataFrame, return `nothing`.
 $(SIGNATURES)
@@ -37,7 +44,11 @@ function next(u::CtsUrn, psgdf::DataFrame)
         end
         
     end
-    nextpsg
+    if isnothing(nextpsg)
+        nothing
+    else
+        samedoc(nextpsg.urn, u) ? nextpsg : nothing
+    end
 end
 
 
@@ -82,7 +93,11 @@ function prev(u::CtsUrn, psgdf::DataFrame)
         end
         
     end
-    prevpsg
+    if isnothing(prevpsg)
+        nothing
+    else
+        samedoc(prevpsg, u) ? prevpsg : nothing
+    end
 end
 
 

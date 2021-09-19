@@ -25,9 +25,9 @@ end
 $(SIGNATURES)
 """
 function cex(doc::CitableDocument, delim = "|")
-    nb = join(["// ", label(doc), ", ", urn(doc)])
+    notabene = join(["// ", label(doc), ", ", urn(doc)])
     sz = join(["// ", length(doc.passages), " citable passages."])
-    lines = ["#!ctsdata",nb, sz, "//"]
+    lines = ["#!ctsdata",notabene, sz, "//"]
     for psg in doc.passages
         push!(lines, cex(psg))
     end
@@ -49,6 +49,11 @@ function document_fromcex(cexstring, delimiter = "|"; docurn = nothing, title = 
     end
     if isnothing(docurn)
         topurn = passages[1].urn |> droppassage
+        # check that all passages are in same doc.
+        docurns = document_urns(passages)
+        if length(docurns) != 1
+            throw(DomainError("Found $(length(docurns)) documents in source data."))
+        end
         CitableDocument(topurn, label, passages)
     else
         docpassages = filter(p -> urncontains(docurn, p.urn), passages)

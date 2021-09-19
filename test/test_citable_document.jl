@@ -72,10 +72,15 @@ end
     @test urn(doc5) == bk1
     @test length(doc5.passages) == 1
 
-
     bk2 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:2")
     @test_throws ArgumentError CitableCorpus.document_fromcex(ctsblock, docurn = bk2)
 
     odyssey = CtsUrn("urn:cts:greekLit:tlg0012.tlg002:")
     @test_throws ArgumentError CitableCorpus.document_fromcex(ctsblock, docurn = odyssey)
+end
+
+@testset "Test reading CEX with multiple documents" begin
+    f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
+    cexsrc = read(f, String)
+    @test_throws DomainError document_fromcex(cexsrc)
 end

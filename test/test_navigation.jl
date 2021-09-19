@@ -13,9 +13,16 @@ urn:cts:latinLit:stoa1263.stoa001.hc:pr.5#Ex Ponto et Mari piscium genera.
     @test length(c.passages) == 6
   
     @test next(c.passages[1].urn, c) == c.passages[2]
-    @test prev(c.passages[1].urn, c) |> isnothing
+    @test isnothing(prev(c.passages[1].urn, c))
 
     @test next(c.passages[6].urn, c) |> isnothing
     @test next(c.passages[5].urn, c) == c.passages[6]
 
+end
+
+@testset "Test navigation in a corpus within in document" begin
+    f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
+    corp = read(f, String) |> corpus_fromcex
+    lastbancroft = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:4")
+    @test isnothing(next(lastbancroft, corp))
 end

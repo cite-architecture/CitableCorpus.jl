@@ -84,6 +84,14 @@ function documents(corp::CitableTextCorpus)
    docs
 end
 
+"""Identify documents in a list of passages by URN.
+
+$(SIGNATURES)
+"""
+function document_urns(psglist)
+    map(p -> droppassage(p.urn), psglist) |> unique
+ end
+
 
 """Identify documents in a corpus by URN.
 
