@@ -4,6 +4,13 @@ struct CitablePassage <: Citable
     text::AbstractString
 end
 
+"""Override Base.== for `CitablePassage`.
+$(SIGNATURES)
+"""        
+function ==(psg1::CitablePassage, psg2::CitablePassage)
+    psg1.urn == psg2.urn && psg1.text == psg2.text
+end
+
 """URN identifyiing `psg`.
 $(SIGNATURES)
 Required function for `Citable` abstraction.

@@ -5,6 +5,18 @@ struct CitableDocument <: Citable
     passages
 end
 
+"""Override Base.== for `CitablePassage`.
+$(SIGNATURES)
+"""        
+function ==(doc1::CitableDocument, doc2::CitableDocument)
+    if length(doc1.passages) == length(doc2.passages)
+       all(doc1.passages .== doc2.passages)
+    else
+        false
+    end
+end
+
+
 """URN identifyiing `doc`.
 $(SIGNATURES)
 Required function for `Citable` abstraction.

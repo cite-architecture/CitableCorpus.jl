@@ -2,7 +2,7 @@ module CitableCorpus
 
 
 import Base:  print
-#import Base:  length
+import Base:  ==
 
 import CitableBase: cex
 import CitableBase: urn
