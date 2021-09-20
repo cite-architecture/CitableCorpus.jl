@@ -3,6 +3,19 @@ struct CitableTextCorpus
     passages
 end
 
+"""Override Base.== for `CitableTextCorpus`.
+    $(SIGNATURES)
+    """        
+    function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
+        if length(corp1.passages) == length(corp2.passages)
+           all(corp1.passages .== corp2.passages)
+        else
+            false
+        end
+    end
+
+
+
 """
 $(SIGNATURES)
 Create a DataFrame from a `CitableTextCorpus`
@@ -52,7 +65,6 @@ function cex(c::CitableTextCorpus, delimiter="|")
             c.passage)
     join(txt, "\n") * "\n"
 end
-
 
 """Read content of `ctsdata` blocks in CEX-formatted string into 
 a `CitableTextCorpus`.
