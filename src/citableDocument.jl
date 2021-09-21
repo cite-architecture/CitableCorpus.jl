@@ -89,7 +89,8 @@ end
 function show(io::IO, doc::CitableDocument)
     count = doc.passages |> length
     suffix = count == 1 ? "" : "s"
-    show(io, label(doc), " <", urn(doc), "> $count citable passage$suffix" )
+    str = string(label(doc), " <", urn(doc), "> $count citable passage$suffix" )
+    show(io,str)
 end
 
 
