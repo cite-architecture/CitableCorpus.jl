@@ -86,6 +86,9 @@ function print(io::IO, doc::CitableDocument)
     print(io, label(doc), " <", urn(doc), "> $count citable passage$suffix" )
 end
 
+"""Override Base.show for `CitableDocument`.
+$(SIGNATURES)
+"""
 function show(io::IO, doc::CitableDocument)
     count = doc.passages |> length
     suffix = count == 1 ? "" : "s"

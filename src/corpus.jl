@@ -5,15 +5,34 @@ end
 
 """Override Base.== for `CitableTextCorpus`.
     $(SIGNATURES)
-    """        
-    function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
-        if length(corp1.passages) == length(corp2.passages)
-           all(corp1.passages .== corp2.passages)
-        else
-            false
-        end
+"""        
+function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
+    if length(corp1.passages) == length(corp2.passages)
+        all(corp1.passages .== corp2.passages)
+    else
+        false
     end
+end
 
+"""Override Base.print for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function print(io::IO, corp::CitableTextCorpus)
+    doccount = document_urns(corp.passages) |> length
+    psgcount = corp.passages |> length
+    msg = "Corpus with $psgcount citable passages in $doccount documents."
+    print(io,msg)
+end
+
+"""Override Base.show for `CitableDocument`.
+$(SIGNATURES)
+"""
+function show(io::IO, corp::CitableTextCorpus)
+    doccount = document_urns(corp.passages) |> length
+    psgcount = corp.passages |> length
+    msg = "Corpus with $psgcount citable passages in $doccount documents."
+    print(io,msg)
+end
 
 
 """
