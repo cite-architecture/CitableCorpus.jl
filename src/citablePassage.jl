@@ -47,6 +47,15 @@ function print(io::IO, psg::CitablePassage)
 end
 
 
+"""Override Base.show for `CitablePassage`.
+$(SIGNATURES)
+Required function for `Citable` abstraction.
+"""
+function show(io::IO, psg::CitablePassage)
+    print(io, "<", psg.urn, "> ", psg.text)
+end
+
+
 """Parse a delimited-text string into a `CitablePassage`.
 $(SIGNATURES)
 """
