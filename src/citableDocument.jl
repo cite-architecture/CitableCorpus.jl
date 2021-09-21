@@ -86,6 +86,12 @@ function print(io::IO, doc::CitableDocument)
     print(io, label(doc), " <", urn(doc), "> $count citable passage$suffix" )
 end
 
+function show(io::IO, doc::CitableDocument)
+    count = doc.passages |> length
+    suffix = count == 1 ? "" : "s"
+    show(io, label(doc), " <", urn(doc), "> $count citable passage$suffix" )
+end
+
 
 """Create a DataFrame of passages in `doc`.
 $(SIGNATURES)
