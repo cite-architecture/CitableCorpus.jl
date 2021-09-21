@@ -39,7 +39,7 @@ doc = CitableDocument(bancroft, "Bancroft's text of the Gettysburg Address", [ps
 
 # output
 
-Bancroft's text of the Gettysburg Address <urn:cts:citedemo:gburg.bancroft.v2:> 1 citable passage
+"Bancroft's text of the Gettysburg Address <urn:cts:citedemo:gburg.bancroft.v2:> 1 citable passage"
 ```
 
 CitableCorpus includes functions that fulfill the contract of the `Citable` abstraction in the `CitableBase` module. 
@@ -80,7 +80,7 @@ document_fromcex(cexsrc)
 
 # output
 
-Citable document <urn:cts:citedemo:gburg.bancroft.v2:> 1 citable passage
+"Citable document <urn:cts:citedemo:gburg.bancroft.v2:> 1 citable passage"
 ```    
 
 You can use these functions together with normal Julia I/O functions to read CEX data from files, URLs, or other data sources.
