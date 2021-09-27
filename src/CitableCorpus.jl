@@ -12,7 +12,7 @@ import CitableBase: label
 using CitableBase
 using CitableText
 using CiteEXchange
-using CSV, DataFrames, HTTP
+using DataFrames, HTTP
 using Documenter, DocStringExtensions
 
 
@@ -28,10 +28,10 @@ export next, prev, retrieve
 export document_urns, documents, document
 
 export CatalogedText
-export catalog, cataloged_to_df, citationdepth
 export groupname, worktitle, versionlabel, exemplarlabel
 export citationlabels, online, lang
-
+export catalogedtext, catalogdf_fromcex, catalogdf_fromfile
+export citationdepth
 
 include("citablePassage.jl")
 include("citableDocument.jl")

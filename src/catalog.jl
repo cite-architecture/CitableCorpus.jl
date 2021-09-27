@@ -54,13 +54,13 @@ for `CatalogedText`.
 $(SIGNATURES)
 """
 function cex(cataloged::CatalogedText, delimiter = "|")
-    join([cataloged.urn.urn, cataloged.citation, cataloged.group, cataloged.work, cataloged.version, cataloged.exemplar, cataloged.online, cataloged.lang], "\n")
+    join([cataloged.urn.urn, cataloged.citation, cataloged.group, cataloged.work, cataloged.version, cataloged.exemplar, cataloged.online, cataloged.lang], delimiter)
 end
 
 """Parse a single line of CEX data into a `CatalogedText`.
 $(SIGNATURES)
 """
-function catalogentry(cexstring, delimiter = "|")
+function catalogedtext(cexstring, delimiter = "|")
     boolstrings = ["t", "true"]
     pieces = split(cexstring, delimiter)
     urn = CtsUrn(pieces[1])
@@ -84,14 +84,43 @@ $(SIGNATURES)
 function catalogdf_fromcex(cexlines, delimiter = "|")
     textcatalog = []
     for ln in cexlines
-        push!(textcatalog, catalogentry(ln, delimiter))
+        push!(textcatalog, catalogedtext(ln, delimiter))
     end
     textcatalog |> DataFrame
 end
 
 
+"""
+
+$(SIGNATURES)
+"""
+function catalogdf_fromfile(f, delimiter = "|")
+    cexblocks = read(f, String) |> blocks
+    catalogblocks = blocksfortype("ctscatalog", cexblocks)
+
+    blocklines = []
+    for blk in catalogblocks
+        push!(blocklines, blk.lines[2:end])
+    end
+    cexlines = blocklines |> Iterators.flatten |> collect
+    catalogdf_fromcex(cexlines, delimiter)
+end
 
 
+"""
+
+"""
+function catalogdf_fromurl(url, delimiter = "|")
+    cexblocks = HTTP.get(url).body |> blocks
+    catalogblocks = blocksfortype("ctscatalog", cexblocks)
+
+    blocklines = []
+    for blk in catalogblocks
+        push!(blocklines, blk.lines[2:end])
+    end
+    cexlines = blocklines |> Iterators.flatten |> collect
+    catalogdf_fromcex(cexlines, delimiter)
+end
 
 """Calculate number of citation levels defined for a cataloged text.
 $(SIGNATURES)
@@ -215,7 +244,7 @@ function catalog(csvrow::CSV.Row)
         end
     end
 end
-=#
+
 """Create a `CatalogedText` from an array of String values.
 
 $(SIGNATURES)
@@ -247,3 +276,4 @@ function catalog(arr)
         end
     end
 end
+=#
