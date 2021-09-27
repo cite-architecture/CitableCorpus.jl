@@ -1,5 +1,5 @@
 "A catalog description of a text."
-struct CatalogedText
+struct CatalogedText <: Citable
     urn::CtsUrn
     citation
     group
@@ -10,23 +10,115 @@ struct CatalogedText
     lang
 end
 
-"Number of citation levels defined for a cataloged text."
+"""Override Base.== for `CatalogedText`.
+$(SIGNATURES)
+"""    
+function ==(doc1::CatalogedText, doc2::CatalogedText)
+    cex(doc1) == cex(doc2)
+end
+
+"""Implement `urn` function required by `Citable` interface 
+for `CatalogedText`.
+$(SIGNATURES)
+"""
+function urn(cataloged::CatalogedText)
+    cataloged.urn
+end
+
+
+"""Implement `label` function required by `Citable` interface 
+for `CatalogedText`.
+$(SIGNATURES)
+"""
+function label(cataloged::CatalogedText)
+    isnothing(cataloged.version) ? string(cataloged.group, ", ", cataloged.work) : string(cataloged.group, ", ", cataloged.work, ", (", cataloged.version, ")")
+end
+
+"""Override Base.print for `CatalogedText`.
+$(SIGNATURES)
+"""
+function print(io::IO, doc::CatalogedText)
+    print(io, " <", urn(doc), "> ", label(doc) )
+end
+
+"""Override Base.show for `CatalogedText`.
+$(SIGNATURES)
+"""
+function show(io::IO, doc::CatalogedText)
+    str = string("<", urn(doc), "> ", label(doc))
+    show(io,str)
+end
+
+"""Implement `cex` function required by `Citable` interface 
+for `CatalogedText`.
+$(SIGNATURES)
+"""
+function cex(cataloged::CatalogedText, delimiter = "|")
+    join([cataloged.urn.urn, cataloged.citation, cataloged.group, cataloged.work, cataloged.version, cataloged.exemplar, cataloged.online, cataloged.lang], "\n")
+end
+
+"""Parse a single line of CEX data into a `CatalogedText`.
+$(SIGNATURES)
+"""
+function catalogentry(cexstring, delimiter = "|")
+    boolstrings = ["t", "true"]
+    pieces = split(cexstring, delimiter)
+    urn = CtsUrn(pieces[1])
+    citation = pieces[2]
+    textgroup = pieces[3]
+    textwork = pieces[4]
+    textversion = pieces[5]
+    textexemplar = pieces[6]
+    onlineval = lowercase(pieces[7]) in boolstrings
+    lang = pieces[8]
+    CatalogedText(urn, citation, textgroup,
+    textwork, textversion, textexemplar, 
+    onlineval, lang)
+end
+
+
+"""Parse  a vector of CEX lines into a DataFrame of `CatalogedText`.s
+
+$(SIGNATURES)
+"""
+function catalogdf_fromcex(cexlines, delimiter = "|")
+    textcatalog = []
+    for ln in cexlines
+        push!(textcatalog, catalogentry(ln, delimiter))
+    end
+    textcatalog |> DataFrame
+end
+
+
+
+
+
+"""Calculate number of citation levels defined for a cataloged text.
+$(SIGNATURES)
+"""
 function citationdepth(catalogedtext::CatalogedText)
     length(split(catalogedtext.citation,","))
 end
 
 
-"Find in a dataframe of catalog data the number of citation levels defined for a text identified by URN."
+""""Find in a dataframe of catalog data the number of citation levels defined for a text identified by URN.
+
+$(SIGNATURES)
+"""    
 function citationdepth(u::CtsUrn, df)
     matched = filter(row -> row.urn == u, df)
     citation = matched[1,:citation]
     length(split(citation,","))
 end
 
+
+
+#=
 """Create a DataFrame with text catalog information from an array of raw text values.
 
 $(SIGNATURES)
 """
+
 function raw_to_df(arr)
     urns = map(row -> row[1], arr)
     citations = map(row -> row[2], arr)
@@ -78,6 +170,10 @@ function cataloged_to_df(arr)
     )
 end
 
+
+
+
+
 """Decompose members of a `CatalogedText` into an Array.
 
 $(SIGNATURES)
@@ -87,7 +183,6 @@ function unmarshall(entry)
     entry.group, entry.work, entry.version, entry.exemplar,
     entry.online, entry.lang]
 end
-
 
 """
 $(SIGNATURES)
@@ -120,7 +215,7 @@ function catalog(csvrow::CSV.Row)
         end
     end
 end
-
+=#
 """Create a `CatalogedText` from an array of String values.
 
 $(SIGNATURES)

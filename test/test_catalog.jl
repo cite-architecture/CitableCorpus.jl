@@ -1,19 +1,19 @@
 
 
 @testset "Test constructing catalog entry from text array" begin
-    cex = split("urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat", "|")
-    cataloged = catalog(cex)
+    cexsrc = split("urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat", "|")
+    cataloged = catalog(cexsrc)
     @test isa(cataloged, CatalogedText)
     @test cataloged.online
 end
 
 @testset "Unmarshall CatalogedText" begin
-    cex = split("urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat", "|")
-    cataloged = catalog(cex)
+    cexsrc = split("urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat", "|")
+    cataloged = catalog(cexsrc)
     unmarshalled = CitableCorpus.unmarshall(cataloged)
     # Need equality test on CtsUrns from 
     
-    @test_broken all(unmarshalled .==
+    @test all(unmarshalled .==
     [CtsUrn("urn:cts:latinLit:stoa1263.stoa001.hc:"), 
     "chapter,section", 
     "Hyginus", "Fabulae", "Holy Cross edition", nothing, 
@@ -28,7 +28,6 @@ end
     @test isa(df, DataFrame)
 
 end
-
 
 @testset "Test loading a catalog from a local file into a DataFrame" begin
     catfile = "data/catalog.csv"
