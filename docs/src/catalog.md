@@ -12,14 +12,14 @@ A `CatalogedText` has the following information about an individual text:
 5. A version identifier
 6. An exemplar (here, empty)
 7. Whether the text is online
-8. The languagej of the text, identified by 3-letter ISO code.
+8. The language of the text, identified by 3-letter ISO code.
 
+The `catalogedtext` function creates a `CatalogedText` from a single line of data in delimited-text format.
 
 ```jldoctest catalog
 using CitableCorpus
 data = "urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat"
-columns = split(data, "|")
-cataloged = catalog(columns)
+cataloged = catalogedtext(data)
 cataloged.group
 
 # output
@@ -27,11 +27,75 @@ cataloged.group
 "Hyginus"
 ```
 
+A `CatalogedText` implements the `Citable` interface (from the `CitableBase` module), so you can use its `urn`, `label` and `cex` functions.
+
+
+```jldoctest catalog
+using CitableBase
+urn(cataloged)
+
+# output
+
+urn:cts:latinLit:stoa1263.stoa001.hc:
+```
+
+```jldoctest catalog
+label(cataloged)
+
+# output
+
+"Hyginus, Fabulae, (Holy Cross edition)"
+```
+
 
 ## A collection of cataloged texts
 
-You can create either Vectors of `CatalogedText`s or DataFrames with catalog data from delimited-text sources.
+You can read a collection of `CatalogedText`s into a DataFrame from delimited-text strings, files or URLs.
 
-- catalog_fromdelimited
-- df_fromfile, df_fromurl
-- fromcexfile, fromcexurl
+
+```jldoctest catalog
+url = "https://raw.githubusercontent.com/cite-architecture/CitableCorpus.jl/dev/docs/data/gettysburgcatalog.cex"
+df = catalogdf_fromurl(url)
+typeof(df)
+
+# output
+
+DataFrames.DataFrame
+```
+
+You can, of course, work with this as you would with any DataFrame, including applying functions from the `CitableText` module to filter rows using URN logic.  For example, you could count how many texts belong to the `gburg` group.
+
+
+
+```jldoctest catalog
+using DataFrames, CitableText
+groupurn = CtsUrn("urn:cts:citedemo:gburg:")
+filter(r -> urncontains(groupurn, r.urn), df) |> nrow
+
+# output
+
+5
+```
+
+`CitableCorpus` also provides short-hand functions for finding each of the property values of a cataloged text identified by URN.  (See the API documentation for a full list.)
+
+
+```jldoctest catalog
+hay = CtsUrn("urn:cts:citedemo:gburg.hay.v2:")
+worktitle(df, hay)
+
+# output
+
+"Hay's text"
+```
+
+If the URN you query for with these functions matches 0 or more than one row, you will receive a warning, and the return value will be `nothing`.
+
+
+```
+worktitle(df, groupurn) |> isnothing
+
+# output
+
+true
+```
