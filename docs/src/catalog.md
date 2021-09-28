@@ -60,5 +60,42 @@ typeof(df)
 
 # output
 
-DataFrame
+DataFrames.DataFrame
+```
+
+You can, of course, work with this as you would with any DataFrame, including applying functions from the `CitableText` module to filter rows using URN logic.  For example, you could count how many texts belong to the `gburg` group.
+
+
+
+```jldoctest catalog
+using DataFrames, CitableText
+groupurn = CtsUrn("urn:cts:citedemo:gburg:")
+filter(r -> urncontains(groupurn, r.urn), df) |> nrow
+
+# output
+
+5
+```
+
+`CitableCorpus` also provides short-hand functions for finding each of the property values of a cataloged text identified by URN.  (See the API documentation for a full list.)
+
+
+```jldoctest catalog
+hay = CtsUrn("urn:cts:citedemo:gburg.hay.v2:")
+worktitle(df, hay)
+
+# output
+
+"Hay's text"
+```
+
+If the URN you query for with these functions matches 0 or more than one row, you will receive a warning, and the return value will be `nothing`.
+
+
+```jldoctest catalog
+worktitle(df, groupurn) |> isnothing
+
+# output
+
+true
 ```
