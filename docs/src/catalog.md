@@ -50,7 +50,7 @@ label(cataloged)
 
 ## A collection of cataloged texts
 
-You can read a collection of `CatalogedText`s into a DataFrames from delimited-text strings, files or URLs.
+You can read a collection of `CatalogedText`s into a DataFrame from delimited-text strings, files or URLs.
 
 
 ```jldoctest catalog
@@ -92,7 +92,7 @@ worktitle(df, hay)
 If the URN you query for with these functions matches 0 or more than one row, you will receive a warning, and the return value will be `nothing`.
 
 
-```jldoctest catalog
+```
 worktitle(df, groupurn) |> isnothing
 
 # output
