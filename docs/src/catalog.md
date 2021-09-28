@@ -12,14 +12,14 @@ A `CatalogedText` has the following information about an individual text:
 5. A version identifier
 6. An exemplar (here, empty)
 7. Whether the text is online
-8. The languagej of the text, identified by 3-letter ISO code.
+8. The language of the text, identified by 3-letter ISO code.
 
+The `catalogedtext` function creates a `CatalogedText` from a single line of data in delimited-text format.
 
 ```jldoctest catalog
 using CitableCorpus
 data = "urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat"
-columns = split(data, "|")
-cataloged = catalog(columns)
+cataloged = catalogedtext(data)
 cataloged.group
 
 # output
@@ -27,11 +27,38 @@ cataloged.group
 "Hyginus"
 ```
 
+A `CatalogedText` implements the `Citable` interface (from the `CitableBase` module), so you can use its `urn`, `label` and `cex` functions.
+
+
+```jldoctest catalog
+using CitableBase
+urn(cataloged)
+
+# output
+
+urn:cts:latinLit:stoa1263.stoa001.hc:
+```
+
+```jldoctest catalog
+label(cataloged)
+
+# output
+
+"Hyginus, Fabulae, (Holy Cross edition)"
+```
+
 
 ## A collection of cataloged texts
 
-You can create either Vectors of `CatalogedText`s or DataFrames with catalog data from delimited-text sources.
+You can read a collection of `CatalogedText`s into a DataFrames from delimited-text strings, files or URLs.
 
-- catalog_fromdelimited
-- df_fromfile, df_fromurl
-- fromcexfile, fromcexurl
+
+```jldoctest catalog
+url = "https://raw.githubusercontent.com/cite-architecture/CitableCorpus.jl/dev/docs/data/gettysburgcatalog.cex"
+df = catalogdf_fromurl(url)
+typeof(df)
+
+# output
+
+DataFrame
+```

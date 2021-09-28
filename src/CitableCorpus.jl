@@ -28,9 +28,11 @@ export next, prev, retrieve
 export document_urns, documents, document
 
 export CatalogedText
+export catalogedtext
+export catalogdf_fromcex, catalogdf_fromfile, catalogdf_fromurl
+
 export groupname, worktitle, versionlabel, exemplarlabel
 export citationlabels, online, lang
-export catalogedtext, catalogdf_fromcex, catalogdf_fromfile
 export citationdepth
 
 include("citablePassage.jl")

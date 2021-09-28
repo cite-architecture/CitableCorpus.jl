@@ -111,7 +111,7 @@ end
 
 """
 function catalogdf_fromurl(url, delimiter = "|")
-    cexblocks = HTTP.get(url).body |> blocks
+    cexblocks = String(HTTP.get(url).body) |> blocks
     catalogblocks = blocksfortype("ctscatalog", cexblocks)
 
     blocklines = []
