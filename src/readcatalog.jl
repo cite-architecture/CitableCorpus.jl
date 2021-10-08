@@ -31,7 +31,8 @@ function worktitle(catalogdf, urn::CtsUrn)
         @warn("Multiple entries for $urn found in catalog.")
         nothing
     else
-        rows[1, :work]
+        s = rows[1, :work]
+        isempty(s) ? nothing : s
     end
 end
 
@@ -51,7 +52,8 @@ function versionlabel(catalogdf, urn::CtsUrn)
         @warn("Multiple entries for $urn found in catalog.")
         nothing
     else
-        rows[1, :version]
+        s = rows[1, :version]
+        isempty(s) ? nothing : s
     end
 end
 
@@ -71,7 +73,8 @@ function exemplarlabel(catalogdf, urn::CtsUrn)
         @warn("Multiple entries for $urn found in catalog.")
         nothing
     else
-        rows[1, :exemplar]
+        s = rows[1, :exemplar]
+        isempty(s) ? nothing : s
     end
 end
 
