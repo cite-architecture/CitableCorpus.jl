@@ -1,7 +1,7 @@
 name = "CitableCorpus"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 authors = ["nsmith "]
-version = "0.6.0"
+version = "0.6.1"
 
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
