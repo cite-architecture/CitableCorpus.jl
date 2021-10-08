@@ -81,8 +81,8 @@ function cex(c::CitableTextCorpus, delimiter="|")
     txt = map( cn -> string(
             cn.urn.urn, delimiter, 
             replace(cn.text, "\n" => " ")), 
-            c.passage)
-    join(txt, "\n") * "\n"
+            c.passages)
+    "#!ctsdata\n" * join(txt, "\n") * "\n"
 end
 
 """Read content of `ctsdata` blocks in CEX-formatted string into 
@@ -90,7 +90,7 @@ a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function corpus_fromcex(cexstring, delimiter = "|")
+function corpus_fromcex(cexstring::AbstractString, delimiter = "|")
     allblocks = blocks(cexstring)
     ctsblocks = blocksfortype("ctsdata", allblocks)
     passages = []
@@ -102,6 +102,14 @@ function corpus_fromcex(cexstring, delimiter = "|")
     CitableTextCorpus(passages)
 end
 
+
+"""Read content of `ctsdata` blocks in CEX-formatted source into a `CitableTextCorpus`.
+
+$(SIGNATURES)
+"""
+function corpus_fromcex(bytevector::AbstractVector{UInt8}, delimiter = "|")
+    corpus_fromcex(String(bytevector), delimiter)
+end
 
 """Create a Vector of citable documents in a corpus.
 

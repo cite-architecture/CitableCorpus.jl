@@ -21,7 +21,6 @@ export urn, label, cex
 
 export CitablePassage, CitableDocument, CitableTextCorpus
 
-
 export corpus_fromcex, document_fromcex, textdf
 export combine
 export next, prev, retrieve
@@ -34,6 +33,7 @@ export catalogdf_fromcex, catalogdf_fromfile, catalogdf_fromurl
 export groupname, worktitle, versionlabel, exemplarlabel
 export citationlabels, online, lang
 export citationdepth
+
 
 include("citablePassage.jl")
 include("citableDocument.jl")
