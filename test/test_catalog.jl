@@ -14,7 +14,7 @@ end
 end
 
 @testset "Test converting an array of CEX lines to a DataFrame" begin
-    cexsrc = ["urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat"]
+    cexsrc = "#!ctscatalog\nurn|itation|group|title|version|exemplar|online|lang\nurn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat"
     df = catalogdf_fromcex(cexsrc)
     @test isa(df, DataFrame)
 end
@@ -33,14 +33,12 @@ end
 
 
 @testset "Find in a dataframe of catalog data the citation depth for a cataloged text" begin
-    #=
-    cex = split("urn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat", "|")
-    cataloged = catalog(cex)
-    df = cataloged_to_df([cataloged])
+    data = "#!ctscatalog\nurn|citation|group|title|version|exempar}online|lang\nurn:cts:latinLit:stoa1263.stoa001.hc:|chapter,section|Hyginus|Fabulae|Holy Cross edition||true|lat"
+    catalogdf = catalogdf_fromcex(data)
+
+
     urn = CtsUrn("urn:cts:latinLit:stoa1263.stoa001.hc:")
-    depth = citationdepth(urn, df)
-    
-    =#
-    depth = 1
-    @test_broken depth == 2
+    depth = citationdepth(urn, catalogdf)
+
+    @test depth == 2
 end

@@ -84,29 +84,28 @@ end
 
 $(SIGNATURES)
 """
-function catalogdf_fromcex(cexlines, delimiter = "|")
+function catalogdf_fromcex(cex::AbstractString, delimiter = "|")
     textcatalog = []
-    for ln in cexlines
+    for ln in datafortype("ctscatalog", blocks(cex))[2:end]
         push!(textcatalog, catalogedtext(ln, delimiter))
     end
     textcatalog |> DataFrame
 end
 
+"""Parse  a vector of Unicode bytes into a DataFrame of `CatalogedText`.s
+
+$(SIGNATURES)
+"""
+function catalogdf_fromcex(v::AbstractVector{UInt8}, delimiter = "|")
+    catalogdf_fromcex(String(v), delimiter)
+end
 
 """
 
 $(SIGNATURES)
 """
 function catalogdf_fromfile(f, delimiter = "|")
-    cexblocks = read(f, String) |> blocks
-    catalogblocks = blocksfortype("ctscatalog", cexblocks)
-
-    blocklines = []
-    for blk in catalogblocks
-        push!(blocklines, blk.lines[2:end])
-    end
-    cexlines = blocklines |> Iterators.flatten |> collect
-    catalogdf_fromcex(cexlines, delimiter)
+   catalogdf_fromcex(read(f), delimiter)
 end
 
 
@@ -114,15 +113,7 @@ end
 
 """
 function catalogdf_fromurl(url, delimiter = "|")
-    cexblocks = String(HTTP.get(url).body) |> blocks
-    catalogblocks = blocksfortype("ctscatalog", cexblocks)
-
-    blocklines = []
-    for blk in catalogblocks
-        push!(blocklines, blk.lines[2:end])
-    end
-    cexlines = blocklines |> Iterators.flatten |> collect
-    catalogdf_fromcex(cexlines, delimiter)
+    catalogdf_fromcex(HTTP.get(url).body, delimiter)
 end
 
 """Calculate number of citation levels defined for a cataloged text.

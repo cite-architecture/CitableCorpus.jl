@@ -4,6 +4,11 @@ struct CitablePassage <: Citable
     text::AbstractString
 end
 
+
+CitableTrait(::Type{CitablePassage}) = CitableByCtsUrn()
+
+
+
 """Override Base.== for `CitablePassage`.
 $(SIGNATURES)
 """        
