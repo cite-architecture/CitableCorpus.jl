@@ -27,7 +27,7 @@ cataloged.group
 "Hyginus"
 ```
 
-A `CatalogedText` implements the `Citable` interface (from the `CitableBase` module), so you can use its `urn`, `label` and `cex` functions.
+A `CatalogedText` implements the `CitableTrait` (from the `CitableBase` module), so you can use the `urn`, `label` and `cex` functions as you would with any implementation of a `CitableTrait`.
 
 
 ```jldoctest catalog

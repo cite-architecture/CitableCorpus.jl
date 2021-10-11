@@ -17,7 +17,7 @@ using DataFrames, HTTP
 using Documenter, DocStringExtensions
 
 
-# Citable functions from CitableBase 3.0.0
+# Citable functions from CitableTrait interface
 export urn, label, cex
 
 export CitablePassage, CitableDocument, CitableTextCorpus
