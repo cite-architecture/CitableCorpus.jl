@@ -18,7 +18,6 @@ Navigation:
 - [x] previous passage
 - [ ] previousn passages
 
-
 ## Working with a catalog of texts
 
 - [x] load from delimited text sources

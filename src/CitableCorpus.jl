@@ -5,12 +5,13 @@ import Base:  print
 import Base:  show
 import Base:  ==
 
+using CitableBase
 import CitableBase: CitableTrait
 import CitableBase: cex
 import CitableBase: urn
 import CitableBase: label
 
-using CitableBase
+
 using CitableText
 using CiteEXchange
 using DataFrames, HTTP
