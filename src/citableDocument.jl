@@ -5,6 +5,9 @@ struct CitableDocument <: Citable
     passages
 end
 
+CitableTrait(::Type{CitableDocument}) = CitableByCtsUrn()
+
+
 """Override Base.== for `CitablePassage`.
 $(SIGNATURES)
 """        

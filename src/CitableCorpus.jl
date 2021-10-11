@@ -5,6 +5,7 @@ import Base:  print
 import Base:  show
 import Base:  ==
 
+import CitableBase: CitableTrait
 import CitableBase: cex
 import CitableBase: urn
 import CitableBase: label

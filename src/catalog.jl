@@ -10,6 +10,9 @@ struct CatalogedText <: Citable
     lang
 end
 
+CitableTrait(::Type{CatalogedText}) = CitableByCtsUrn()
+
+
 """Override Base.== for `CatalogedText`.
 $(SIGNATURES)
 """    

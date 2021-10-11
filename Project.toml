@@ -1,7 +1,7 @@
 name = "CitableCorpus"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 authors = ["nsmith "]
-version = "0.6.1"
+version = "0.7.0"
 
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
@@ -14,7 +14,7 @@ HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-CitableBase = "3"
+CitableBase = "4"
 CitableText = "0.11"
 CiteEXchange = "0.4"
 DataFrames = "1"
