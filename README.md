@@ -1,4 +1,4 @@
-https://github.com/cite-architecture/CitableCorpus.jl/actions/workflows/Documentation.yml/badge.svg
+![build](https://github.com/cite-architecture/CitableCorpus.jl/actions/workflows/Documentation.yml/badge.svg)
 
 
 # CitableCorpus.jl
