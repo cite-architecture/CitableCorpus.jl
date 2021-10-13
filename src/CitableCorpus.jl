@@ -27,6 +27,7 @@ export corpus_fromcex, document_fromcex, textdf
 export combine
 export next, prev, retrieve
 export document_urns, documents, document
+export passage_count
 
 export CatalogedText
 export catalogedtext

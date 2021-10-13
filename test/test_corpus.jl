@@ -75,8 +75,14 @@ end
 end
 
 
-@testset "Overload *fromcex methods to read from Vector of bytes" begin
+@testset "Overload `fromcex` methods to read from Vector of bytes" begin
         f = "data/hyginus.cex"
         corpus = read(f) |> corpus_fromcex
         @test length(corpus.passages) == 1234
+end
+
+@testset "Count passges in a corpus" begin
+        f = "data/hyginus.cex"
+        corpus = read(f) |> corpus_fromcex
+        @test passage_count(corpus) == 1234
 end
