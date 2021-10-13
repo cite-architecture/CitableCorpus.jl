@@ -150,3 +150,11 @@ function document(u::CtsUrn, c::CitableTextCorpus)
     psgs = filter(p -> urncontains(u, p.urn), c.passages)
     isempty(psgs) ? nothing  :     CitableDocument(u, "Citable document", psgs)
 end
+
+"""Count passages in corpus.
+
+$(SIGNATURES)
+"""
+function passage_count(c::CitableTextCorpus)
+    length(c.passages)
+end
