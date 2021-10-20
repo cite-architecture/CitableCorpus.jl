@@ -51,7 +51,7 @@ end
     @test urn(doc1) == iliad
     @test length(doc1.passages) == 1
 
-    doc2 = CitableCorpus.document_fromcex(ctsblock, "|")
+    doc2 = CitableCorpus.document_fromcex(ctsblock; delimiter = "|")
     @test label(doc2) == "Unlabelled citable document"
     @test urn(doc2) == iliad
     @test length(doc2.passages) == 1
