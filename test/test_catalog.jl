@@ -42,3 +42,11 @@ end
 
     @test depth == 2
 end
+
+@testset "Test reading from a Vector of CiteEXchange.Blocks" begin
+    archiveurl = "https://raw.githubusercontent.com/homermultitext/hmt-archive/master/releases-cex/hmt-2020i.cex"
+    cexblocks = HTTP.get(archiveurl).body |> String |> blocks
+    catblocks = blocksfortype("ctscatalog", cexblocks)
+    catalogdf = catalogdf_fromcex(catblocks, "#")
+    @test  nrow(catalogdf) == 7
+end

@@ -49,7 +49,7 @@ include("retrieval.jl")
 
 include("catalog.jl")
 include("readcatalog.jl")
-include("catalog_delimited.jl")
+#include("catalog_delimited.jl")
 
 
 

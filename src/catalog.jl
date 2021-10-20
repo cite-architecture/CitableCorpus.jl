@@ -79,6 +79,15 @@ function catalogedtext(cexstring, delimiter = "|")
     onlineval, lang)
 end
 
+function catalogdf_fromcex(blocks::Vector{CiteEXchange.Block}, delimiter = "|")
+    textcatalog = []
+    for blk in blocks
+        for ln in blk.lines[2:end]
+            push!(textcatalog, catalogedtext(ln, delimiter))
+        end
+    end
+    textcatalog |> DataFrame
+end
 
 """Parse  a vector of CEX lines into a DataFrame of `CatalogedText`.s
 
