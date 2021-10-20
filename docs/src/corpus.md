@@ -80,7 +80,7 @@ document_fromcex(cexsrc)
 
 # output
 
-"Citable document <urn:cts:citedemo:gburg.bancroft.v2:> 1 citable passage"
+"Unlabelled citable document <urn:cts:citedemo:gburg.bancroft.v2:> 1 citable passage"
 ```    
 
 You can use these functions together with normal Julia I/O functions to read CEX data from files, URLs, or other data sources.
