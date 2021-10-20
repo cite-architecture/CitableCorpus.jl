@@ -76,7 +76,7 @@ end
 
 $(SIGNATURES)
 """
-function cex(c::CitableTextCorpus, delimiter="|")
+function cex(c::CitableTextCorpus; delimiter="|")
     # Rm newlines from output.
     txt = map( cn -> string(
             cn.urn.urn, delimiter, 
@@ -91,7 +91,7 @@ a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function corpus_fromcex(v::Vector{CiteEXchange.Block}, delimiter = "|")
+function corpus_fromcex(v::Vector{CiteEXchange.Block}; delimiter = "|")
     ctsblocks = blocksfortype("ctsdata", v)
     passages = []
     for blk in ctsblocks
@@ -107,9 +107,9 @@ a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function corpus_fromcex(cexstring::AbstractString, delimiter = "|")
+function corpus_fromcex(cexstring::AbstractString; delimiter = "|")
     allblocks = blocks(cexstring)
-    corpus_fromcex(allblocks, delimiter)
+    corpus_fromcex(allblocks; delimiter = delimiter)
 end
 
 
@@ -117,8 +117,8 @@ end
 
 $(SIGNATURES)
 """
-function corpus_fromcex(bytevector::AbstractVector{UInt8}, delimiter = "|")
-    corpus_fromcex(String(bytevector), delimiter)
+function corpus_fromcex(bytevector::AbstractVector{UInt8}; delimiter = "|")
+    corpus_fromcex(String(bytevector);delimiter = delimiter)
 end
 
 """Create a Vector of citable documents in a corpus.
