@@ -1,4 +1,3 @@
-
 """Read text group name for a given text.
 Returns nothing if no entry found
 $(SIGNATURES)
@@ -15,8 +14,6 @@ function groupname(catalogdf, urn::CtsUrn)
         rows[1, :group]
     end
 end
-
-
 
 """Read work title for a given text.
 Returns nothing if no entry found
@@ -36,9 +33,6 @@ function worktitle(catalogdf, urn::CtsUrn)
     end
 end
 
-
-
-
 """Read version label for a given text.
 Returns nothing if no entry found
 $(SIGNATURES)
@@ -57,9 +51,6 @@ function versionlabel(catalogdf, urn::CtsUrn)
     end
 end
 
-
-
-
 """Read exemplar label for a given text.
 Returns nothing if no entry found
 $(SIGNATURES)
@@ -77,10 +68,6 @@ function exemplarlabel(catalogdf, urn::CtsUrn)
         isempty(s) ? nothing : s
     end
 end
-
-
-
-
 
 """Read citable labels for a given text.
 Returns nothing if no entry found, otherwise returns a
@@ -101,10 +88,6 @@ function citationlabels(catalogdf, urn::CtsUrn)
         rows[1, :citation]
     end
 end
-
-
-
-
 
 """Read ISO language code for `urn` from catalog.
 Returns nothing if no entry found.

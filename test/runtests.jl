@@ -1,7 +1,8 @@
 using CitableCorpus
 using CitableBase
 using CitableText
-using DataFrames
+using CiteEXchange
+using DataFrames, HTTP
 using Test
 
 
