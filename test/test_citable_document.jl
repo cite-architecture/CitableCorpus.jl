@@ -47,12 +47,12 @@ end
     ctsblock = cex(srcdoc1)
 
     doc1 = CitableCorpus.document_fromcex(ctsblock)
-    @test label(doc1) == "Citable document"
+    @test label(doc1) == "Unlabelled citable document"
     @test urn(doc1) == iliad
     @test length(doc1.passages) == 1
 
     doc2 = CitableCorpus.document_fromcex(ctsblock, "|")
-    @test label(doc2) == "Citable document"
+    @test label(doc2) == "Unlabelled citable document"
     @test urn(doc2) == iliad
     @test length(doc2.passages) == 1
 

@@ -38,6 +38,7 @@ end
 
 """Format a `CitableDocument` as a CEX `ctsdata` block.
 $(SIGNATURES)
+Required function for `Citable` abstraction.
 """
 function cex(doc::CitableDocument, delim = "|")
     notabene = join(["// ", label(doc), ", ", urn(doc)])
@@ -49,13 +50,14 @@ function cex(doc::CitableDocument, delim = "|")
     join(lines,"\n")
 end
 
-"""Parse a CEX `ctsdata` block into a `CitableDocument`.
+
+"""Parse a Vector `CiteEXchange.Block`s into a `CitableDocument`.
 $(SIGNATURES)
 """
-function document_fromcex(cexstring, delimiter = "|"; docurn = nothing, title = nothing)
-    label = isnothing(title) ? "Citable document" : title
-    allblocks = blocks(cexstring)
-    ctsblocks = blocksfortype("ctsdata", allblocks)
+function document_fromcex(v::Vector{CiteEXchange.Block}, delimiter = "|"; docurn = nothing, title = nothing)
+    label = isnothing(title) ? "Unlabelled citable document" : title
+
+    ctsblocks = blocksfortype("ctsdata", v)
     passages = []
     for blk in ctsblocks
         for psg in blk.lines
@@ -78,6 +80,14 @@ function document_fromcex(cexstring, delimiter = "|"; docurn = nothing, title = 
             CitableDocument(docurn, label, docpassages)
         end
     end
+end
+
+"""Parse a CEX `ctsdata` block into a `CitableDocument`.
+$(SIGNATURES)
+"""
+function document_fromcex(cexstring, delimiter = "|"; docurn = nothing, title = nothing)
+    allblocks = blocks(cexstring)
+    document_fromcex(allblocks, delimiter; docurn = docurn, title = title)
 end
 
 """Override Base.print for `CitableDocument`.
