@@ -47,6 +47,6 @@ end
     archiveurl = "https://raw.githubusercontent.com/homermultitext/hmt-archive/master/releases-cex/hmt-2020i.cex"
     cexblocks = HTTP.get(archiveurl).body |> String |> blocks
     catblocks = blocksfortype("ctscatalog", cexblocks)
-    catalogdf = catalogdf_fromcex(catblocks, "#")
+    catalogdf = catalogdf_fromcex(catblocks; delimiter = "#")
     @test  nrow(catalogdf) == 7
 end

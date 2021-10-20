@@ -63,7 +63,7 @@ end
 """Parse a single line of CEX data into a `CatalogedText`.
 $(SIGNATURES)
 """
-function catalogedtext(cexstring, delimiter = "|")
+function catalogedtext(cexstring; delimiter = "|") 
     boolstrings = ["t", "true"]
     pieces = split(cexstring, delimiter)
     urn = CtsUrn(pieces[1])
@@ -79,24 +79,27 @@ function catalogedtext(cexstring, delimiter = "|")
     onlineval, lang)
 end
 
-function catalogdf_fromcex(blocks::Vector{CiteEXchange.Block}, delimiter = "|")
+function catalogdf_fromcex(blocks::Vector{CiteEXchange.Block}; delimiter = "|")
+    @info("Reading Blocks")
+    catblocks = blocksfortype("ctscatalog", blocks)
     textcatalog = []
-    for blk in blocks
+    for blk in catblocks
         for ln in blk.lines[2:end]
-            push!(textcatalog, catalogedtext(ln, delimiter))
+            push!(textcatalog, catalogedtext(ln; delimiter = delimiter))
+            #push!(textcatalog, ln)
         end
     end
-    textcatalog |> DataFrame
+    textcatalog  |> DataFrame
 end
 
 """Parse  a vector of CEX lines into a DataFrame of `CatalogedText`.s
 
 $(SIGNATURES)
 """
-function catalogdf_fromcex(cex::AbstractString, delimiter = "|")
+function catalogdf_fromcex(cex::AbstractString; delimiter = "|")
     textcatalog = []
     for ln in datafortype("ctscatalog", blocks(cex))[2:end]
-        push!(textcatalog, catalogedtext(ln, delimiter))
+        push!(textcatalog, catalogedtext(ln; delimiter = delimiter))
     end
     textcatalog |> DataFrame
 end
@@ -105,8 +108,8 @@ end
 
 $(SIGNATURES)
 """
-function catalogdf_fromcex(v::AbstractVector{UInt8}, delimiter = "|")
-    catalogdf_fromcex(String(v), delimiter)
+function catalogdf_fromcex(v::AbstractVector{UInt8}; delimiter = "|")
+    catalogdf_fromcex(String(v); delimiter = delimiter)
 end
 
 """
@@ -114,7 +117,7 @@ end
 $(SIGNATURES)
 """
 function catalogdf_fromfile(f, delimiter = "|")
-   catalogdf_fromcex(read(f), delimiter)
+   catalogdf_fromcex(read(f); delimiter = delimiter)
 end
 
 
@@ -122,7 +125,7 @@ end
 
 """
 function catalogdf_fromurl(url, delimiter = "|")
-    catalogdf_fromcex(HTTP.get(url).body, delimiter)
+    catalogdf_fromcex(HTTP.get(url).body; delimiter = delimiter)
 end
 
 """Calculate number of citation levels defined for a cataloged text.
