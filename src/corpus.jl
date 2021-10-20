@@ -85,14 +85,14 @@ function cex(c::CitableTextCorpus, delimiter="|")
     "#!ctsdata\n" * join(txt, "\n") * "\n"
 end
 
-"""Read content of `ctsdata` blocks in CEX-formatted string into 
+
+"""Parse a Vector of `CiteEXchange.Blocks` into 
 a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function corpus_fromcex(cexstring::AbstractString, delimiter = "|")
-    allblocks = blocks(cexstring)
-    ctsblocks = blocksfortype("ctsdata", allblocks)
+function corpus_fromcex(v::Vector{CiteEXchange.Block}, delimiter = "|")
+    ctsblocks = blocksfortype("ctsdata", v)
     passages = []
     for blk in ctsblocks
         for psg in blk.lines
@@ -100,6 +100,16 @@ function corpus_fromcex(cexstring::AbstractString, delimiter = "|")
         end
     end
     CitableTextCorpus(passages)
+end
+
+"""Read content of `ctsdata` blocks in CEX-formatted string into 
+a `CitableTextCorpus`.
+
+$(SIGNATURES)
+"""
+function corpus_fromcex(cexstring::AbstractString, delimiter = "|")
+    allblocks = blocks(cexstring)
+    corpus_fromcex(allblocks, delimiter)
 end
 
 

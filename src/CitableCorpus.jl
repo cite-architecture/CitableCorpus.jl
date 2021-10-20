@@ -42,14 +42,12 @@ include("citablePassage.jl")
 include("citableDocument.jl")
 include("corpus.jl")
 include("navigation.jl")
-
-
 include("retrieval.jl")
 
 
 include("catalog.jl")
 include("readcatalog.jl")
-#include("catalog_delimited.jl")
+
 
 
 
