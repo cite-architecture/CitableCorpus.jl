@@ -40,12 +40,12 @@ end
 $(SIGNATURES)
 Required function for `Citable` abstraction.
 """
-function cex(doc::CitableDocument, delim = "|")
+function cex(doc::CitableDocument; delimiter = "|")
     notabene = join(["// ", label(doc), ", ", urn(doc)])
     sz = join(["// ", length(doc.passages), " citable passages."])
     lines = ["#!ctsdata",notabene, sz, "//"]
     for psg in doc.passages
-        push!(lines, cex(psg))
+        push!(lines, cex(psg; delimiter = delimiter))
     end
     join(lines,"\n")
 end

@@ -56,7 +56,7 @@ end
 for `CatalogedText`.
 $(SIGNATURES)
 """
-function cex(cataloged::CatalogedText, delimiter = "|")
+function cex(cataloged::CatalogedText; delimiter = "|")
     join([cataloged.urn.urn, cataloged.citation, cataloged.group, cataloged.work, cataloged.version, cataloged.exemplar, cataloged.online, cataloged.lang], delimiter)
 end
 

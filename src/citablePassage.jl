@@ -38,8 +38,8 @@ end
 $(SIGNATURES)
 Required function for `Citable` abstraction.
 """
-function cex(psg::CitablePassage, delim = "|")
-    join([psg.urn, psg.text], delim)
+function cex(psg::CitablePassage; delimiter = "|")
+    join([psg.urn, psg.text], delimiter)
 end
 
 
