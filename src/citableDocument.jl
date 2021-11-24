@@ -7,6 +7,23 @@ end
 
 CitableTrait(::Type{CitableDocument}) = CitableByCtsUrn()
 
+"""Required function to iterate a document using julia `Base` functions.
+
+$(SIGNATURES)
+"""
+function iterate(doc::CitableDocument)
+    isempty(doc.passages) ? nothing : (doc.passages[1], 1)
+end
+
+"""Required function to iterate a document using julia `Base` functions.
+
+$(SIGNATURES)
+"""
+function iterate(doc::CitableDocument, state)
+    next = state + 1
+    next > length(doc.passages) ? nothing : (doc.passages[next], next)
+end
+
 
 """Override Base.== for `CitablePassage`.
 $(SIGNATURES)
