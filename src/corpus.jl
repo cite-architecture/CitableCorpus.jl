@@ -3,6 +3,25 @@ struct CitableTextCorpus
     passages
 end
 
+
+"""Required function to iterate a document using julia `Base` functions.
+
+$(SIGNATURES)
+"""
+function iterate(c::CitableTextCorpus)
+    isempty(c.passages) ? nothing : (c.passages[1], 1)
+end
+
+"""Required function to iterate a document using julia `Base` functions.
+
+$(SIGNATURES)
+"""
+function iterate(c::CitableTextCorpus, state)
+    next = state + 1
+    next > length(c.passages) ? nothing : (c.passages[next], next)
+end
+
+
 """Override Base.== for `CitableTextCorpus`.
     $(SIGNATURES)
 """        
