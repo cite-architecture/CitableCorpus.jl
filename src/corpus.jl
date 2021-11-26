@@ -3,6 +3,52 @@ struct CitableTextCorpus
     passages
 end
 
+CitableLibraryTrait(::Type{CitableTextCorpus}) = CitableLibraryCollection()
+
+"""Looks up text passage with URN `u` in corpus `c`.
+Returns either a single `CitableTextPassage` or `nothing`.
+
+$(SIGNATURES)
+"""
+function urnequals(u::CtsUrn, c::CitableTextCorpus, )
+    matches = filter(psg -> psg.urn == u, c.passages)
+    isempty(matches) ? nothing : matches[1]
+end
+
+"""Looks up passage in corpus `c` with URNs contained by `u`. Returns either a (possible empty) Vector of `CitableTextPassage`s.
+
+$(SIGNATURES)
+"""
+function urncontains(u::CtsUrn, c::CitableTextCorpus)
+    filter(psg -> urncontains(u, psg.urn), c.passages)
+end
+
+
+"""Serializes `c` to CEX format.
+
+$(SIGNATURES)
+"""
+function cex(c::CitableTextCorpus; delimiter="|")
+    lines = ["#!ctsdata"]
+    for p in c.passages
+        push!(lines, cex(p, delimiter = delimiter))
+    end
+    join(lines,"\n")
+end
+#=
+"""Compose a delimited-text string for a corpus.
+
+$(SIGNATURES)
+"""
+function cex(c::CitableTextCorpus)
+    # Rm newlines from output.
+    txt = map( cn -> string(
+            cn.urn.urn, delimiter, 
+            replace(cn.text, "\n" => " ")), 
+            c.passages)
+    "#!ctsdata\n" * join(txt, "\n") * "\n"
+end
+=#
 
 """Required function to iterate a document using julia `Base` functions.
 
@@ -90,19 +136,6 @@ function combine(src_array, composite = nothing)
     end
 end
 
-
-"""Compose a delimited-text string for a corpus.
-
-$(SIGNATURES)
-"""
-function cex(c::CitableTextCorpus; delimiter="|")
-    # Rm newlines from output.
-    txt = map( cn -> string(
-            cn.urn.urn, delimiter, 
-            replace(cn.text, "\n" => " ")), 
-            c.passages)
-    "#!ctsdata\n" * join(txt, "\n") * "\n"
-end
 
 
 """Parse a Vector of `CiteEXchange.Blocks` into 

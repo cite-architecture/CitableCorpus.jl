@@ -6,6 +6,8 @@ using DataFrames, HTTP
 using Test
 
 
+include("test_library.jl")
+
 include("test_citable_passages.jl")
 include("test_citable_document.jl")
 

@@ -11,6 +11,12 @@ import CitableBase: CitableTrait
 import CitableBase: cex
 import CitableBase: urn
 import CitableBase: label
+import CitableBase: urncontains
+
+using CitableLibrary
+import CitableLibrary: CitableLibraryTrait
+import CitableLibrary: urnequals
+
 
 
 using CitableText
@@ -21,6 +27,8 @@ using Documenter, DocStringExtensions
 
 # Citable functions from CitableTrait interface
 export urn, label, cex
+export urnequals, urncontains
+
 
 export CitablePassage, CitableDocument, CitableTextCorpus
 
