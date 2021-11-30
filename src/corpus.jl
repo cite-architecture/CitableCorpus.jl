@@ -143,12 +143,13 @@ a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function corpus_fromcex(v::Vector{CiteEXchange.Block}; delimiter = "|")
+function fromcex(v::CiteEXchange.Block[], CitableTextCorpus; delimiter = "|" ) #Vector{CiteEXchange.Block}, CitableTextCorpus; delimiter = "|")
     ctsblocks = blocksfortype("ctsdata", v)
+    @info("CTS BLOCKS", ctsblocks)
     passages = []
     for blk in ctsblocks
         for psg in blk.lines
-            push!(passages, passage_fromcex(psg, delimiter))
+            push!(passages, fromcex(psg, CitablePassage; delimiter = delimiter))
         end
     end
     CitableTextCorpus(passages)
@@ -159,9 +160,14 @@ a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function corpus_fromcex(cexstring::AbstractString; delimiter = "|")
+function fromcex(cexstring::AbstractString, CitableTextCorpus; delimiter = "|")
     allblocks = blocks(cexstring)
-    corpus_fromcex(allblocks; delimiter = delimiter)
+    @info("Now make corpus from CEX blocks", allblocks)
+    if isempty(allblocks)
+        throw(DomainError(cexstring, "No #!ctsdata blocks found."))
+    end
+    @info(typeof(allblocks))
+    fromcex(allblocks, CitableTextCorpus; delimiter = delimiter)
 end
 
 
@@ -169,8 +175,8 @@ end
 
 $(SIGNATURES)
 """
-function corpus_fromcex(bytevector::AbstractVector{UInt8}; delimiter = "|")
-    corpus_fromcex(String(bytevector);delimiter = delimiter)
+function fromcex(bytevector::AbstractVector{UInt8}, CitableTextCorpus; delimiter = "|")
+    fromcex(String(bytevector), CitableTextCorpus ;delimiter = delimiter)
 end
 
 """Create a Vector of citable documents in a corpus.

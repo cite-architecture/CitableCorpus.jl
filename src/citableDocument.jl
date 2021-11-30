@@ -71,7 +71,7 @@ end
 """Parse a Vector `CiteEXchange.Block`s into a `CitableDocument`.
 $(SIGNATURES)
 """
-function document_fromcex(v::Vector{CiteEXchange.Block}; delimiter = "|", docurn = nothing, title = nothing)
+function fromcex(v::Vector{CiteEXchange.Block}, CitableDocument; delimiter = "|", docurn = nothing, title = nothing)
     label = isnothing(title) ? "Unlabelled citable document" : title
 
     ctsblocks = blocksfortype("ctsdata", v)
@@ -102,9 +102,9 @@ end
 """Parse a CEX `ctsdata` block into a `CitableDocument`.
 $(SIGNATURES)
 """
-function document_fromcex(cexstring; delimiter = "|", docurn = nothing, title = nothing)
+function fromcex(cexstring, CitableDocument; delimiter = "|", docurn = nothing, title = nothing)
     allblocks = blocks(cexstring)
-    document_fromcex(allblocks; delimiter = delimiter, docurn = docurn, title = title)
+    fromcex(allblocks, CitableDocument; delimiter = delimiter, docurn = docurn, title = title)
 end
 
 """Override Base.print for `CitableDocument`.

@@ -16,6 +16,7 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
 CitableBase = "5"
+CitableLibrary = "0.2"
 CitableText = "0.11"
 CiteEXchange = "0.4"
 DataFrames = "1"

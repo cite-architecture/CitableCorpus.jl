@@ -9,6 +9,7 @@ import Base: iterate
 using CitableBase
 import CitableBase: CitableTrait
 import CitableBase: cex
+import CitableBase: fromcex
 import CitableBase: urn
 import CitableBase: label
 import CitableBase: urncontains
@@ -26,13 +27,13 @@ using Documenter, DocStringExtensions
 
 
 # Citable functions from CitableTrait interface
-export urn, label, cex
+export urn, label, cex, fromcex
 export urnequals, urncontains
 
 
 export CitablePassage, CitableDocument, CitableTextCorpus
 
-export corpus_fromcex, document_fromcex, textdf
+export fromcex, textdf
 export combine
 export next, prev, retrieve
 export document_urns, documents, document
@@ -56,10 +57,6 @@ include("retrieval.jl")
 
 include("catalog.jl")
 include("readcatalog.jl")
-
-
-
-
 
 
 end # module

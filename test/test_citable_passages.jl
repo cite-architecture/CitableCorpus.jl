@@ -20,8 +20,9 @@ end
 @testset "Test CEX parsing for CitablePassage" begin
         psg = CitablePassage(CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.1"), "μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος")
         # Round trip it!
-        cex(psg) |> CitableCorpus.passage_fromcex == psg
+        psg == fromcex(cex(psg), CitablePassage)
+        #cex(psg) |> CitableCorpus.passage_fromcex == psg
         # Check error handling:
-        @test_throws DomainError CitableCorpus.passage_fromcex("No columns")
-        @test_throws DomainError CitableCorpus.passage_fromcex("Too|many|darn|columns!|")
+        @test_throws DomainError fromcex("No columns", CitablePassage)
+        @test_throws DomainError fromcex("Too|many|darn|columns!|", CitablePassage)
 end
