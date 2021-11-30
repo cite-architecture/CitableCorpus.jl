@@ -143,7 +143,7 @@ a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function fromcex(v::CiteEXchange.Block[], CitableTextCorpus; delimiter = "|" ) #Vector{CiteEXchange.Block}, CitableTextCorpus; delimiter = "|")
+function fromblocks(v::CiteEXchange.Block[]; delimiter = "|" ) #Vector{CiteEXchange.Block}, CitableTextCorpus; delimiter = "|")
     ctsblocks = blocksfortype("ctsdata", v)
     @info("CTS BLOCKS", ctsblocks)
     passages = []
@@ -167,7 +167,7 @@ function fromcex(cexstring::AbstractString, CitableTextCorpus; delimiter = "|")
         throw(DomainError(cexstring, "No #!ctsdata blocks found."))
     end
     @info(typeof(allblocks))
-    fromcex(allblocks, CitableTextCorpus; delimiter = delimiter)
+    fromblocks(allblocks; delimiter = delimiter)
 end
 
 

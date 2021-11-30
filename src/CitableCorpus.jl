@@ -6,7 +6,7 @@ import Base:  show
 import Base:  ==
 import Base: iterate
 
-using CitableBase
+using CitableBase: Citable, CitableByCtsUrn, CitableByCite2Urn
 import CitableBase: CitableTrait
 import CitableBase: cex
 import CitableBase: fromcex
@@ -49,14 +49,16 @@ export citationdepth
 
 
 include("citablePassage.jl")
+
 include("citableDocument.jl")
 include("corpus.jl")
 include("navigation.jl")
 include("retrieval.jl")
 
 
+#=
 include("catalog.jl")
 include("readcatalog.jl")
-
+=#
 
 end # module
