@@ -1,6 +1,6 @@
 @testset "Test iterator functions" begin
     f = "data/hyginus.cex"
-    c = read(f, String) |> corpus_fromcex
+    c = fromcex(read(f, String), CitableTextCorpus)
 
     count = 0
     for psg in c

@@ -21,7 +21,7 @@ end
         psg = CitablePassage(CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.1"), "μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος")
         # Round trip it!
         psg == fromcex(cex(psg), CitablePassage)
-        #cex(psg) |> CitableCorpus.passage_fromcex == psg
+        
         # Check error handling:
         @test_throws DomainError fromcex("No columns", CitablePassage)
         @test_throws DomainError fromcex("Too|many|darn|columns!|", CitablePassage)

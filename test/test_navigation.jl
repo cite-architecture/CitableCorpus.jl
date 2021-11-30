@@ -9,7 +9,7 @@ urn:cts:latinLit:stoa1263.stoa001.hc:pr.3#Ex Aethere et Terra Dolor Dolus Ira Lu
 urn:cts:latinLit:stoa1263.stoa001.hc:pr.4#Ex Terra et Tartaro Gigantes, Enceladus Coeus elentes mophius Astraeus Pelorus Pallas Emphytus Rhoecus ienios Agrius alemone Ephialtes Eurytus effracorydon Theomises Theodamas Otus Typhon Polyboetes menephriarus abesus colophonus Iapetus.
 urn:cts:latinLit:stoa1263.stoa001.hc:pr.5#Ex Ponto et Mari piscium genera.
 """     
-    c = corpus_fromcex(cexsrc; delimiter = "#")
+    c = fromcex(cexsrc, CitableTextCorpus; delimiter = "#")
     @test length(c.passages) == 6
   
     @test next(c.passages[1].urn, c) == c.passages[2]
@@ -22,7 +22,7 @@ end
 
 @testset "Test navigation in a corpus within in document" begin
     f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
-    corp = read(f, String) |> corpus_fromcex
+    corp = fromcex(read(f, String), CitableTextCorpus)
     lastbancroft = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:4")
     @test isnothing(next(lastbancroft, corp))
 end

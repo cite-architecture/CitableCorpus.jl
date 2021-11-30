@@ -78,7 +78,7 @@ function fromcex(v::Vector{CiteEXchange.Block}, CitableDocument; delimiter = "|"
     passages = []
     for blk in ctsblocks
         for psg in blk.lines
-            push!(passages, passage_fromcex(psg, delimiter))
+            push!(passages, fromcex(psg, CitablePassage; delimiter = delimiter))
         end
     end
     if isnothing(docurn)

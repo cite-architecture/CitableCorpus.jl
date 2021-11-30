@@ -1,5 +1,5 @@
 @testset "Test assignment of CitableTrait" begin
-    psg = CitableCorpus.passage_fromcex("urn:cts:greekLit:tlg0012.tlg001.nx:1.1|Wrathful text")
+    psg = fromcex("urn:cts:greekLit:tlg0012.tlg001.nx:1.1|Wrathful text", CitablePassage)
     @test CitableTrait(typeof(psg)) == CitableByCtsUrn()
 
 
