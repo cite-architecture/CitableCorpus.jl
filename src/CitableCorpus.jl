@@ -33,7 +33,10 @@ using Documenter, DocStringExtensions
 
 export CitablePassage
 export PassageCitableByCtsUrn, CtsUrnComparablePassage, CexPassage
-#export CitableDocument
+export CitableDocument
+export DocumentCitableByCtsUrn, CtsUrnComparableDocument, CexDocument
+
+
 #export CitableTextCorpus
 
 #=
@@ -52,8 +55,7 @@ export citationdepth
 
 =#
 include("citablePassage.jl")
-
-#include("citableDocument.jl")
+include("citableDocument.jl")
 #include("corpus.jl")
 #include("navigation.jl")
 #include("retrieval.jl")

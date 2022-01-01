@@ -5,37 +5,39 @@ struct CitableDocument <: Citable
     passages
 end
 
-CitableTrait(::Type{CitableDocument}) = CitableByCtsUrn()
-
-"""Required function to iterate a document using julia `Base` functions.
-
-$(SIGNATURES)
-"""
-function iterate(doc::CitableDocument)
-    isempty(doc.passages) ? nothing : (doc.passages[1], 1)
-end
-
-"""Required function to iterate a document using julia `Base` functions.
-
-$(SIGNATURES)
-"""
-function iterate(doc::CitableDocument, state)
-    next = state + 1
-    next > length(doc.passages) ? nothing : (doc.passages[next], next)
-end
-
 
 """Override Base.== for `CitablePassage`.
 $(SIGNATURES)
 """        
 function ==(doc1::CitableDocument, doc2::CitableDocument)
     if length(doc1.passages) == length(doc2.passages)
-       all(doc1.passages .== doc2.passages)
+        all(doc1.passages .== doc2.passages)
     else
         false
     end
 end
 
+
+"""Override Base.show for `CitableDocument`.
+$(SIGNATURES)
+"""
+function show(io::IO, doc::CitableDocument)
+    count = doc.passages |> length
+    suffix = count == 1 ? "" : "s"
+    str = string(label(doc), " <", urn(doc), "> $count citable passage$suffix" )
+    show(io,str)
+end
+
+
+"Value for CitableTrait"
+struct DocumentCitableByCtsUrn <: CitableTrait end
+
+"""Define`CitableTrait` value for `CitablePassage`.
+$(SIGNATURES)
+"""
+function citabletrait(::Type{CitableDocument})
+    DocumentCitableByCtsUrn()
+end
 
 """URN identifyiing `doc`.
 $(SIGNATURES)
@@ -53,6 +55,24 @@ function label(doc::CitableDocument)
     doc.title
 end
 
+
+
+
+struct CtsUrnComparableDocument <: UrnComparisonTrait end
+
+
+
+
+
+struct CexDocument <: CexTrait end
+
+"""Define`CexTrait` value for `CitablePassage`.
+$(SIGNATURES)
+"""
+function cextrait(::Type{CitableDocument})
+    CexDocument()
+end
+
 """Format a `CitableDocument` as a CEX `ctsdata` block.
 $(SIGNATURES)
 Required function for `Citable` abstraction.
@@ -66,7 +86,6 @@ function cex(doc::CitableDocument; delimiter = "|")
     end
     join(lines,"\n")
 end
-
 
 """Parse a Vector `CiteEXchange.Block`s into a `CitableDocument`.
 $(SIGNATURES)
@@ -107,29 +126,33 @@ function fromcex(cexstring, CitableDocument; delimiter = "|", docurn = nothing, 
     fromcex(allblocks, CitableDocument; delimiter = delimiter, docurn = docurn, title = title)
 end
 
-"""Override Base.print for `CitableDocument`.
-$(SIGNATURES)
-"""
-function print(io::IO, doc::CitableDocument)
-    count = doc.passages |> length
-    suffix = count == 1 ? "" : "s"
-    print(io, label(doc), " <", urn(doc), "> $count citable passage$suffix" )
-end
-
-"""Override Base.show for `CitableDocument`.
-$(SIGNATURES)
-"""
-function show(io::IO, doc::CitableDocument)
-    count = doc.passages |> length
-    suffix = count == 1 ? "" : "s"
-    str = string(label(doc), " <", urn(doc), "> $count citable passage$suffix" )
-    show(io,str)
-end
-
 
 """Create a DataFrame of passages in `doc`.
 $(SIGNATURES)
 """
 function textdf(doc::CitableDocument)
     doc.passages |> DataFrame
+end
+
+
+
+
+# implement full set of iterate with 
+# length, eltype
+
+"""Required function to iterate a document using julia `Base` functions.
+
+$(SIGNATURES)
+"""
+function iterate(doc::CitableDocument)
+    isempty(doc.passages) ? nothing : (doc.passages[1], 1)
+end
+
+"""Required function to iterate a document using julia `Base` functions.
+
+$(SIGNATURES)
+"""
+function iterate(doc::CitableDocument, state)
+    next = state + 1
+    next > length(doc.passages) ? nothing : (doc.passages[next], next)
 end
