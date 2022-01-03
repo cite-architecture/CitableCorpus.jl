@@ -29,6 +29,10 @@ function show(io::IO, doc::CitableDocument)
 end
 
 
+function text(doc::CitableDocument)
+    map(psg -> psg.text, doc.passages)
+end
+
 "Value for CitableTrait"
 struct DocumentCitableByCtsUrn <: CitableTrait end
 
