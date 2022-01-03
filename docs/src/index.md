@@ -23,5 +23,7 @@ Both the `CitableDocument` and the `CitableTextCorpus` are *citable collections*
 The following pages document each of the above structures. Throughout our examples, we will work with a citable corpus of [the five extant versions of the Gettysburg Address](http://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm). 
 
 !!! tip "Data files"
+    
+    You can find the text corpus serialized in CEX format in the file `gettysburgcorpus.cex` of this repository's `test/data` directory. In the same directory, the file `gettysburgcatalog.cex` has a CEX representation of the catalog for that corpus.
 
-   You can find the text corpus serialized in CEX format in the file `gettysburgcorpus.cex` of this repository's `test/data` directory. In the same directory, the file `gettysburgcatalog.cex` has a CEX representation of the catalog for that corpus.
+

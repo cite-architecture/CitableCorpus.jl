@@ -18,6 +18,15 @@ function entry(u::CtsUrn, citation, group, work, version; exemplar = nothing, on
 end
 
 
+"""Override Base.show for `CatalogedText`.
+$(SIGNATURES)
+Required function for `Citable` abstraction.
+"""
+function show(io::IO, catentry::CatalogedText)
+    print(io, "<", catentry.urn, "> ", catentry.group, ", ", catentry.work, ", ", catentry.version)
+end
+
+
 """Retrieve label for citation pattern of `txt`.
 $(SIGNATURES)
 """
@@ -68,6 +77,11 @@ function lang(txt::CatalogedText)
     txt.lang
 end
 
+
+
+
+
+
 "Single type to use as value for UrnComparisonTrait"
 struct CitableTextEntry <: CitableTrait end
 
@@ -78,14 +92,25 @@ function citabletrait(::Type{CatalogedText})
     CitableTextEntry()
 end
 
-#=
-
-"""Override Base.== for `CatalogedText`.
-$(SIGNATURES)
-"""    
-function ==(doc1::CatalogedText, doc2::CatalogedText)
-    cex(doc1) == cex(doc2)
+function urn(catentry::CatalogedText)
+    catentry.urn
 end
+
+function label(catentry::CatalogedText)
+    string(catentry)
+end
+
+
+"Value for UrnComparisonTrait"
+struct CtsComparableTextCatalogEntry <: UrnComparisonTrait end
+
+"Value for CexTrait"
+struct CexCatalogedText <: CexTrait end
+
+
+
+
+#=
 
 """Implement `urn` function required by `Citable` interface 
 for `CatalogedText`.

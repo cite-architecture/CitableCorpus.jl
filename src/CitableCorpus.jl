@@ -26,7 +26,9 @@ import CitableBase: urnsimilar
 import CitableBase: citablecollectiontrait
 
 
-export CatalogedText, entry
+export CatalogedText
+export CitableTextEntry, CtsComparableTextCatalogEntry, CexCatalogedText
+export entry
 export citation, textgroup, work, version, exemplar
 export lang, online
 
