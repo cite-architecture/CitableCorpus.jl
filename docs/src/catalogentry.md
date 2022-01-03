@@ -47,16 +47,16 @@ A `CatalogedText` follows `CtsBase`'s definition of a [*citable object*](https:/
 
 
 
-```@example passage
+```@example catentry
 using CitableBase
 citable(catentry)
 ```
 
-```@example passage
+```@example catentry
 urncomparable(catentry)
 ```
 
-```@example passage
+```@example catentry
 cexserializable(catentry)
 ```
 
@@ -65,10 +65,10 @@ cexserializable(catentry)
 
 The `label` and `urn` functions are available from `CitableBase`.
 
-```@example passage
+```@example catentry
 label(catentry)
 ```
-```@example passage
+```@example catentry
 urn(catentry)
 ```
 
@@ -77,17 +77,27 @@ urn(catentry)
 
 `CatalogedText`s can be compared to URNs using [URN logic for equality, containment and similarity](https://cite-architecture.github.io/CitableBase.jl/stable/).   Note that in each function, the first parameter is the catalog entry, and the second a URN to compare the text to.
 
-```@example passage
+```@example catentry
 urnequals(catentry, catentry.urn)
 ```
-```@example passage
+```@example catentry
 allgburg = CtsUrn("urn:cts:citedemo:gburg:")
 urncontains(catentry, allgburg)
 ```
-```@example passage
+```@example catentry
 urnsimilar(catentry, allgburg)
 ```
 
 ### CEX serialization
 
 `CitablePassage`s can be lossly roundtripped to and from objects and delimited-text strings in CEX format using the `cex` and `fromcex` functions of `CitableBase`.
+
+
+```@example catentry
+cex(catentry)
+```
+
+
+```@example catentry
+fromcex(cex(catentry), CatalogedText) == catentry
+```

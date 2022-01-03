@@ -29,7 +29,8 @@ import CitableBase: citablecollectiontrait
 export CatalogedText
 export CitableTextEntry, CtsComparableTextCatalogEntry, CexCatalogedText
 export entry
-export citation, textgroup, work, version, exemplar
+export citation, citationdepth
+export textgroup, work, version, exemplar
 export lang, online
 
 export TextCatalogCollection
