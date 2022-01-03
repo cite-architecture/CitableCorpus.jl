@@ -1,16 +1,15 @@
 # Citable passages
 
-A `CitablePassage` represents a single canonically citable unit of text. Construct one with a `CtsUrn` and a string value.
+A `CitablePassage` represents a single canonically citable unit of text which you construct with a `CtsUrn` and a string value.  We create a `CitablePassage` for the opening sentence of the Gettysburg Address in the version of John Hay, now in the Library of Congress.
 
 ```@example passage
 using CitableCorpus
 using CitableText
 
-psgurn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:1")
-txt = "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+psgurn = CtsUrn("urn:cts:citedemo:gburg.hay.v2:1")
+txt = "Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
 psg = CitablePassage(psgurn, txt)
 ```
-
 
 Use the `text` function to find the text content of a passage.
 
@@ -18,12 +17,31 @@ Use the `text` function to find the text content of a passage.
 text(psg)
 ```
 
+
+
 `CitablePassage`s can be compared used the `==` function of Julia `Base`.
 
 ```@example passage
 duplicate = psg
 psg == duplicate
 ```
+
+Note that two passages are equal only if both their text and URNs match.  Here is the opening sentence of Lincoln's address in the version of Edward Everett, the principal speaker at Gettysburg.
+
+```@example passage
+urn2 = CtsUrn("urn:cts:citedemo:gburg.everett.v2:1")
+txt2 = "Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+psg2 = CitablePassage(urn2, txt2)
+```
+
+```@example passage
+text(psg) == text(psg2)
+```
+
+```@example passage
+psg == psg2
+```
+
 
 
 
