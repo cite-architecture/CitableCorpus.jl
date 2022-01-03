@@ -107,8 +107,6 @@ end
 
 
 
-
-
 "Singleton type to use as value for CitableTrait"
 struct CitableTextEntry <: CitableTrait end
 

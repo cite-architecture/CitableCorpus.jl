@@ -34,7 +34,7 @@ export textgroup, work, version, exemplar
 export lang, online
 
 export TextCatalogCollection
-
+export CitableTextCatalog
 
 
 export CitablePassage
