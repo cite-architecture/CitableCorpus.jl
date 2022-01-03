@@ -86,7 +86,7 @@ Since `CitablePassage`s are cited by `CtsUrn`, you can use any functions from [t
 urn(everett_psg) |> passagecomponent
 ```
 
-## URN comparison
+### URN comparison
 
 
 `CitablePassage`s can be compared to URNs using [URN logic for equality, containment and similarity](https://cite-architecture.github.io/CitableBase.jl/stable/).   Note that in each function, the first parameter is the passage of text, and the second a URN to compare the text to.
@@ -108,4 +108,36 @@ urncontains(hay_psg, lincoln_generic)
 ```
 
 ```@example passage
+urncontains(everett_psg, lincoln_generic)
+```
+
+```@example passage
+urncontains(everett_psg, hay_generic)
+```
+
+```@example passage
+urncontains(hay_psg, hay_generic)
+```
+
+```@example passage
+urnsimilar(everett_psg, lincoln_generic)
+```
+
+
+
+
+### CEX serialization
+
+`CitablePassage`s can be lossly roundtripped to and from objects and delimited-text strings in CEX format using the `cex` and `fromcex` functions of `CitableBase`.
+
+
+```@example passage
+cex(everett_psg)
+```
+
+
+
+```@example passage
+everett_cex = cex(everett_psg)
+everett_psg == fromcex(everett_cex, CitablePassage)
 ```
