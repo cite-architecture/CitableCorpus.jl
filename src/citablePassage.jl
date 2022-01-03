@@ -57,7 +57,7 @@ struct CexPassage <: CexTrait end
 $(SIGNATURES)
 """
 function cextrait(::Type{CitablePassage})  
-    CexTrait()
+    CexPassage()
 end
 """Format a `CitablePassage` as a delimited-text string.
 $(SIGNATURES)
