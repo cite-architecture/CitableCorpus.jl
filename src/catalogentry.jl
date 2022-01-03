@@ -18,6 +18,15 @@ function entry(u::CtsUrn, citation, group, work, version; exemplar = nothing, on
 end
 
 
+"""Override Base.== for `CatalogedText`.
+$(SIGNATURES)
+Required function for `Citable` abstraction.
+"""
+function ==(t1::CatalogedText, t2::CatalogedText)
+    t1.urn == t2.urn && t1.citation == t2.citation && t1.group == t2.group && t1.work == t2.work && t1.version == t2.version && t1.exemplar == t2.exemplar && t1.online == t2.online && t1.lang == t2.lang
+end
+
+
 """Override Base.show for `CatalogedText`.
 $(SIGNATURES)
 Required function for `Citable` abstraction.
@@ -172,16 +181,11 @@ function cex(cataloged::CatalogedText; delimiter = "|")
 end
 
 
-#=
-
-
-
-
 
 """Parse a single line of CEX data into a `CatalogedText`.
 $(SIGNATURES)
 """
-function catalogedtext(cexstring; delimiter = "|") 
+function fromcex(cexstring::AbstractString,  CatalogedText; delimiter = "|", configuration = nothing)
     boolstrings = ["t", "true"]
     pieces = split(cexstring, delimiter)
     urn = CtsUrn(pieces[1])
@@ -189,14 +193,10 @@ function catalogedtext(cexstring; delimiter = "|")
     textgroup = pieces[3]
     textwork = pieces[4]
     textversion = pieces[5]
-    textexemplar = pieces[6]
+    textexemplar = isempty(pieces[6]) || pieces[6] == "nothing" ? nothing : pieces[6]
     onlineval = lowercase(pieces[7]) in boolstrings
     lang = pieces[8]
     CatalogedText(urn, citation, textgroup,
     textwork, textversion, textexemplar, 
     onlineval, lang)
 end
-
-
-
-=#
