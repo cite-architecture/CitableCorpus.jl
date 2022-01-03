@@ -59,8 +59,6 @@ end
 
 
 
-
-
 "Singleton type to use as value for CexTrait"
 struct TextCatalogCex <: CexTrait end
 
@@ -70,3 +68,60 @@ $(SIGNATURES)
 function cextrait(::Type{TextCatalogCollection})
     TextCatalogCex()
 end
+
+"""Serialize `catalog` to a `ctscatalog` block.
+$(SIGNATURES)
+"""
+function cex(catalog::TextCatalogCollection; delimiter = "|")
+    lines = ["#!ctscatalog"]
+    for entry in catalog.entries
+        push!(lines, cex(entry))
+    end
+    join(lines, "\n")
+end
+
+"""Instantiate a text catalog from CEX source
+$(SIGNATURES)
+"""
+function fromcex(cexsrc::AbstractString, ::Type{TextCatalogCollection}; 
+    delimiter = "|", configuration = nothing)
+    catalogdata = data(cexsrc, "ctscatalog", delimiter = delimiter)
+    entries = []
+    for dataline in catalogdata
+        push!(entries, fromcex(dataline, CatalogedText, delimiter = delimiter))
+    end
+    isempty(entries) ? nothing : TextCatalogCollection(entries)
+end
+
+
+# Iteration:
+
+"""Implement required iterate function with one parameter for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function iterate(catalog::TextCatalogCollection)
+    isempty(catalog.entries) ? nothing : (catalog.entries[1], 2)
+end
+
+"""Implement required iterate function with two parameters for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function iterate(catalog::TextCatalogCollection, state)
+    state > length(catalog.entries) ? nothing : (catalog.entries[state], state + 1)
+end
+
+
+"""Implement `length` for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function length(catalog::TextCatalogCollection)
+    length(catalog.entries)
+end
+
+"""Implement `eltype` for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function eltype(catalog::TextCatalogCollection)
+    CatalogedText
+end
+

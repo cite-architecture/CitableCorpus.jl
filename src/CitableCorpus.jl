@@ -8,7 +8,7 @@ using Documenter, DocStringExtensions
 
 import Base:  show
 import Base:  ==
-import Base: iterate
+import Base: iterate, length, eltype
 
 import CitableBase: citabletrait
 import CitableBase: urn

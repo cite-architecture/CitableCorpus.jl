@@ -21,3 +21,25 @@ end
     @test length(urncontains(allgburg, catalog)) == 2
     @test length(urnsimilar(allgburg, catalog)) == 2
 end
+
+
+@testset "Test CEX serialization for TextCatalogCollection" begin
+    hay = entry(CtsUrn("urn:cts:citedemo:gburg.hay.v2:"), "section", "Gettysburg Address", "Text of John Hay", "second HC digital edition")
+    everett = entry(CtsUrn("urn:cts:citedemo:gburg.everett.v2:"), "section", "Gettysburg Address", "Text of Edward Everett", "second HC digital edition")
+    catalog = TextCatalogCollection([hay, everett])
+
+    expectedcex = "#!ctscatalog\nurn:cts:citedemo:gburg.hay.v2:|section|Gettysburg Address|Text of John Hay|second HC digital edition|nothing|true|eng\nurn:cts:citedemo:gburg.everett.v2:|section|Gettysburg Address|Text of Edward Everett|second HC digital edition|nothing|true|eng"
+    @test cex(catalog) == expectedcex
+
+    @test_broken fromcex(expectedcex) == catalog
+end
+
+
+@testset "Test iteration for TextCatalogCollection" begin
+    hay = entry(CtsUrn("urn:cts:citedemo:gburg.hay.v2:"), "section", "Gettysburg Address", "Text of John Hay", "second HC digital edition")
+    everett = entry(CtsUrn("urn:cts:citedemo:gburg.everett.v2:"), "section", "Gettysburg Address", "Text of Edward Everett", "second HC digital edition")
+    catalog = TextCatalogCollection([hay, everett])
+
+    @test collect(catalog) == [hay, everett]
+
+end
