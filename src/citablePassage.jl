@@ -41,6 +41,13 @@ $(SIGNATURES)
 Required function for `Citable` abstraction.
 """
 function label(psg::CitablePassage)
+    string(psg)
+end
+
+"""Text content of `psg`.
+$(SIGNATURES)
+"""
+function text(psg::CitablePassage)
     psg.text
 end
 
@@ -63,7 +70,7 @@ end
 """Parse a delimited-text string into a `CitablePassage`.
 $(SIGNATURES)
 """
-function fromcex(s::AbstractString, CitablePassage; delimiter = "|")
+function fromcex(s::AbstractString, CitablePassage; delimiter = "|", configuration = nothing)
     parts = split(s, delimiter)
     if length(parts) == 2 
         u = CtsUrn(parts[1])
@@ -73,6 +80,19 @@ function fromcex(s::AbstractString, CitablePassage; delimiter = "|")
     end
 end
 
-
 "Value for UrnComparisonTrait"
 struct CtsUrnComparablePassage <: UrnComparisonTrait end
+
+"""Define`UrnComparisonTrait` value for `CitablePassage`.
+$(SIGNATURES)
+"""
+function urncomparisontrait(::Type{CitablePassage})
+    CtsUrnComparablePassage()
+end
+
+"""True if urn matches psg.urn for equality.
+$(SIGNATURES)
+"""
+function urnequals(psg::CitablePassage, urn)
+    urnequals(urn, psg.urn)
+end

@@ -14,4 +14,11 @@ The behaviors of these structures are defined by the traits from [the `CitableBa
 
 Both the `CitableDocument` and the `CitableTextCorpus` are *citable collections*, and therefore  implement Julia's interface for iterators. This means that you can apply any function to them that you can use for other iterable collections.  `for psg in document`, for example, iterates through all passages in `document`.
 
-The following pages document each of `CitableCorpus`' four structures.
+
+
+## User's guide 
+
+The following pages document each of `CitableCorpus`' four structures. Throughout our examples, we'll work with a citable corpus of [the five extant versions of the Gettysburg Address](http://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm). 
+
+
+> TBA: add link to corpus and catalog cex files.

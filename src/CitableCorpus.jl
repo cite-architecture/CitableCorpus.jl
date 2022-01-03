@@ -1,38 +1,35 @@
 module CitableCorpus
 
-
-#import Base:  print
-import Base:  show
-import Base:  ==
-import Base: iterate
-
 using CitableBase
-
-import CitableBase: citabletrait
-import CitableBase: urn
-import CitableBase: label
-
-
-import CitableBase: cex
-import CitableBase: fromcex
-
-import CitableBase: urncontains
-import CitableBase: urnequals
-
-
 using CitableText
 using CiteEXchange
 using DataFrames, HTTP
 using Documenter, DocStringExtensions
 
+import Base:  show
+import Base:  ==
+import Base: iterate
 
-# Citable functions from CitableTrait interface
-#export urn, label, cex, fromcex
-#export urnequals, urncontains
+import CitableBase: citabletrait
+import CitableBase: urn
+import CitableBase: label
+
+import CitableBase: cextrait
+import CitableBase: cex
+import CitableBase: fromcex
+
+import CitableBase: urncomparisontrait
+import CitableBase: urncontains
+import CitableBase: urnequals
+import CitableBase: urnsimilar
 
 
 export CitablePassage
 export PassageCitableByCtsUrn, CtsUrnComparablePassage, CexPassage
+export text
+
+
+
 export CitableDocument
 export DocumentCitableByCtsUrn, CtsUrnComparableDocument, CexDocument
 
