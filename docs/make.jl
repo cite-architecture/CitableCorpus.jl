@@ -18,8 +18,10 @@ makedocs(
     pages = [
         "Overview" => "index.md",
         "User's guide" => Any[
-            "Citable passages and corpora" => "corpus.md",
-            "Citable text catalogs" => "catalog.md"
+            "Citable passages" => "passages.md",
+            "Citable documents" => "documents.md",
+            "Citable corpora" => "corpora.md",
+            "Cataloging texts" => "catalog.md"
 
         ],
         "API documentation" => "api.md"
