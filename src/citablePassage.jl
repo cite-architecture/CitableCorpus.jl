@@ -96,3 +96,21 @@ $(SIGNATURES)
 function urnequals(psg::CitablePassage, urn)
     urnequals(urn, psg.urn)
 end
+
+
+
+"""True if urn matches psg.urn for containment.
+$(SIGNATURES)
+"""
+function urncontains(psg::CitablePassage, urn)
+    urncontains(urn, psg.urn)
+end
+
+
+
+"""True if urn matches psg.urn for similarity.
+$(SIGNATURES)
+"""
+function urnsimilar(psg::CitablePassage, urn)
+    urnsimilar(urn, psg.urn)
+end

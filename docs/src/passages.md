@@ -8,7 +8,7 @@ using CitableText
 
 hay_urn = CtsUrn("urn:cts:citedemo:gburg.hay.v2:1")
 hay_txt = "Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
-hay_psg = CitablePassage(hay_urn, txt)
+hay_psg = CitablePassage(hay_urn, hay_txt)
 ```
 
 Use the `text` function to find the text content of a passage.
@@ -102,9 +102,9 @@ urnequals(everett_psg, hay_urn)
 
 
 ```@example passage
-lincolngeneric = CtsUrn("urn:cts:citedemo:gburg:")
-haygeneric = CtsUrn("urn:cts:citedemo:gburg.hay:")
-urncontains(hay_psg, lincolngeneric)
+lincoln_generic = CtsUrn("urn:cts:citedemo:gburg:")
+hay_generic = CtsUrn("urn:cts:citedemo:gburg.hay:")
+urncontains(hay_psg, lincoln_generic)
 ```
 
 ```@example passage
