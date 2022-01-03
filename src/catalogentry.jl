@@ -10,8 +10,75 @@ struct CatalogedText <: Citable
     lang
 end
 
-CitableTrait(::Type{CatalogedText}) = CitableByCtsUrn()
+"""Construct a `CatalogedText` allowing for some default values.
+$(SIGNATURES)
+"""
+function entry(u::CtsUrn, citation, group, work, version; exemplar = nothing, online = true, lang = "eng")
+    CatalogedText(u,citation, group, work, version,  exemplar, online, lang)
+end
 
+
+"""Retrieve label for citation pattern of `txt`.
+$(SIGNATURES)
+"""
+function citation(txt::CatalogedText)
+    txt.citation
+end
+
+"""Retrieve label for text group of `txt`.
+$(SIGNATURES)
+"""
+function textgroup(txt::CatalogedText)
+    txt.group
+end
+
+"""Retrieve label for work of `txt`.
+$(SIGNATURES)
+"""
+function work(txt::CatalogedText)
+    txt.work
+end
+
+"""Retrieve label for version of `txt`.
+$(SIGNATURES)
+"""
+function version(txt::CatalogedText)
+    txt.version
+end
+
+"""Retrieve label for exemplar (if any) of `txt`.
+$(SIGNATURES)
+"""
+function exemplar(txt::CatalogedText)
+    txt.exemplar
+end
+
+
+"""True if `txt` is online.
+$(SIGNATURES)
+"""
+function online(txt::CatalogedText)
+    txt.exemplar
+end
+
+"""Retrieve ISO language code for `txt`.
+$(SIGNATURES)
+"""
+function lang(txt::CatalogedText)
+    txt.lang
+end
+
+"Single type to use as value for UrnComparisonTrait"
+struct CitableTextEntry <: CitableTrait end
+
+"""Define`UrnComparisonTrait` value for `CatalogedText`.
+$(SIGNATURES)
+"""
+function citabletrait(::Type{CatalogedText}) 
+    CitableTextEntry()
+end
+
+#=
 
 """Override Base.== for `CatalogedText`.
 $(SIGNATURES)
@@ -146,3 +213,4 @@ function citationdepth(u::CtsUrn, df)
     length(split(citation,","))
 end
 
+=#

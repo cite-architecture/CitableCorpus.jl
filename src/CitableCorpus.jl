@@ -23,6 +23,16 @@ import CitableBase: urncontains
 import CitableBase: urnequals
 import CitableBase: urnsimilar
 
+import CitableBase: citablecollectiontrait
+
+
+export CatalogedText, entry
+export citation, textgroup, work, version, exemplar
+export lang, online
+
+
+
+
 
 export CitablePassage
 export PassageCitableByCtsUrn, CtsUrnComparablePassage, CexPassage
@@ -51,12 +61,20 @@ export citationlabels, online, lang
 export citationdepth
 
 =#
+
+
+include("catalogentry.jl")
+include("catalogcollection.jl")
+
 include("citablePassage.jl")
 include("citableDocument.jl")
+
+
 #include("corpus.jl")
 #include("navigation.jl")
 #include("retrieval.jl")
 
+include("dataframes.jl")
 
 #=
 include("catalog.jl")

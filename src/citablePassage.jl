@@ -19,8 +19,12 @@ function show(io::IO, psg::CitablePassage)
     print(io, "<", psg.urn, "> ", psg.text)
 end
 
+
+
+
 "Value for CitableTrait"
 struct PassageCitableByCtsUrn <: CitableTrait end
+
 """Define`CitableTrait` value for `CitablePassage`.
 $(SIGNATURES)
 """
@@ -96,7 +100,6 @@ $(SIGNATURES)
 function urnequals(psg::CitablePassage, urn)
     urnequals(urn, psg.urn)
 end
-
 
 
 """True if urn matches psg.urn for containment.

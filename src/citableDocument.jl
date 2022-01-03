@@ -33,6 +33,7 @@ function text(doc::CitableDocument)
     map(psg -> psg.text, doc.passages)
 end
 
+
 "Value for CitableTrait"
 struct DocumentCitableByCtsUrn <: CitableTrait end
 
@@ -125,9 +126,11 @@ end
 """Parse a CEX `ctsdata` block into a `CitableDocument`.
 $(SIGNATURES)
 """
-function fromcex(cexstring, CitableDocument; delimiter = "|", docurn = nothing, title = nothing)
+#function fromcex(cexstring, CitableDocument; delimiter = "|", docurn = nothing, title = nothing)
+function fromcex(cexstring, CitableDocument; delimiter = "|", configuration = nothing)
     allblocks = blocks(cexstring)
-    fromcex(allblocks, CitableDocument; delimiter = delimiter, docurn = docurn, title = title)
+    #fromcex(allblocks, CitableDocument; delimiter = delimiter, docurn = docurn, title = title)
+    nothing
 end
 
 
@@ -137,6 +140,18 @@ $(SIGNATURES)
 function textdf(doc::CitableDocument)
     doc.passages |> DataFrame
 end
+
+
+"Singleton value for CitableCollectionTrait"
+struct CitableDocumentCollection <: CitableCollectionTrait end
+
+"""Define`CitableCollectionTrait` value for `CitableDocument`.
+$(SIGNATURES)
+"""
+function citablecollectiontrait(::Type{CitableDocument})
+    CitableDocumentCollection()
+end
+
 
 
 
