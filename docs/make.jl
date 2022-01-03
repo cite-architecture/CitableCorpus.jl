@@ -22,8 +22,8 @@ makedocs(
             "Text catalog" => "catalogcollection.md",
             "Citable passages" => "passages.md",
             "Citable documents" => "documents.md",
-            "Citable corpora" => "corpora.md",
-            "Cataloging texts" => "catalog.md"
+            "Citable corpora" => "corpora.md"
+            
 
         ],
         "API documentation" => "api.md"

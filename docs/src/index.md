@@ -1,11 +1,13 @@
 # CitableCorpus.jl
 
-The CitableCorpus.jl package defines functions for working with four structures.  
+The CitableCorpus.jl package defines functions for working with the following structures:
 
+- a `CatalogedText` text associates labelling metadata with an identifying URN for a concrete version of a text.
 - a `CitablePassage` represents a passage of text.  It associates a `CtsUrn` with a string value for the content of the passage.
-- a `CitableDocument` contains an ordered list of `CitablePassages`, all belonging to a single version of a single text.
+- a `CitableDocument` represents a single cataloged document. It associates an ordered list of `CitablePassages`, all belonging to a single version of a single text, with a `CatalogedText`.
+- a `TextCatalogCollection` is a collection of `CatalogedText`s.
 - a `CitableTextCorpus` contains an ordered list of `CitablePassages` belonging to one or more versions of one or more texts.
-- a `CatalogedText` contains catalog information for a single citable text document.
+
 
 
 
@@ -18,7 +20,8 @@ Both the `CitableDocument` and the `CitableTextCorpus` are *citable collections*
 
 ## User's guide 
 
-The following pages document each of `CitableCorpus`' four structures. Throughout our examples, we'll work with a citable corpus of [the five extant versions of the Gettysburg Address](http://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm). 
+The following pages document each of the above structures. Throughout our examples, we will work with a citable corpus of [the five extant versions of the Gettysburg Address](http://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm). 
 
+!!! tip "Data files"
 
-> TBA: add link to corpus and catalog cex files.
+   You can find the text corpus serialized in CEX format in the file `gettysburgcorpus.cex` of this repository's `test/data` directory. In the same directory, the file `gettysburgcatalog.cex` has a CEX representation of the catalog for that corpus.

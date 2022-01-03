@@ -30,7 +30,7 @@ export CatalogedText, entry
 export citation, textgroup, work, version, exemplar
 export lang, online
 
-
+export TextCatalogCollection
 
 
 
