@@ -13,6 +13,19 @@ end
 @testset "Test citable status of CatalogedText" begin
     catentry = entry(CtsUrn("urn:cts:citedemo:gburg.hay.v2:"), "section", "Gettysburg Address", "Text of John Hay", "second HC digital edition")
     @test citable(catentry)
+    @test citabletrait(typeof(catentry)) == CitableTextEntry()
     @test urn(catentry) == CtsUrn("urn:cts:citedemo:gburg.hay.v2:")
     @test label(catentry) == "<urn:cts:citedemo:gburg.hay.v2:> Gettysburg Address, Text of John Hay, second HC digital edition"
+end
+
+
+@testset "Test URN comparison of CatalogedText" begin
+    catentry = entry(CtsUrn("urn:cts:citedemo:gburg.hay.v2:"), "section", "Gettysburg Address", "Text of John Hay", "second HC digital edition")
+    allgburg = CtsUrn("urn:cts:citedemo:gburg:")
+    
+    @test urnequals(catentry, catentry.urn)
+    @test urncontains(catentry, allgburg)
+    @test urnsimilar(catentry, allgburg)
+
+
 end

@@ -82,10 +82,10 @@ end
 
 
 
-"Single type to use as value for UrnComparisonTrait"
+"Singleton type to use as value for CitableTrait"
 struct CitableTextEntry <: CitableTrait end
 
-"""Define`UrnComparisonTrait` value for `CatalogedText`.
+"""Define`CitableTrait` value for `CatalogedText`.
 $(SIGNATURES)
 """
 function citabletrait(::Type{CatalogedText}) 
@@ -101,8 +101,42 @@ function label(catentry::CatalogedText)
 end
 
 
-"Value for UrnComparisonTrait"
+"Singleton type to use as value for UrnComparisonTrait"
 struct CtsComparableTextCatalogEntry <: UrnComparisonTrait end
+"""Define`UrnComparisonTrait` value for `CatalogedText`.
+$(SIGNATURES)
+"""
+function urncomparisontrait(::Type{CatalogedText}) 
+    CtsComparableTextCatalogEntry()
+end
+
+
+
+"""True if urn matches catentry.urn for equality.
+$(SIGNATURES)
+"""
+function urnequals(catentry::CatalogedText, urn)
+    urnequals(urn, catentry.urn)
+end
+
+
+"""True if urn matches catentry.urn for containment.
+$(SIGNATURES)
+"""
+function urncontains(catentry::CatalogedText, urn)
+    urncontains(urn, catentry.urn)
+end
+
+
+
+"""True if urn matches catentry.urn for similarity.
+$(SIGNATURES)
+"""
+function urnsimilar(catentry::CatalogedText, urn)
+    urnsimilar(urn, catentry.urn)
+end
+
+
 
 "Value for CexTrait"
 struct CexCatalogedText <: CexTrait end

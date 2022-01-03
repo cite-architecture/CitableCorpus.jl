@@ -65,11 +65,28 @@ cexserializable(catentry)
 
 The `label` and `urn` functions are available from `CitableBase`.
 
+```@example passage
+label(catentry)
+```
+```@example passage
+urn(catentry)
+```
 
 ### URN comparison
 
 
 `CatalogedText`s can be compared to URNs using [URN logic for equality, containment and similarity](https://cite-architecture.github.io/CitableBase.jl/stable/).   Note that in each function, the first parameter is the catalog entry, and the second a URN to compare the text to.
+
+```@example passage
+urnequals(catentry, catentry.urn)
+```
+```@example passage
+allgburg = CtsUrn("urn:cts:citedemo:gburg:")
+urncontains(catentry, allgburg)
+```
+```@example passage
+urnsimilar(catentry, allgburg)
+```
 
 ### CEX serialization
 
