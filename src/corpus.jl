@@ -18,11 +18,6 @@ end
     $(SIGNATURES)
 """        
 function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
-    #if length(corp1.passages) == length(corp2.passages)
-     #   all(corp1.passages .== corp2.passages)
-    #else
-    #    false
-    #end
     corp1.passages == corp2.passages
 end
 
@@ -42,6 +37,7 @@ function document_urns(v::Vector{CitablePassage})
     map(p -> droppassage(p.urn), v) |> unique
 end
 
+
 "Singleton type to use as value for CitableTrait"
 struct CitableCorpusTrait <: CitableCollectionTrait end
 
@@ -53,11 +49,20 @@ function citablecollectiontrait(::Type{CitableTextCorpus})
 end
 
 
+"Singleton type to use as value for UrnComparisonTrait"
+struct CtsComparableCorpus <: UrnComparisonTrait end
+
+"""Define`CitableTrait` value for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function urncomparisontrait(::Type{CitableTextCorpus})
+    CtsComparableCorpus()
+end
 
 """Filter `corpus` for entries with urn matching `urn` for equality.
 $(SIGNATURES)
 """
-function urnequals(urn::CtsUrn, corpus::CitableTextCorpus )
+function urnequals(urn::CtsUrn, corpus::CitableTextCorpus)
     filter(item -> urnequals(item.urn, urn), corpus.passages)
 end
 
@@ -79,29 +84,17 @@ end
 
 
 
+"Singleton type to use as value for CexTrait"
+struct CexCorpus <: CexTrait end
 
-#=
-
-"""Looks up text passage with URN `u` in corpus `c`.
-Returns either a single `CitableTextPassage` or `nothing`.
-
+"""Define`CexTrait` value for `CitableTextCorpus`.
 $(SIGNATURES)
 """
-function urnequals(u::CtsUrn, c::CitableTextCorpus, )
-    matches = filter(psg -> psg.urn == u, c.passages)
-    isempty(matches) ? nothing : matches[1]
+function cextrait(::Type{CitableTextCorpus})
+    CexCorpus()
 end
 
-"""Looks up passage in corpus `c` with URNs contained by `u`. Returns either a (possible empty) Vector of `CitableTextPassage`s.
-
-$(SIGNATURES)
-"""
-function urncontains(u::CtsUrn, c::CitableTextCorpus)
-    filter(psg -> urncontains(u, psg.urn), c.passages)
-end
-
-
-"""Serializes `c` to CEX format.
+"""Serialize `c` to CEX format.
 
 $(SIGNATURES)
 """
@@ -112,6 +105,8 @@ function cex(c::CitableTextCorpus; delimiter="|")
     end
     join(lines,"\n")
 end
+
+
 #=
 """Compose a delimited-text string for a corpus.
 

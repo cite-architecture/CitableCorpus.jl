@@ -25,7 +25,6 @@ import CitableBase: urnsimilar
 
 import CitableBase: citablecollectiontrait
 
-
 export CatalogedText
 export CitableTextEntry, CtsComparableTextCatalogEntry, CexCatalogedText
 export entry
@@ -36,19 +35,15 @@ export lang, online
 export TextCatalogCollection
 export CitableTextCatalog
 
-
 export CitablePassage
 export PassageCitableByCtsUrn, CtsUrnComparablePassage, CexPassage
 export text
 
-
-
 export CitableDocument
 export DocumentCitableByCtsUrn, CtsUrnComparableDocument, CexDocument
 
-
 export CitableTextCorpus
-export CitableCorpusTrait
+export CitableCorpusTrait, CtsComparableCorpus, CexCorpus
 
 export document_urns
 #=
@@ -57,13 +52,8 @@ export next, prev, retrieve
 export document_urns, documents, document
 export passage_count
 
-export CatalogedText
-export catalogedtext
-export catalogdf_fromcex, catalogdf_fromfile, catalogdf_fromurl
 
-export groupname, worktitle, versionlabel, exemplarlabel
-export citationlabels, online, lang
-export citationdepth
+export catalogdf_fromcex, catalogdf_fromfile, catalogdf_fromurl
 
 =#
 
