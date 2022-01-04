@@ -1,9 +1,48 @@
 "A canonically citable text corpus."
 struct CitableTextCorpus
-    passages
+    passages::Vector{CitablePassage}
 end
 
-CitableLibraryTrait(::Type{CitableTextCorpus}) = CitableLibraryCollection()
+"""Override Base.show for `CitableDocument`.
+$(SIGNATURES)
+"""
+function show(io::IO, corp::CitableTextCorpus)
+    doccount = document_urns(corp.passages) |> length
+    psgcount = corp.passages |> length
+    msg = "Corpus with $psgcount citable passages in $doccount documents."
+    print(io,msg)
+end
+
+
+"""Override Base.== for `CitableTextCorpus`.
+    $(SIGNATURES)
+"""        
+function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
+    #if length(corp1.passages) == length(corp2.passages)
+     #   all(corp1.passages .== corp2.passages)
+    #else
+    #    false
+    #end
+    corp1.passages == corp2.passages
+end
+
+
+
+#CitableLibraryTrait(::Type{CitableTextCorpus}) = CitableLibraryCollection()
+
+
+
+"Singleton type to use as value for CitableTrait"
+struct CitableCorpusTrait <: CitableCollectionTrait end
+
+"""Define`CitableTrait` value for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function citablecollectiontrait(::Type{CitableTextCorpus})
+    CitableCorpusTrait()
+end
+
+#=
 
 """Looks up text passage with URN `u` in corpus `c`.
 Returns either a single `CitableTextPassage` or `nothing`.
@@ -68,36 +107,9 @@ function iterate(c::CitableTextCorpus, state)
 end
 
 
-"""Override Base.== for `CitableTextCorpus`.
-    $(SIGNATURES)
-"""        
-function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
-    if length(corp1.passages) == length(corp2.passages)
-        all(corp1.passages .== corp2.passages)
-    else
-        false
-    end
-end
 
-"""Override Base.print for `CitableTextCorpus`.
-$(SIGNATURES)
-"""
-function print(io::IO, corp::CitableTextCorpus)
-    doccount = document_urns(corp.passages) |> length
-    psgcount = corp.passages |> length
-    msg = "Corpus with $psgcount citable passages in $doccount documents."
-    print(io,msg)
-end
 
-"""Override Base.show for `CitableDocument`.
-$(SIGNATURES)
-"""
-function show(io::IO, corp::CitableTextCorpus)
-    doccount = document_urns(corp.passages) |> length
-    psgcount = corp.passages |> length
-    msg = "Corpus with $psgcount citable passages in $doccount documents."
-    print(io,msg)
-end
+
 
 
 """
@@ -226,3 +238,4 @@ $(SIGNATURES)
 function passage_count(c::CitableTextCorpus)
     length(c.passages)
 end
+=#

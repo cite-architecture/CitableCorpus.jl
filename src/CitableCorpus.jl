@@ -47,7 +47,9 @@ export CitableDocument
 export DocumentCitableByCtsUrn, CtsUrnComparableDocument, CexDocument
 
 
-#export CitableTextCorpus
+export CitableTextCorpus
+export CitableCorpusTrait
+
 
 #=
 export combine
@@ -70,10 +72,10 @@ include("catalogentry.jl")
 include("catalogcollection.jl")
 
 include("citablePassage.jl")
+include("corpus.jl")
+
 include("citableDocument.jl")
 
-
-#include("corpus.jl")
 #include("navigation.jl")
 #include("retrieval.jl")
 
