@@ -3,36 +3,10 @@
 
 # CitableCorpus.jl
 
+> Work with texts modelled as passages, documents and corpora canonically citable by CTS URN.
 
-## Plans for version 1.0
+## Roadmap
 
-## Working with a corpus of citable passages
-
-Retrieval:
-
-- [x] leaf node
-- [x] containing node
-- [x] range
-
-Navigation:
-
-- [x] next passage
-- [ ] nextn passages
-- [x] previous passage
-- [ ] previousn passages
-
-## Working with a catalog of texts
-
-- [x] load from delimited text sources
-- [ ] compare contents of catalog with contents of a corpus
-
-Read values for a given text from the catalog:
-
-- [x] text group name
-- [x] work title
-- [x] version label
-- [x] exemplar label
-- [x] labels for citation levels
-- [x] language
-- [x] online status
-
+- [x] v0.10.0 Fully implement abstractions of `CitableBase` v0.8.
+- [ ] v0.11.0 Add `CitableDocumentCollection` unifying contents of a catalog and corpus
+- [ ] v0.12.0 Add `dataframe` function to apply to catalogs, corpora, and collectons of citable documents

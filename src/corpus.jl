@@ -1,8 +1,116 @@
 "A canonically citable text corpus."
 struct CitableTextCorpus
-    passages
+    passages::Vector{CitablePassage}
 end
 
+"""Override Base.show for `CitableDocument`.
+$(SIGNATURES)
+"""
+function show(io::IO, corp::CitableTextCorpus)
+    doccount = document_urns(corp.passages) |> length
+    psgcount = corp.passages |> length
+    msg = "Corpus with $psgcount citable passages in $doccount documents."
+    print(io,msg)
+end
+
+"""Override Base.== for `CitableTextCorpus`.
+    $(SIGNATURES)
+"""        
+function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
+    corp1.passages == corp2.passages
+end
+
+"""Identify documents in a corpus by URN.
+
+$(SIGNATURES)
+"""
+function document_urns(c::CitableTextCorpus)
+    map(p -> droppassage(p.urn), c.passages) |> unique
+end
+
+"""Identify documents in a list of passages by URN.
+
+$(SIGNATURES)
+"""
+function document_urns(v::Vector{CitablePassage})
+    map(p -> droppassage(p.urn), v) |> unique
+end
+
+
+"Singleton type to use as value for CitableTrait"
+struct CitableCorpusTrait <: CitableCollectionTrait end
+"""Define`CitableTrait` value for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function citablecollectiontrait(::Type{CitableTextCorpus})
+    CitableCorpusTrait()
+end
+
+"Singleton type to use as value for UrnComparisonTrait"
+struct CtsComparableCorpus <: UrnComparisonTrait end
+"""Define`CitableTrait` value for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function urncomparisontrait(::Type{CitableTextCorpus})
+    CtsComparableCorpus()
+end
+
+"""Filter `corpus` for entries with urn matching `urn` for equality.
+$(SIGNATURES)
+"""
+function urnequals(urn::CtsUrn, corpus::CitableTextCorpus)
+    filter(item -> urnequals(item.urn, urn), corpus.passages)
+end
+
+"""Filter `corpus` for entries with urn matching `urn` for containment.
+$(SIGNATURES)
+"""
+function urncontains(urn::CtsUrn, corpus::CitableTextCorpus)
+    filter(item -> urncontains(urn, item.urn), corpus.passages)
+end
+
+"""Filter `corpus` for entries with urn matching `urn` for similarity.
+$(SIGNATURES)
+"""
+function urnsimilar(urn::CtsUrn, corpus::CitableTextCorpus)
+    filter(item -> urnsimilar(item.urn, urn), corpus.passages)
+end
+
+"Singleton type to use as value for CexTrait"
+struct CexCorpus <: CexTrait end
+"""Define`CexTrait` value for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function cextrait(::Type{CitableTextCorpus})
+    CexCorpus()
+end
+
+"""Serialize `c` to CEX format.
+
+$(SIGNATURES)
+"""
+function cex(c::CitableTextCorpus; delimiter="|")
+    lines = ["#!ctsdata"]
+    for p in c.passages
+        push!(lines, cex(p, delimiter = delimiter))
+    end
+    join(lines,"\n")
+end
+
+"""Read content of `ctsdata` blocks in CEX-formatted string into 
+a `CitableTextCorpus`.
+
+$(SIGNATURES)
+"""
+function fromcex(cexstring::AbstractString,  ::Type{CitableTextCorpus}; 
+    delimiter = "|", configuration = nothing)
+    ctsdata = data(cexstring, "ctsdata")
+    passages = []
+    for ln in ctsdata
+        push!(passages, fromcex(ln, CitablePassage; delimiter = delimiter))
+    end
+    isempty(passages) ? nothing : CitableTextCorpus(passages)
+end
 
 """Required function to iterate a document using julia `Base` functions.
 
@@ -22,45 +130,61 @@ function iterate(c::CitableTextCorpus, state)
 end
 
 
-"""Override Base.== for `CitableTextCorpus`.
-    $(SIGNATURES)
-"""        
-function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
-    if length(corp1.passages) == length(corp2.passages)
-        all(corp1.passages .== corp2.passages)
-    else
-        false
-    end
-end
-
-"""Override Base.print for `CitableTextCorpus`.
+"""Implement `length` for `CitableTextCorpus`.
 $(SIGNATURES)
 """
-function print(io::IO, corp::CitableTextCorpus)
-    doccount = document_urns(corp.passages) |> length
-    psgcount = corp.passages |> length
-    msg = "Corpus with $psgcount citable passages in $doccount documents."
-    print(io,msg)
+function length(c::CitableTextCorpus)
+    length(c.passages)
 end
 
-"""Override Base.show for `CitableDocument`.
+"""Implement `eltype` for `TextCatalogCollection`.
 $(SIGNATURES)
 """
-function show(io::IO, corp::CitableTextCorpus)
-    doccount = document_urns(corp.passages) |> length
-    psgcount = corp.passages |> length
-    msg = "Corpus with $psgcount citable passages in $doccount documents."
-    print(io,msg)
+function eltype(c::CitableTextCorpus)
+    CitablePassage
 end
 
 
-"""
+## OLD TO REVIW 
+#=
+"""Create a Vector of citable documents in a corpus.
+
+
+
+
 $(SIGNATURES)
-Create a DataFrame from a `CitableTextCorpus`
 """
-function textdf(c::CitableTextCorpus)
-    c.passages |> DataFrame
+function documents(corp::CitableTextCorpus)
+   docs = []
+   for docurn in document_urns(corp)
+        push!(docs, document(docurn, corp))
+   end
+   docs
 end
+
+"""Identify documents in a list of passages by URN.
+
+$(SIGNATURES)
+"""
+function document_urns(psglist)
+    map(p -> droppassage(p.urn), psglist) |> unique
+ end
+
+
+
+
+
+"""Extract a citable document from a corpus.  
+If no matching document found, return nothing.
+
+$(SIGNATURES)
+"""
+function document(u::CtsUrn, c::CitableTextCorpus)
+    psgs = filter(p -> urncontains(u, p.urn), c.passages)
+    isempty(psgs) ? nothing  :     CitableDocument(u, "Citable document", psgs)
+end
+
+
 
 """
 $(SIGNATURES)
@@ -69,6 +193,7 @@ Create a single composite CitableTextCorpus` from two sources.
 function combine(c1::CitableTextCorpus, c2::CitableTextCorpus)
     CitableTextCorpus(vcat(c1.passages, c2.passages))
 end
+
 
 
 """
@@ -91,18 +216,15 @@ function combine(src_array, composite = nothing)
 end
 
 
-"""Compose a delimited-text string for a corpus.
+"""Read content of `ctsdata` blocks in CEX-formatted source into a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function cex(c::CitableTextCorpus; delimiter="|")
-    # Rm newlines from output.
-    txt = map( cn -> string(
-            cn.urn.urn, delimiter, 
-            replace(cn.text, "\n" => " ")), 
-            c.passages)
-    "#!ctsdata\n" * join(txt, "\n") * "\n"
+function fromcex(bytevector::AbstractVector{UInt8}, CitableTextCorpus; delimiter = "|")
+    fromcex(String(bytevector), CitableTextCorpus ;delimiter = delimiter)
 end
+
+
 
 
 """Parse a Vector of `CiteEXchange.Blocks` into 
@@ -110,80 +232,15 @@ a `CitableTextCorpus`.
 
 $(SIGNATURES)
 """
-function corpus_fromcex(v::Vector{CiteEXchange.Block}; delimiter = "|")
+function fromblocks(v::Vector{CiteEXchange.Block}; delimiter = "|" ) #Vector{CiteEXchange.Block}, CitableTextCorpus; delimiter = "|")
     ctsblocks = blocksfortype("ctsdata", v)
+    @info("CTS BLOCKS", ctsblocks)
     passages = []
     for blk in ctsblocks
         for psg in blk.lines
-            push!(passages, passage_fromcex(psg, delimiter))
+            push!(passages, fromcex(psg, CitablePassage; delimiter = delimiter))
         end
     end
     CitableTextCorpus(passages)
 end
-
-"""Read content of `ctsdata` blocks in CEX-formatted string into 
-a `CitableTextCorpus`.
-
-$(SIGNATURES)
-"""
-function corpus_fromcex(cexstring::AbstractString; delimiter = "|")
-    allblocks = blocks(cexstring)
-    corpus_fromcex(allblocks; delimiter = delimiter)
-end
-
-
-"""Read content of `ctsdata` blocks in CEX-formatted source into a `CitableTextCorpus`.
-
-$(SIGNATURES)
-"""
-function corpus_fromcex(bytevector::AbstractVector{UInt8}; delimiter = "|")
-    corpus_fromcex(String(bytevector);delimiter = delimiter)
-end
-
-"""Create a Vector of citable documents in a corpus.
-
-$(SIGNATURES)
-"""
-function documents(corp::CitableTextCorpus)
-   docs = []
-   for docurn in document_urns(corp)
-        push!(docs, document(docurn, corp))
-   end
-   docs
-end
-
-"""Identify documents in a list of passages by URN.
-
-$(SIGNATURES)
-"""
-function document_urns(psglist)
-    map(p -> droppassage(p.urn), psglist) |> unique
- end
-
-
-"""Identify documents in a corpus by URN.
-
-$(SIGNATURES)
-"""
-function document_urns(c::CitableTextCorpus)
-    map(p -> droppassage(p.urn), c.passages) |> unique
-end
-
-
-"""Extract a citable document from a corpus.  
-If no matching document found, return nothing.
-
-$(SIGNATURES)
-"""
-function document(u::CtsUrn, c::CitableTextCorpus)
-    psgs = filter(p -> urncontains(u, p.urn), c.passages)
-    isempty(psgs) ? nothing  :     CitableDocument(u, "Citable document", psgs)
-end
-
-"""Count passages in corpus.
-
-$(SIGNATURES)
-"""
-function passage_count(c::CitableTextCorpus)
-    length(c.passages)
-end
+=#

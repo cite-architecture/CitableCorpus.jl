@@ -1,55 +1,24 @@
 # API documentation
 
 
-## Exported types and functions
+## Exported functions
 
-
-### The main types
-
-```@docs
-CitablePassage
-CitableTextCorpus
-CatalogedText
-```
-
-### Building a corpus
-
+### For a cataloged text
 
 ```@docs
-combine
-textdf
-```
-
-### Navigating a corpus
-
-```@docs
-next
-prev
-retrieve
-```
-
-
-### Building a catalog
-
-```@docs
-catalogedtext
-catalogdf_fromcex
-catalogdf_fromfile
-catalogdf_fromurl
-```
-
-### Reading the catalog of a corpus
-
-```@docs
-groupname
-worktitle
-versionlabel
-exemplarlabel
-citationlabels
+entry
+citation
+textgroup
+work
+version
+exemplar
 online
 lang
 ```
 
+### Other
 
-
-  
+```@docs
+text
+document_urns
+```

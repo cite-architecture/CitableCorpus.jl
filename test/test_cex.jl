@@ -2,7 +2,7 @@
 @testset "Test creating delimited text from corpus" begin
     src = """#!ctsdata\nurn:cts:latinLit:stoa1263.stoa001.hc:t.1#EXCERPTA EX HYGINI GENEALOGIIS, VOLGO FABVLAE.
 """     
-    c = corpus_fromcex(src; delimiter = "#")
+    c = fromcex(src, CitableTextCorpus; delimiter = "#")
     @test isa(c, CitableTextCorpus)
     @test cex(c; delimiter = "#") == src 
 end
