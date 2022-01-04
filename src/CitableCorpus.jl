@@ -50,7 +50,7 @@ export DocumentCitableByCtsUrn, CtsUrnComparableDocument, CexDocument
 export CitableTextCorpus
 export CitableCorpusTrait
 
-
+export document_urns
 #=
 export combine
 export next, prev, retrieve

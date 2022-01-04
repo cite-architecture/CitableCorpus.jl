@@ -26,21 +26,59 @@ function ==(corp1::CitableTextCorpus, corp2::CitableTextCorpus)
     corp1.passages == corp2.passages
 end
 
+"""Identify documents in a corpus by URN.
 
+$(SIGNATURES)
+"""
+function document_urns(c::CitableTextCorpus)
+    map(p -> droppassage(p.urn), c.passages) |> unique
+end
 
-#CitableLibraryTrait(::Type{CitableTextCorpus}) = CitableLibraryCollection()
+"""Identify documents in a list of passages by URN.
 
-
+$(SIGNATURES)
+"""
+function document_urns(v::Vector{CitablePassage})
+    map(p -> droppassage(p.urn), v) |> unique
+end
 
 "Singleton type to use as value for CitableTrait"
 struct CitableCorpusTrait <: CitableCollectionTrait end
 
-"""Define`CitableTrait` value for `TextCatalogCollection`.
+"""Define`CitableTrait` value for `CitableTextCorpus`.
 $(SIGNATURES)
 """
 function citablecollectiontrait(::Type{CitableTextCorpus})
     CitableCorpusTrait()
 end
+
+
+
+"""Filter `corpus` for entries with urn matching `urn` for equality.
+$(SIGNATURES)
+"""
+function urnequals(urn::CtsUrn, corpus::CitableTextCorpus )
+    filter(item -> urnequals(item.urn, urn), corpus.passages)
+end
+
+
+"""Filter `corpus` for entries with urn matching `urn` for containment.
+$(SIGNATURES)
+"""
+function urncontains(urn::CtsUrn, corpus::CitableTextCorpus)
+    filter(item -> urncontains(urn, item.urn), corpus.passages)
+end
+
+
+"""Filter `corpus` for entries with urn matching `urn` for similarity.
+$(SIGNATURES)
+"""
+function urnsimilar(urn::CtsUrn, corpus::CitableTextCorpus)
+    filter(item -> urnsimilar(item.urn, urn), corpus.passages)
+end
+
+
+
 
 #=
 
@@ -212,13 +250,7 @@ function document_urns(psglist)
  end
 
 
-"""Identify documents in a corpus by URN.
 
-$(SIGNATURES)
-"""
-function document_urns(c::CitableTextCorpus)
-    map(p -> droppassage(p.urn), c.passages) |> unique
-end
 
 
 """Extract a citable document from a corpus.  
