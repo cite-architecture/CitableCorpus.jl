@@ -21,7 +21,7 @@ makedocs(
             "Text catalog entry" => "catalogentry.md",
             "Text catalog" => "catalogcollection.md",
             "Citable passages" => "passages.md",
-            "Citable documents" => "documents.md",
+            #"Citable documents" => "documents.md",
             "Citable corpora" => "corpora.md"
             
 

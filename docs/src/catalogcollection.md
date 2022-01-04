@@ -49,5 +49,31 @@ urnsimilar(allgburg, catalog)
 
 ## CEX serialization
 
+```@example catalog
+catcex =cex(catalog)
+```
+
+```@example catalog
+fromcex(catcex, TextCatalogCollection) == catalog
+```
+
 
  ## Iteration
+
+```@example catalog
+length(catalog)
+```
+
+```@example catalog
+eltype(catalog)
+```
+
+```@example catalog
+collect(catalog)
+```
+
+ ```@example catalog
+for entry in catalog
+    println(entry)
+end
+```

@@ -41,5 +41,8 @@ end
     catalog = TextCatalogCollection([hay, everett])
 
     @test collect(catalog) == [hay, everett]
+    @test length(catalog) == 2
+    @test eltype(catalog) == CatalogedText
+
 
 end
