@@ -37,10 +37,10 @@ end
 "Singleton type to use as value for UrnComparisonTrait"
 struct CtsComparableTextCatalog <: UrnComparisonTrait end
 
-"""Define`CitableTrait` value for `TextCatalogCollection`.
+"""Define`UrnComparisonTrait` value for `TextCatalogCollection`.
 $(SIGNATURES)
 """
-function citablecollectiontrait(::Type{TextCatalogCollection})
+function urncomparisontrait(::Type{TextCatalogCollection})
     CtsComparableTextCatalog()
 end
 

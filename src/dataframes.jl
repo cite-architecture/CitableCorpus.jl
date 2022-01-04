@@ -53,3 +53,20 @@ function catalogdf_fromurl(url, delimiter = "|")
 end
 
 =#
+
+
+
+
+#= CORPUS STUFF
+
+
+"""
+$(SIGNATURES)
+Create a DataFrame from a `CitableTextCorpus`
+"""
+function textdf(c::CitableTextCorpus)
+    c.passages |> DataFrame
+end
+
+
+=#
