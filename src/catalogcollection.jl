@@ -3,6 +3,13 @@ struct TextCatalogCollection
     entries::Vector{CatalogedText}
 end
 
+"""Override Base.== for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function ==(cat1::TextCatalogCollection, cat2::TextCatalogCollection)
+    cat1.entries == cat2.entries
+end
+
 
 """Override Base.show for `TextCatalogCollection`.
 $(SIGNATURES)
@@ -10,6 +17,9 @@ $(SIGNATURES)
 function show(io::IO, catalog::TextCatalogCollection)
     print(io, "TextCatalogCollection with ", length(catalog.entries), " entries")
 end
+
+
+
 
 
 "Singleton type to use as value for CitableTrait"
@@ -73,7 +83,9 @@ end
 $(SIGNATURES)
 """
 function cex(catalog::TextCatalogCollection; delimiter = "|")
-    lines = ["#!ctscatalog"]
+    lines = ["#!ctscatalog",
+    join(["urn","citationScheme","groupName","workTitle","versionLabel","exemplarLabel","online","language"], delimiter)
+    ]
     for entry in catalog.entries
         push!(lines, cex(entry))
     end
