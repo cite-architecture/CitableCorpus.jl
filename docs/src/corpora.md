@@ -55,7 +55,7 @@ urnsimilar(allgburg, corpus)
 corpuscex = cex(corpus)
 ```
 
-```@example catalog
+```@example corp
 fromcex(corpuscex, CitableTextCorpus) == corpus
 ```
 

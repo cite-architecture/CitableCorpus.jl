@@ -76,8 +76,6 @@ function urnsimilar(urn::CtsUrn, corpus::CitableTextCorpus)
     filter(item -> urnsimilar(item.urn, urn), corpus.passages)
 end
 
-
-
 "Singleton type to use as value for CexTrait"
 struct CexCorpus <: CexTrait end
 """Define`CexTrait` value for `CitableTextCorpus`.
