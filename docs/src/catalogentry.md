@@ -33,7 +33,7 @@ work(catentry)
 version(catentry)
 ```
 ```@example catentry
-exemplar(catentry)
+exemplar(catentry) |> isnothing
 ```
 ```@example catentry
 lang(catentry)
@@ -77,7 +77,7 @@ urn(catentry)
 `CatalogedText`s can be compared to URNs using [URN logic for equality, containment and similarity](https://cite-architecture.github.io/CitableBase.jl/stable/).   Note that in each function, the first parameter is the catalog entry, and the second a URN to compare the text to.
 
 ```@example catentry
-urnequals(catentry, catentry.urn)
+urnequals(catentry, hay_urn)
 ```
 ```@example catentry
 allgburg = CtsUrn("urn:cts:citedemo:gburg:")

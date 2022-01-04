@@ -99,7 +99,6 @@ function cex(c::CitableTextCorpus; delimiter="|")
     join(lines,"\n")
 end
 
-
 """Read content of `ctsdata` blocks in CEX-formatted string into 
 a `CitableTextCorpus`.
 
@@ -107,45 +106,13 @@ $(SIGNATURES)
 """
 function fromcex(cexstring::AbstractString,  ::Type{CitableTextCorpus}; 
     delimiter = "|", configuration = nothing)
-    allblocks = blocks(cexstring)
-    @info("Now make corpus from CEX blocks", allblocks)
-    if isempty(allblocks)
-        throw(DomainError(cexstring, "No #!ctsdata blocks found."))
-    end
-    @info(typeof(allblocks))
-    fromblocks(allblocks; delimiter = delimiter)
-end
-
-
-
-
-
-
-
-
-
-"""Parse a Vector of `CiteEXchange.Blocks` into 
-a `CitableTextCorpus`.
-
-$(SIGNATURES)
-"""
-function fromblocks(v::Vector{CiteEXchange.Block}; delimiter = "|" ) #Vector{CiteEXchange.Block}, CitableTextCorpus; delimiter = "|")
-    ctsblocks = blocksfortype("ctsdata", v)
-    @info("CTS BLOCKS", ctsblocks)
+    ctsdata = data(cexstring, "ctsdata")
     passages = []
-    for blk in ctsblocks
-        for psg in blk.lines
-            push!(passages, fromcex(psg, CitablePassage; delimiter = delimiter))
-        end
+    for ln in ctsdata
+        push!(passages, fromcex(ln, CitablePassage; delimiter = delimiter))
     end
-    CitableTextCorpus(passages)
+    isempty(passages) ? nothing : CitableTextCorpus(passages)
 end
-
-
-
-
-
-
 
 """Required function to iterate a document using julia `Base` functions.
 
@@ -163,7 +130,6 @@ function iterate(c::CitableTextCorpus, state)
     next = state + 1
     next > length(c.passages) ? nothing : (c.passages[next], next)
 end
-
 
 
 """Implement `length` for `CitableTextCorpus`.
@@ -258,5 +224,25 @@ $(SIGNATURES)
 """
 function fromcex(bytevector::AbstractVector{UInt8}, CitableTextCorpus; delimiter = "|")
     fromcex(String(bytevector), CitableTextCorpus ;delimiter = delimiter)
+end
+
+
+
+
+"""Parse a Vector of `CiteEXchange.Blocks` into 
+a `CitableTextCorpus`.
+
+$(SIGNATURES)
+"""
+function fromblocks(v::Vector{CiteEXchange.Block}; delimiter = "|" ) #Vector{CiteEXchange.Block}, CitableTextCorpus; delimiter = "|")
+    ctsblocks = blocksfortype("ctsdata", v)
+    @info("CTS BLOCKS", ctsblocks)
+    passages = []
+    for blk in ctsblocks
+        for psg in blk.lines
+            push!(passages, fromcex(psg, CitablePassage; delimiter = delimiter))
+        end
+    end
+    CitableTextCorpus(passages)
 end
 =#
