@@ -6,7 +6,8 @@ A `CatalogedText` identifies a concrete version of a text by CTS URN, and record
 using CitableCorpus
 using CitableText
 
-catentry = entry(CtsUrn("urn:cts:citedemo:gburg.hay.v2:"), "section", "Gettysburg Address", "Text of John Hay", "second HC digital edition")
+hay_urn = CtsUrn("urn:cts:citedemo:gburg.hay.v2:")
+catentry = entry(hay_urn, "section", "Gettysburg Address", "Text of John Hay", "second HC digital edition")
 ```
 
 !!! note "Default values"
@@ -39,11 +40,9 @@ lang(catentry)
 ```
 
 
-
-
 ## A citable object
 
-A `CatalogedText` follows `CtsBase`'s definition of a [*citable object*](https://cite-architecture.github.io/CitableBase.jl/stable/citable/).   It therefore implements three traits defining behavior for *citation*, *comparison based on URN logic*, and *serialization to/from CEX format*.
+A `CatalogedText` follows `CtsBase`'s definition of a [*citable object*](https://cite-architecture.github.io/CitableBase.jl/stable/citable/).   It therefore implements three traits defining behavior for (1) *citation*, (2) *comparison based on URN logic*, and (3) *serialization to/from CEX format*. You can verify that with the following functions from `CitableBase`.
 
 
 
@@ -63,7 +62,7 @@ cexserializable(catentry)
 
 ### Citation
 
-The `label` and `urn` functions are available from `CitableBase`.
+The `label` and `urn` functions are available for citable objects.
 
 ```@example catentry
 label(catentry)
