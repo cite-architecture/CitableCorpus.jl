@@ -3,7 +3,7 @@
 
 ## Exported functions
 
-For a cataloged text:
+### For a cataloged text
 
 ```@docs
 entry
@@ -16,7 +16,7 @@ online
 lang
 ```
 
-Other:
+### Other
 
 ```@docs
 text
