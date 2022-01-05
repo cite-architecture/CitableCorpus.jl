@@ -32,7 +32,7 @@ function citabletrait(::Type{CitablePassage})
     PassageCitableByCtsUrn()
 end
 
-"""URN identifyiing `psg`.
+"""URN identifying `psg`.
 $(SIGNATURES)
 Required function for `Citable` abstraction.
 """
