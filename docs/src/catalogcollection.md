@@ -13,7 +13,7 @@ everett = entry(everett_urn, "section", "Gettysburg Address", "Text of Edward Ev
 catalog = TextCatalogCollection([hay, everett])
 ```
 
- The `TextCatalogCollection` implements the `CitableCollectionTrait`, which implies that it also implements URN comparison and CEX serialiation
+ The `TextCatalogCollection` implements the `CitableCollectionTrait`, which implies that it also implements URN comparison and CEX serialization
 
  ```@example catalog
 using CitableBase
@@ -50,7 +50,7 @@ urnsimilar(allgburg, catalog)
 ## CEX serialization
 
 ```@example catalog
-catcex =cex(catalog)
+catcex = cex(catalog)
 ```
 
 ```@example catalog
@@ -72,7 +72,7 @@ eltype(catalog)
 collect(catalog)
 ```
 
- ```@example catalog
+```@example catalog
 for entry in catalog
     println(entry)
 end

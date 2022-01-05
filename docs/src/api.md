@@ -1,7 +1,9 @@
-# REVISE API DOCS
+# API documentation
 
 
-## A cataloged text
+## Exported functions
+
+### For a cataloged text
 
 ```@docs
 entry
@@ -12,4 +14,11 @@ version
 exemplar
 online
 lang
+```
+
+### Other
+
+```@docs
+text
+document_urns
 ```
