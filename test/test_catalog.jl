@@ -34,6 +34,16 @@ end
     @test fromcex(expectedcex, TextCatalogCollection) == catalog
 end
 
+@testset "Test dispatch of fromcex" begin
+    f = joinpath("data", "gettysburgcatalog.cex")
+    filecatalog = fromcex(f, TextCatalogCollection, FileReader)
+
+    url = "https://raw.githubusercontent.com/cite-architecture/CitableCorpus.jl/main/test/data/gettysburgcatalog.cex"
+    urlcatalog = fromcex(url, TextCatalogCollection, UrlReader)
+
+    @test filecatalog == urlcatalog
+end
+
 
 @testset "Test iteration for TextCatalogCollection" begin
     hay = entry(CtsUrn("urn:cts:citedemo:gburg.hay.v2:"), "section", "Gettysburg Address", "Text of John Hay", "second HC digital edition")

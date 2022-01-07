@@ -29,6 +29,16 @@ end
     @test fromcex(expectedcex, CitableTextCorpus) == corpus
 end
 
+@testset "Test dispatch on fromcex with Reader types" begin
+    f = joinpath("data", "gettysburgcorpus.cex")
+    filecorpus = fromcex(f, CitableTextCorpus, FileReader)
+
+    url = "https://raw.githubusercontent.com/cite-architecture/CitableCorpus.jl/main/test/data/gettysburgcorpus.cex" 
+    urlcorpus = fromcex(url, CitableTextCorpus, UrlReader)
+
+    @test filecorpus == urlcorpus
+end
+
 @testset "Test URN comparison on CitableTextCorpus" begin
     psgs = [
         CitablePassage(CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:1"), "Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."),
