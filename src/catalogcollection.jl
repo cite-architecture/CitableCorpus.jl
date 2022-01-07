@@ -20,6 +20,30 @@ end
 
 
 
+# Implement Tables.jl interface
+"""Define `CitableTextCorpus` as implementing `Tables`.
+$(SIGNATURES)
+"""
+function istable(cat::TextCatalogCollection)
+    true
+end
+
+"""Implement `rows` function for `TextCatalogCollection`.
+$(SIGNATURES)
+"""
+function rows(cat::TextCatalogCollection)
+    Tables.rows(cat.entries)
+end
+
+"""Implement `columns` function for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function columns(cat::TextCatalogCollection)
+    Tables.columns(cat.entries)
+end
+
+
+
 
 
 "Singleton type to use as value for CitableTrait"

@@ -28,6 +28,34 @@ function document_urns(c::CitableTextCorpus)
     map(p -> droppassage(p.urn), c.passages) |> unique
 end
 
+
+# Implement Tables.jl interface
+"""Define `CitableTextCorpus` as implementing `Tables`.
+$(SIGNATURES)
+"""
+function istable(t::CitableTextCorpus)
+    true
+end
+
+"""Implement `rows` function for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function rows(corp::CitableTextCorpus)
+    Tables.rows(corp.passages)
+end
+
+"""Implement `columns` function for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function columns(corp::CitableTextCorpus)
+    Tables.columns(corp.passages)
+end
+
+
+
+
+
+
 """Identify documents in a list of passages by URN.
 
 $(SIGNATURES)
