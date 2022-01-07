@@ -95,7 +95,7 @@ end
 """Instantiate a text catalog from CEX source
 $(SIGNATURES)
 """
-function fromcex(cexsrc::AbstractString, ::Type{TextCatalogCollection}; 
+function fromcex(trait::TextCatalogCex, cexsrc::AbstractString, ::Type{TextCatalogCollection}; 
     delimiter = "|", configuration = nothing)
     catalogdata = data(cexsrc, "ctscatalog", delimiter = delimiter)
     entries = []
