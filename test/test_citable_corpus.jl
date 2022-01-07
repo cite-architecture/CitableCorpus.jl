@@ -76,3 +76,15 @@ end
     
     
 end
+
+
+
+
+@testset "Test tables interface on CitableTextCorpus" begin
+    f = joinpath("data", "gettysburgcorpus.cex")
+    corpus = fromcex(f, CitableTextCorpus, FileReader)
+
+    @test Tables.istable(corpus)
+    @test Tables.rows(corpus) |>collect |> length == 20
+    @test Tables.columns(corpus) |>collect |> length == 2
+end

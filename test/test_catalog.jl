@@ -56,3 +56,20 @@ end
 
 
 end
+
+
+@testset "Test tables interface on TextCatalogCollection" begin
+    f = joinpath("data", "gettysburgcatalog.cex")
+    catalog = fromcex(f, TextCatalogCollection, FileReader)
+
+    @test Tables.istable(catalog)
+    @test Tables.rows(catalog) |>collect |> length == 5
+    @test Tables.columns(catalog) |> collect |> length == 8
+
+    rows = Tables.rows(catalog) |> collect
+    urn1 = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:")
+    @test Tables.getcolumn(rows[1], 1) == urn1
+    @test Tables.getcolumn(rows[1], :urn) == urn1
+
+
+end

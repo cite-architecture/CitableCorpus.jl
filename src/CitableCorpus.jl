@@ -3,7 +3,17 @@ module CitableCorpus
 using CitableBase
 using CitableText
 using CiteEXchange
-using DataFrames, HTTP
+
+using Tables
+import Tables: istable
+import Tables: rows
+import Tables: columns
+
+
+using DataFrames
+
+using HTTP
+
 using Documenter, DocStringExtensions
 
 import Base:  show
