@@ -9,9 +9,6 @@ import Tables: istable
 import Tables: rows
 import Tables: columns
 
-
-using DataFrames
-
 using HTTP
 
 using Documenter, DocStringExtensions
@@ -61,10 +58,6 @@ export combine
 export next, prev, retrieve
 export document_urns, documents, document
 export passage_count
-
-
-export catalogdf_fromcex, catalogdf_fromfile, catalogdf_fromurl
-
 =#
 
 
@@ -79,7 +72,7 @@ include("citableDocument.jl")
 #include("navigation.jl")
 #include("retrieval.jl")
 
-include("dataframes.jl")
+#include("dataframes.jl")
 
 #=
 include("catalog.jl")

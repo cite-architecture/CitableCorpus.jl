@@ -8,6 +8,6 @@
 ## Roadmap
 
 - [x] v0.10.0 Fully implement abstractions of `CitableBase` v0.8.
-- [ ] v0.11.0 Add `CitableDocumentCollection` unifying contents of a catalog and corpus
-- [ ] v0.12.0 Add `dataframe` function to apply to catalogs, corpora, and collectons of citable documents
+- [x] v0.11.0 Implement `Tables` interface for text catalogs and corpora
+- [ ] v0.12.0 Add `CitableDocumentCollection` unifying contents of a catalog and corpus
 - [ ] **v1.x** Add navigation of documents and corpora by chunks and ranges.
