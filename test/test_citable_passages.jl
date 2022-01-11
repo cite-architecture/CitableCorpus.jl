@@ -16,6 +16,7 @@ end
         @test citabletrait(typeof(psg)) == PassageCitableByCtsUrn()
         @test citable(psg) 
         
+        @test urntype(psg) == CtsUrn
         @test urn(psg) == u    
         @test label(psg) == "<urn:cts:greekLit:tlg0012.tlg001:1.1> μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος"
 end

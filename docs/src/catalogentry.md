@@ -62,7 +62,12 @@ cexserializable(catentry)
 
 ### Citation
 
-The `label` and `urn` functions are available for citable objects.
+The `urntype`, `label` and `urn` functions are available for citable objects.
+
+
+```@example catentry
+urntype(catentry)
+```
 
 ```@example catentry
 label(catentry)

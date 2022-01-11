@@ -68,7 +68,12 @@ cexserializable(everett_psg)
 
 ### Citation
 
-The `label` and `urn` functions are available from `CitableBase`.
+The `urntype`, `label` and `urn` functions are available from `CitableBase`.
+
+```@example passage
+urn(everett_psg)
+```
+
 
 ```@example passage
 label(everett_psg)

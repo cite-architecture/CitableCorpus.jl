@@ -20,6 +20,12 @@ using CitableBase
 citablecollection(catalog)
 ```
 
+ ```@example catalog
+using CitableBase
+urntype(catalog)
+```
+
+
 ```@example catalog
 cexserializable(catalog)
 ```

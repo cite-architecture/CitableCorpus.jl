@@ -48,6 +48,15 @@ function label(psg::CitablePassage)
     string(psg)
 end
 
+"""Identify URN type for a `CitablePassage` as `CtsUrn`.
+$(SIGNATURES)
+Required function for `Citable` abstraction.
+"""
+function urntype(catentry::CitablePassage)
+    CtsUrn
+end
+
+
 """Text content of `psg`.
 $(SIGNATURES)
 """

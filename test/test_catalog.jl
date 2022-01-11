@@ -6,7 +6,7 @@
 
     @test citablecollection(catalog)
     @test citablecollectiontrait(typeof(catalog)) == CitableTextCatalog()
-
+    @test urntype(catalog) == CtsUrn
 end
 
 

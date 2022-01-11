@@ -56,7 +56,12 @@ function citablecollectiontrait(::Type{TextCatalogCollection})
     CitableTextCatalog()
 end
 
-
+"""Identify URN type for a `TextCatalogCollection` as `CtsUrn`.
+$(SIGNATURES)
+"""
+function urntype(catalog::TextCatalogCollection)
+    CtsUrn
+end
 
 "Singleton type to use as value for UrnComparisonTrait"
 struct CtsComparableTextCatalog <: UrnComparisonTrait end
@@ -72,7 +77,7 @@ end
 $(SIGNATURES)
 """
 function urnequals(urn::CtsUrn, catalog::TextCatalogCollection )
-    filter(item -> urnequals(item.urn, urn), catalog.entries)
+    filter(item -> urnequals(item.urn, urn), catalog.entries) |> TextCatalogCollection
 end
 
 
@@ -80,7 +85,7 @@ end
 $(SIGNATURES)
 """
 function urncontains(urn::CtsUrn, catalog::TextCatalogCollection)
-    filter(item -> urncontains(urn, item.urn), catalog.entries)
+    filter(item -> urncontains(urn, item.urn), catalog.entries) |> TextCatalogCollection
 end
 
 
@@ -88,7 +93,7 @@ end
 $(SIGNATURES)
 """
 function urnsimilar(urn::CtsUrn, catalog::TextCatalogCollection)
-    filter(item -> urnsimilar(item.urn, urn), catalog.entries)
+    filter(item -> urnsimilar(item.urn, urn), catalog.entries) |> TextCatalogCollection
 end
 
 

@@ -1,7 +1,7 @@
 name = "CitableCorpus"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 authors = ["nsmith "]
-version = "0.11.0"
+version = "0.12.0"
 
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
@@ -14,7 +14,7 @@ Tables = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-CitableBase = "8"
+CitableBase = "9"
 CitableText = "0.14"
 CiteEXchange = "0.9"
 DocStringExtensions = "0.8"

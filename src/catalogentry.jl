@@ -117,12 +117,27 @@ function citabletrait(::Type{CatalogedText})
     CitableTextEntry()
 end
 
+"""Find URN identifier for a `CatalogedText`.
+$(SIGNATURES)
+"""
 function urn(catentry::CatalogedText)
     catentry.urn
 end
 
+
+"""Find human-readable label for a `CatalogedText`.
+$(SIGNATURES)
+"""
 function label(catentry::CatalogedText)
     string(catentry)
+end
+
+
+"""Identify URN type for a `CatalogedText` as `CtsUrn`.
+$(SIGNATURES)
+"""
+function urntype(catentry::CatalogedText)
+    CtsUrn
 end
 
 
