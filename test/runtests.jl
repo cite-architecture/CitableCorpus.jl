@@ -2,7 +2,8 @@ using CitableCorpus
 using CitableBase
 using CitableText
 using CiteEXchange
-using DataFrames, HTTP
+using HTTP
+using Tables
 using Test
 
 

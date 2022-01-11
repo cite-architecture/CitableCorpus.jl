@@ -74,6 +74,16 @@ function citablecollectiontrait(::Type{CitableTextCorpus})
     CitableCorpusTrait()
 end
 
+
+"""Identify URN type for a `CitableTextCorpus` as `CtsUrn`.
+$(SIGNATURES)
+"""
+function urntype(corpus::CitableTextCorpus)
+    CtsUrn
+end
+
+
+
 "Singleton type to use as value for UrnComparisonTrait"
 struct CtsComparableCorpus <: UrnComparisonTrait end
 """Define`CitableTrait` value for `TextCatalogCollection`.
@@ -87,21 +97,21 @@ end
 $(SIGNATURES)
 """
 function urnequals(urn::CtsUrn, corpus::CitableTextCorpus)
-    filter(item -> urnequals(item.urn, urn), corpus.passages)
+    filter(item -> urnequals(item.urn, urn), corpus.passages) |> CitableTextCorpus
 end
 
 """Filter `corpus` for entries with urn matching `urn` for containment.
 $(SIGNATURES)
 """
 function urncontains(urn::CtsUrn, corpus::CitableTextCorpus)
-    filter(item -> urncontains(urn, item.urn), corpus.passages)
+    filter(item -> urncontains(urn, item.urn), corpus.passages) |> CitableTextCorpus
 end
 
 """Filter `corpus` for entries with urn matching `urn` for similarity.
 $(SIGNATURES)
 """
 function urnsimilar(urn::CtsUrn, corpus::CitableTextCorpus)
-    filter(item -> urnsimilar(item.urn, urn), corpus.passages)
+    filter(item -> urnsimilar(item.urn, urn), corpus.passages) |> CitableTextCorpus
 end
 
 "Singleton type to use as value for CexTrait"

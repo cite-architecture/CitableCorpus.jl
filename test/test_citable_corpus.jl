@@ -7,8 +7,11 @@
     corpus = CitableTextCorpus(psgs)
     @test corpus isa CitableTextCorpus
 
+
     @test citablecollection(corpus)
     @test citablecollectiontrait(typeof(corpus)) == CitableCorpusTrait()
+    @test urntype(corpus) == CtsUrn
+    
     expecteddocs = [
         CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:"),
         CtsUrn("urn:cts:citedemo:gburg.everett.v2:")

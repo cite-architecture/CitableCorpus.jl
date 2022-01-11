@@ -28,6 +28,9 @@ cexserializable(corpus)
 urncomparable(corpus)
 ```
 
+```@example corp
+urntype(corpus)
+```
 In addition, it implements Julia's `Iterators` behavior.
 
 ## Urn comparison and filtering

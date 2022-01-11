@@ -8,6 +8,8 @@
     @test version(catentry) == "second HC digital edition"
     @test isnothing(catentry |> exemplar)
     @test lang(catentry) == "eng"
+    @test urntype(catentry) == CtsUrn
+
 end
 
 

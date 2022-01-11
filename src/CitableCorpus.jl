@@ -18,6 +18,7 @@ import Base:  ==
 import Base: iterate, length, eltype
 
 import CitableBase: citabletrait
+import CitableBase: urntype
 import CitableBase: urn
 import CitableBase: label
 
