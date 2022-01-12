@@ -83,7 +83,7 @@ end
 """Parse a delimited-text string into a `CitablePassage`.
 $(SIGNATURES)
 """
-function fromcex(s::AbstractString, ::Type{CitablePassage}; delimiter = "|", configuration = nothing)
+function fromcex(s::AbstractString, ::Type{CitablePassage}; delimiter = "|", configuration = nothing, strict = true)
     parts = split(s, delimiter)
     if length(parts) == 2 
         u = CtsUrn(parts[1])

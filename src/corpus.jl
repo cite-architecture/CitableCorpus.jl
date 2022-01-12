@@ -141,7 +141,7 @@ a `CitableTextCorpus`.
 $(SIGNATURES)
 """
 function fromcex(trait::CexCorpus, cexstring::AbstractString,  ::Type{CitableTextCorpus}; 
-    delimiter = "|", configuration = nothing)
+    delimiter = "|", configuration = nothing, strict = true)
     ctsdata = data(cexstring, "ctsdata")
     passages = []
     for ln in ctsdata

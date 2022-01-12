@@ -198,7 +198,7 @@ end
 """Parse a single line of CEX data into a `CatalogedText`.
 $(SIGNATURES)
 """
-function fromcex(cexstring::AbstractString,  ::Type{CatalogedText}; delimiter = "|", configuration = nothing)
+function fromcex(cexstring::AbstractString,  ::Type{CatalogedText}; delimiter = "|", configuration = nothing, strict = true)
     boolstrings = ["t", "true"]
     pieces = split(cexstring, delimiter)
     urn = CtsUrn(pieces[1])
