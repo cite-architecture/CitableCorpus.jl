@@ -125,7 +125,7 @@ end
 $(SIGNATURES)
 """
 function fromcex(trait::TextCatalogCex, cexsrc::AbstractString, ::Type{TextCatalogCollection}; 
-    delimiter = "|", configuration = nothing)
+    delimiter = "|", configuration = nothing, strict = true)
     catalogdata = data(cexsrc, "ctscatalog", delimiter = delimiter)
     entries = []
     for dataline in catalogdata
