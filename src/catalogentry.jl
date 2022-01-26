@@ -199,7 +199,7 @@ end
 $(SIGNATURES)
 """
 function fromcex(cexstring::AbstractString,  ::Type{CatalogedText}; delimiter = "|", configuration = nothing, strict = true)
-    boolstrings = ["t", "true"]
+    boolstrings = ["t", "true", "y", "yes"]
     pieces = split(cexstring, delimiter)
     urn = CtsUrn(pieces[1])
     citation = pieces[2]
