@@ -70,14 +70,5 @@ include("corpus.jl")
 
 include("citableDocument.jl")
 
-#include("navigation.jl")
-#include("retrieval.jl")
-
-#include("dataframes.jl")
-
-#=
-include("catalog.jl")
-include("readcatalog.jl")
-=#
 
 end # module
