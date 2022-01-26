@@ -22,6 +22,12 @@ function show(io::IO, catalog::TextCatalogCollection)
     end
 end
 
+"""Retrieve entries for online texts in catalog.
+$(SIGNATURES)
+"""
+function online(catalog::TextCatalogCollection)
+    filter(e ->  online(e), catalog.entries)
+end
 
 
 # Implement Tables.jl interface

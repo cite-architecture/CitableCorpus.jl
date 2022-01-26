@@ -94,7 +94,7 @@ end
 $(SIGNATURES)
 """
 function online(txt::CatalogedText)
-    txt.exemplar
+    txt.online
 end
 
 """Retrieve ISO language code for `txt`.
