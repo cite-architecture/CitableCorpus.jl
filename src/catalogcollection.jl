@@ -15,7 +15,11 @@ end
 $(SIGNATURES)
 """
 function show(io::IO, catalog::TextCatalogCollection)
-    print(io, "TextCatalogCollection with ", length(catalog.entries), " entries")
+    if length(catalog.entries) == 1
+        print(io, "TextCatalogCollection with ", length(catalog.entries), " entry")
+    else
+        print(io, "TextCatalogCollection with ", length(catalog.entries), " entries")
+    end
 end
 
 
