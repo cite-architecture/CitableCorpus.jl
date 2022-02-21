@@ -15,7 +15,7 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
 CitableBase = "10"
-CitableText = "0.14"
+CitableText = "0.15"
 CiteEXchange = "0.9"
 DocStringExtensions = "0.8"
 Documenter = "0.27"
