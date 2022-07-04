@@ -128,7 +128,7 @@ function cex(catalog::TextCatalogCollection; delimiter = "|")
     for entry in catalog.entries
         push!(lines, cex(entry))
     end
-    join(lines, "\n")
+    join(lines, "\n") * "\n"
 end
 
 """Instantiate a text catalog from CEX source

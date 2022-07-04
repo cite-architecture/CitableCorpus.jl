@@ -132,7 +132,7 @@ function cex(c::CitableTextCorpus; delimiter="|")
     for p in c.passages
         push!(lines, cex(p, delimiter = delimiter))
     end
-    join(lines,"\n")
+    join(lines,"\n") * "\n"
 end
 
 """Read content of `ctsdata` blocks in CEX-formatted string into 

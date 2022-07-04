@@ -89,7 +89,7 @@ function cex(doc::CitableDocument; delimiter = "|")
     for psg in doc.passages
         push!(lines, cex(psg; delimiter = delimiter))
     end
-    join(lines,"\n")
+    join(lines,"\n") *  "\n"
 end
 
 """Parse a Vector `CiteEXchange.Block`s into a `CitableDocument`.

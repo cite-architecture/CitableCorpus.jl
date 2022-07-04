@@ -28,7 +28,7 @@ end
     everett = entry(CtsUrn("urn:cts:citedemo:gburg.everett.v2:"), "section", "Gettysburg Address", "Text of Edward Everett", "second HC digital edition")
     catalog = TextCatalogCollection([hay, everett])
 
-    expectedcex = "#!ctscatalog\nurn|citationScheme|groupName|workTitle|versionLabel|exemplarLabel|online|language\nurn:cts:citedemo:gburg.hay.v2:|section|Gettysburg Address|Text of John Hay|second HC digital edition|nothing|true|eng\nurn:cts:citedemo:gburg.everett.v2:|section|Gettysburg Address|Text of Edward Everett|second HC digital edition|nothing|true|eng"
+    expectedcex = "#!ctscatalog\nurn|citationScheme|groupName|workTitle|versionLabel|exemplarLabel|online|language\nurn:cts:citedemo:gburg.hay.v2:|section|Gettysburg Address|Text of John Hay|second HC digital edition|nothing|true|eng\nurn:cts:citedemo:gburg.everett.v2:|section|Gettysburg Address|Text of Edward Everett|second HC digital edition|nothing|true|eng\n"
     @test cex(catalog) == expectedcex
 
     @test fromcex(expectedcex, TextCatalogCollection) == catalog

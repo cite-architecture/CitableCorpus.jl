@@ -27,8 +27,8 @@ end
     ]
     corpus = CitableTextCorpus(psgs)
     cexserializable(corpus)
-    expectedcex = "#!ctsdata\nurn:cts:citedemo:gburg.bancroft.v2:1|Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.\nurn:cts:citedemo:gburg.everett.v2:1|Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal." 
-    @test cex(corpus) == expectedcex
+    expectedcex = "#!ctsdata\nurn:cts:citedemo:gburg.bancroft.v2:1|Four score and seven years ago our fathers brought forth, on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.\nurn:cts:citedemo:gburg.everett.v2:1|Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.\n" 
+    @test cex(corpus) == expectedcex 
     @test fromcex(expectedcex, CitableTextCorpus) == corpus
 end
 
