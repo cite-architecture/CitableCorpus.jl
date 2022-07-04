@@ -175,13 +175,27 @@ function length(c::CitableTextCorpus)
     length(c.passages)
 end
 
-"""Implement `eltype` for `TextCatalogCollection`.
+"""Implement `eltype` for `CitableTextCorpus`.
 $(SIGNATURES)
 """
 function eltype(c::CitableTextCorpus)
     CitablePassage
 end
 
+
+"""Implement `filter` for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function filter(f, c::CitableTextCorpus)
+    filter(f, c.passages)
+end
+
+"""Implement `map` for `CitableTextCorpus`.
+$(SIGNATURES)
+"""
+function map(f, c::CitableTextCorpus)
+    map(f, c.passages)
+end
 
 ## OLD TO REVIW 
 #=

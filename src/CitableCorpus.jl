@@ -16,6 +16,7 @@ using Documenter, DocStringExtensions
 import Base:  show
 import Base:  ==
 import Base: iterate, length, eltype
+import Base: map, filter
 
 import CitableBase: citabletrait
 import CitableBase: urntype
@@ -58,7 +59,7 @@ export document_urns
 export combine
 export next, prev, retrieve
 export document_urns, documents, document
-export passage_count
+
 =#
 
 
