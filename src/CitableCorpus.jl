@@ -17,6 +17,8 @@ import Base:  show
 import Base:  ==
 import Base: iterate, length, eltype
 
+using CitableBase
+
 import CitableBase: citabletrait
 import CitableBase: urntype
 import CitableBase: urn
@@ -69,6 +71,8 @@ include("citablePassage.jl")
 include("corpus.jl")
 
 include("citableDocument.jl")
+
+include("utils.jl")
 
 
 end # module
