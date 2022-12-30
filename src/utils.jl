@@ -41,16 +41,15 @@ function indexrange(u1::CtsUrn, u2::CtsUrn, c::CitableTextCorpus)
         if length(idx2) != 1
             @error("No node found for $(u2)")
         end
-        (idx1[1], idx2[1])
+        [idx1[1], idx2[1]]
     end
 end
-
 
 
 """Find index of URN `u` in corpus `c`.
 $(SIGNATURES)
 """
-function indexnode(u::CtsUrn, c::CitableTextCorpus)
+function indexurn(u::CtsUrn, c::CitableTextCorpus)
     if isrange(u)
         u1 = addpassage(u, range_begin(u))
         u2 = addpassage(u, range_end(u))
@@ -72,23 +71,3 @@ function indexnode(u::CtsUrn, c::CitableTextCorpus)
         end
     end
 end
-
-
-"""Find index of URN `u` in corpus `c`.
-$(SIGNATURES)
-"""
-function indexurn(u::CtsUrn, c::CitableTextCorpus)
-    if isrange(u)
-        #=
-        opener = range_begin(u)
-        closer = range_end(u)
-        u1 = addpassage(u, opener)
-        u2  = addpassage(u, closer)
-        indexrange(u1, u2, c)
-        =#
-        indexnode(u,c)
-    else
-        indexnode(u, c)       
-    end
-end
-
