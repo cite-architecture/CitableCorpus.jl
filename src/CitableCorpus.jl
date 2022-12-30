@@ -56,9 +56,12 @@ export CitableTextCorpus
 export CitableCorpusTrait, CtsComparableCorpus, CexCorpus
 
 export document_urns
+
+export select
+
 #=
 export combine
-export next, prev, retrieve
+export next, prev
 export document_urns, documents, document
 export passage_count
 =#

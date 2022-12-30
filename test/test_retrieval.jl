@@ -2,31 +2,23 @@
     f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
     corpus = fromcex(read(f, String), CitableTextCorpus)
     psgurn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:3")
-    psglist = CitableCorpus.retrieve_simple(psgurn, DataFrame(corpus.passages))
+    psglist = select(psgurn, corpus)
     @test length(psglist) == 1
 
     speechurn = CtsUrn("urn:cts:citedemo:gburg.bancroft.v2:")
-    speech = CitableCorpus.retrieve_simple(speechurn, DataFrame(corpus.passages))
+    speech = select(speechurn, corpus.passages)
     @test length(speech) == 4
 end
 
-@testset "Test indexing in dataframe" begin
-    f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
-    corpus = fromcex(read(f, String), CitableTextCorpus)
-    df = DataFrame(corpus.passages)
-    psgurn = CtsUrn("urn:cts:citedemo:gburg.hay.v2:1")
-    @test CitableCorpus.row_indices(psgurn, df) == [13]
-    speechurn =  CtsUrn("urn:cts:citedemo:gburg.hay.v2:")
-    @test CitableCorpus.row_indices(speechurn, df) == [13, 14, 15, 16]
-end
+
 
 
 @testset "Test retrieving a range" begin
     f = joinpath(dirname(pwd()), "docs", "data", "gettysburgcorpus.cex")
     corpus = fromcex(read(f, String), CitableTextCorpus)
-    df = DataFrame(corpus.passages)
+    
     rng = CtsUrn("urn:cts:citedemo:gburg.hay.v2:1-4")
-    psgs = CitableCorpus.retrieve_range(rng, df)
+    psgs = select(rng, corpus)
     @test length(psgs) == 4
 end
 
@@ -36,25 +28,26 @@ end
     corpus =  fromcex(cexsrc, CitableTextCorpus)
 
     psgurn = CtsUrn("urn:cts:citedemo:gburg.hay.v2:1")
-    passage = retrieve(psgurn, corpus)
+    passage = select(psgurn, corpus)
     @test length(passage) == 1
 
     rngurn = CtsUrn("urn:cts:citedemo:gburg.hay.v2:1-3")
-    range = retrieve(rngurn, corpus)
+    range = select(rngurn, corpus)
     @test length(range) == 3
 
     speechurn = CtsUrn("urn:cts:citedemo:gburg.hay.v2:")
-    speech = retrieve(speechurn, corpus)
+    speech = select(speechurn, corpus)
     @test length(speech) == 4
 
 
-    
+    #=
     doc = fromcex(cexsrc, CitableDocument; docurn = speechurn)
     @test length(doc.passages) == 4
-    docpassage = retrieve(psgurn, doc)
+    docpassage = select(psgurn, doc)
     @test length(docpassage) == 1
-    docrange = retrieve(rngurn, doc)
+    docrange = select(rngurn, doc)
     @test length(docrange) == 3
     # Tautology:
-    @test length(doc.passages) == length(retrieve(speechurn, doc))
+    @test length(doc.passages) == length(select(speechurn, doc))
+    =#
 end
