@@ -17,6 +17,8 @@ import Base:  show
 import Base:  ==
 import Base: iterate, length, eltype
 
+using CitableBase
+
 import CitableBase: citabletrait
 import CitableBase: urntype
 import CitableBase: urn
@@ -54,9 +56,12 @@ export CitableTextCorpus
 export CitableCorpusTrait, CtsComparableCorpus, CexCorpus
 
 export document_urns
+
+export select
+
 #=
 export combine
-export next, prev, retrieve
+export next, prev
 export document_urns, documents, document
 export passage_count
 =#
@@ -69,6 +74,8 @@ include("citablePassage.jl")
 include("corpus.jl")
 
 include("citableDocument.jl")
+
+include("utils.jl")
 
 
 end # module
