@@ -51,11 +51,15 @@ function selectrange(range::CtsUrn, c::CitableTextCorpus)
     end
 end
 
+
+"""Select `CitablePassage`s identified by a `CtsUrn` referring to a range from a corpus.
+$(SIGNATURES)
+"""
 function selectrange(u1::CtsUrn, u2::CtsUrn, c::CitableTextCorpus)
     # get indexes for u1, u2. slice c.passages from idx1:idx2
-    # but could be range from container to container!
-    
-
+    # but 
+    # ====> could be range from container to container! <=======
+    # NEED TO CHECK FOR THIS
 
 
     urnstrings = map(p -> string(p.urn), c.passages)
