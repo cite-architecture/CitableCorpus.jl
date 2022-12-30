@@ -1,4 +1,19 @@
+"""Select `CitablePassage`s identified by a `CtsUrn`
+from a corpus.
+$(SIGNATURES)
+"""
+function select(u::CtsUrn, c::CitableTextCorpus)
+    if isrange(u)
+        selectrange(u, c)
+        
+    else
+        selectnode(u, c)
+    end
+end
 
+"""Select `CitablePassage`s identified by a `CtsUrn` referring to a single node from a corpus.
+$(SIGNATURES)
+"""
 function selectnode(u::CtsUrn, c::CitableTextCorpus)
     if isrange(u)
         selectrange(u, c)
@@ -19,30 +34,30 @@ end
 
 
 
-function select(u::CtsUrn, c::CitableTextCorpus)
-    if isrange(u)
-        selectrange(u, c)
-        
-    else
-       # return single node?
-        # nothing?
-        selectnode(u, c)
-    end
-end
 
 
+"""Select `CitablePassage`s identified by a `CtsUrn` referring to a single node from a corpus.
+$(SIGNATURES)
+"""
 function selectrange(range::CtsUrn, c::CitableTextCorpus) 
-    opener = range_begin(range)
-    closer = range_end(range)
-    u1 = addpassage(range, opener)
-    u2  = addpassage(range, closer)
-    selectrange(u1, u2, c)
-    
+    if !isrange(range)
+        selectnode(range)
+    else
+        opener = range_begin(range)
+        closer = range_end(range)
+        u1 = addpassage(range, opener)
+        u2  = addpassage(range, closer)
+        selectrange(u1, u2, c)
+    end
 end
 
 function selectrange(u1::CtsUrn, u2::CtsUrn, c::CitableTextCorpus)
     # get indexes for u1, u2. slice c.passages from idx1:idx2
     # but could be range from container to container!
+    
+
+
+
     urnstrings = map(p -> string(p.urn), c.passages)
     idx1 = findall(s -> s == string(u1), urnstrings)
     if length(idx1) != 1
