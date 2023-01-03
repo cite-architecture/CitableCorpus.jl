@@ -28,8 +28,11 @@ $(SIGNATURES)
 function indexrange(u1::CtsUrn, u2::CtsUrn, c::CitableTextCorpus)
     startrange = filter(p -> p.urn == u1, c.passages)
     endrange = filter(p -> p.urn == u2, c.passages)
-    if isempty(startrange) || isempty(endrange)
-        @warn("Invalid range reference.")
+    if isempty(startrange) 
+        @warn("Invalid range reference: did not find $(u1) in corpus")
+        []
+    elseif isempty(endrange)
+        @warn("Invalid range reference: did not find $(u2) in corpus")
         []
     else
         urnstrings = map(p -> string(p.urn), c.passages)
