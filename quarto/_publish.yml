@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 072f5ce4-d0d4-494a-9f19-c51e09852f0f
+      url: 'https://neelsmith.quarto.pub/citablecorpus'

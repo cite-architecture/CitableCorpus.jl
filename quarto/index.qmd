@@ -1,0 +1,7 @@
+---
+title: "Citable text corpora"
+---
+
+Concepts and implementation in a Julia interface.
+
+> See more of my digital scholarship [here](https://neelsmith.quarto.pub/digschol/).
