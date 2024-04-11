@@ -3,3 +3,4 @@ Manifest.toml
 docs/build/
 .vscode
 scratch*
+_site/

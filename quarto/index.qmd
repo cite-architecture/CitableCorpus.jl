@@ -1,0 +1,5 @@
+---
+title: "Citable text corpora"
+---
+
+Concepts and implementation in a Julia interface.
