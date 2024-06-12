@@ -2,4 +2,11 @@
 title: Tutorials
 ---
 
-Learn `CitableCorpus.jl`.
+
+
+The tutorials linked here work with a citable corpus of [the five extant versions of the Gettysburg Address](http://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm). 
+
+
+You can find the text corpus serialized in CEX format in the file `gettysburgcorpus.cex` of this repository's `test/data` directory. In the same directory, the file `gettysburgcatalog.cex` has a CEX representation of the catalog for that corpus.
+
+

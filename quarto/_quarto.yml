@@ -5,7 +5,7 @@ theme: spacelab
 execute:
   freeze: auto
 date: last-modified  
-margin-header: "⚠️ *Place holder for future documentation site for [CitableCorpus.jl](https://cite-architecture.github.io/CitableCorpus.jl/stable/).*"
+margin-header: "Package version: `0.13.5`"
 format:
   html: 
     toc: true
@@ -22,7 +22,8 @@ website:
       - text: "Concepts"
         file: concepts/index.qmd         
       - text: "Tutorials"
-        file: tutorials/index.qmd    
+        file: tutorials/index.qmd  
+        
           
       - text: "Guides"
         file: guides/index.qmd           
@@ -32,11 +33,19 @@ website:
       - icon: github
         href: https://github.com/cite-architecture/CitableCorpus.jl
         aria-label: GitHub
+      - icon: person-circle
+        menu:
+          - text: "About me"
+            href: https://neelsmith.quarto.pub
+          - text: "More of my digital scholarship"
+            href: https://neelsmith.quarto.pub/digschol/
+        aria-label: "More of my work"          
 
   sidebar:
     - title: "Tutorials"
       contents: 
         - tutorials/index.qmd
+        - tutorials/catentry.qmd  
 
     - title: "Guides"
       contents:
@@ -45,6 +54,7 @@ website:
     - title: "Reference"
       contents: 
         - reference/index.qmd
+        - reference/apis.qmd
 
     - title: "Concepts"
       contents: 

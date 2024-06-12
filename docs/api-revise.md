@@ -6,41 +6,85 @@
 
 ### The main types
 
-```@docs
 CitablePassage
-CitableTextCorpus
-CatalogedText
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+using CitableTextCorpus
+@doc hmt_cex
 ```
+:::
+
+
+CitableTextCorpus
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc hmt_cex
+```
+:::
+
+CatalogedText
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc hmt_cex
+```
+:::
 
 ### Building a corpus
 
 
-```@docs
+
 combine
-textdf
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc hmt_cex
 ```
+:::
+
+textdf
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc hmt_cex
+```
+:::
 
 ### Navigating a corpus
 
-```@docs
+
 next
 prev
 retrieve
-```
+
 
 
 ### Building a catalog
 
-```@docs
+
 catalogedtext
 catalogdf_fromcex
 catalogdf_fromfile
 catalogdf_fromurl
-```
+
 
 ### Reading the catalog of a corpus
 
-```@docs
+
 groupname
 worktitle
 versionlabel
@@ -48,7 +92,7 @@ exemplarlabel
 citationlabels
 online
 lang
-```
+
 
 
 

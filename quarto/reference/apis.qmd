@@ -1,0 +1,348 @@
+# API documentation
+
+
+## Exported functions
+
+### For a cataloged text
+
+
+`entry`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+using CitableCorpus
+@doc entry
+```
+:::
+
+
+`citation`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc citation
+```
+:::
+
+
+`textgroup`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc textgroup
+```
+:::
+
+`work`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc work
+```
+:::
+
+`version`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc version
+```
+:::
+
+`exemplar`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc exemplar
+```
+:::
+
+`online`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc online
+```
+:::
+
+`lang`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc lang
+```
+:::
+
+
+
+### Other
+
+`text`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc text
+```
+:::
+
+
+
+`document_urns`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc document_urns
+```
+:::
+
+
+
+# API documentation
+
+
+## Exported functions
+
+### For a cataloged text
+
+entry
+citation
+textgroup
+work
+version
+exemplar
+online
+lang
+
+
+### Other
+
+text
+document_urns
+
+
+
+# API documentation
+
+
+## Exported types and functions
+
+
+### The main types
+
+`CitablePassage`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc CitablePassage
+```
+:::
+
+
+`CitableTextCorpus`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc CitableTextCorpus
+```
+:::
+
+`CatalogedText`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc CatalogedText
+```
+:::
+
+### Building a corpus
+
+
+
+`combine`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc combine
+```
+:::
+
+`textdf`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc textdf
+```
+:::
+
+### Navigating a corpus
+
+
+next
+prev
+retrieve
+
+
+
+### Building a catalog
+
+
+catalogedtext
+catalogdf_fromcex
+catalogdf_fromfile
+catalogdf_fromurl
+
+
+### Reading the catalog of a corpus
+
+
+groupname
+worktitle
+versionlabel
+exemplarlabel
+citationlabels
+online
+lang
+
+
+
+
+  
+# API documentation
+
+
+## Exported types and functions
+
+
+### The main types
+
+`CitablePassage`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc CitablePassage
+```
+:::
+
+
+CitableTextCorpus
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc CitableTextCorpus
+```
+:::
+
+`CatalogedText`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc CatalogedText
+```
+:::
+
+### Building a corpus
+
+
+
+`combine`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc combine
+```
+:::
+
+`textdf`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc textdf
+```
+:::
+
+### Navigating a corpus
+
+
+next
+prev
+retrieve
+
+
+
+### Building a catalog
+
+
+catalogedtext
+catalogdf_fromcex
+catalogdf_fromfile
+catalogdf_fromurl
+
+
+### Reading the catalog of a corpus
+
+
+groupname
+worktitle
+versionlabel
+exemplarlabel
+citationlabels
+online
+lang
+
+
+
+
+  

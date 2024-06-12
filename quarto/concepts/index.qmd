@@ -3,4 +3,8 @@ title: Concepts
 ---
 
 
-Grok citable corpora of texts.
+
+Text copora and catalogs are citable collections of citable objects.
+
+
+Both the `TextCatalogCollection` and the `CitableTextCorpus` are *citable collections*, and therefore implement Julia's interface for iterators. This means that you can apply any function to them that you can use for other iterable collections.  `for psg in corpus`, for example, iterates through all passages in `corpus`.
