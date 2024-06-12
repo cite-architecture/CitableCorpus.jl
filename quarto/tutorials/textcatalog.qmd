@@ -2,7 +2,7 @@
 
 A `TextCatalogCollection` is a wrapper around a Vector of `CatalogedText`s. You can construct one from a Vector of `CatalogedText`s.
 
-```@example catalog
+```{julia}
 using CitableCorpus
 using CitableText
 
@@ -15,23 +15,24 @@ catalog = TextCatalogCollection([hay, everett])
 
  The `TextCatalogCollection` implements the `CitableCollectionTrait`, which implies that it also implements URN comparison and CEX serialization
 
- ```@example catalog
+```{julia}
 using CitableBase
 citablecollection(catalog)
 ```
 
- ```@example catalog
+```{julia}
 using CitableBase
 urntype(catalog)
 ```
 
 
-```@example catalog
+
+```{julia}
 cexserializable(catalog)
 ```
 
 
-```@example catalog
+```{julia}
 urncomparable(catalog)
 ```
 
@@ -39,46 +40,46 @@ In addition, it implements Julia's `Iterators` behavior, as we'll see below.
 
  ## Urn comparison and filtering
 
- ```@example catalog
+```{julia}
 urnequals(hay_urn, catalog)
 ```
 
-```@example catalog
+```{julia}
 allgburg = CtsUrn("urn:cts:citedemo:gburg:")
 urncontains(allgburg, catalog)
 ```
 
 
-```@example catalog
+```{julia}
 urnsimilar(allgburg, catalog)
 ```
 
 ## CEX serialization
 
-```@example catalog
+```{julia}
 catcex = cex(catalog)
 ```
 
-```@example catalog
+```{julia}
 fromcex(catcex, TextCatalogCollection) == catalog
 ```
 
 
  ## Iteration
 
-```@example catalog
+```{julia}
 length(catalog)
 ```
 
-```@example catalog
+```{julia}
 eltype(catalog)
 ```
 
-```@example catalog
+```{julia}
 collect(catalog)
 ```
 
-```@example catalog
+```{julia}
 for entry in catalog
     println(entry)
 end

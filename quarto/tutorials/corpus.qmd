@@ -2,7 +2,7 @@
 
 The `CitableTextCorpus` is a wrapper around a Vector of `CitablePassage`s.  You can construct one from a Vector `CitablePassage`s.
 
-```@example corp
+```{julia}
 using CitableCorpus
 using CitableText
 
@@ -17,35 +17,35 @@ corpus = CitableTextCorpus(psgs)
 
 The `CitableTextCorpus` implements the `CitableCollectionTrait`, and therefore supports URN comparison and CEX serialization.
 
-```@example corp
+```{julia}
 using CitableBase
 citablecollection(corpus)
 ```
-```@example corp
+```{julia}
 cexserializable(corpus)
 ```
-```@example corp
+```{julia}
 urncomparable(corpus)
 ```
 
-```@example corp
+```{julia}
 urntype(corpus)
 ```
 In addition, it implements Julia's `Iterators` behavior.
 
 ## Urn comparison and filtering
 
-```@example corp
+```{julia}
 urnequals(everett1, corpus)
 ```
 
-```@example corp
+```{julia}
 allgburg = CtsUrn("urn:cts:citedemo:gburg:")
 urncontains(allgburg, corpus)
 ```
 
 
-```@example corp
+```{julia}
 allgburg = CtsUrn("urn:cts:citedemo:gburg:")
 urnsimilar(allgburg, corpus)
 ```
@@ -54,30 +54,30 @@ urnsimilar(allgburg, corpus)
 ## CEX serialization
 
 
-```@example corp
+```{julia}
 corpuscex = cex(corpus)
 ```
 
-```@example corp
+```{julia}
 fromcex(corpuscex, CitableTextCorpus) == corpus
 ```
 
 
  ## Iteration
 
-```@example corp
+```{julia}
 length(corpus)
 ```
 
-```@example corp
+```{julia}
 eltype(corpus)
 ```
 
-```@example corp
+```{julia}
 collect(corpus)
 ```
 
-```@example corp
+```{julia}
 for psg in corpus
     println(psg)
 end

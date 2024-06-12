@@ -45,7 +45,12 @@ website:
     - title: "Tutorials"
       contents: 
         - tutorials/index.qmd
+        - text: "---"
         - tutorials/catentry.qmd  
+        - tutorials/textcatalog.qmd  
+        - text: "---"
+        - tutorials/passage.qmd
+        - tutorials/corpus.qmd
 
     - title: "Guides"
       contents:
